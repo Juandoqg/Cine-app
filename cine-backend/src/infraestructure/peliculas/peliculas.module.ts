@@ -15,6 +15,7 @@ import { UpdatePeliculaUseCase } from 'src/application/use-cases/peliculas/updat
 
 import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/inhabilitar-pelicula.use-case';
 
+import { GetPeliculasProximamenteUseCase } from 'src/application/use-cases/peliculas/get-peliculas-proximamente';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PeliculaOrmEntity])],
@@ -51,6 +52,12 @@ import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/
       useFactory: (repo) => new InhabilitarPeliculaUseCase(repo),
       inject: ['PeliculaRepository'],
     },
+    {
+      provide: GetPeliculasProximamenteUseCase,
+      useFactory: (repo) => new GetPeliculasProximamenteUseCase(repo),
+      inject: ['PeliculaRepository'],
+    },
+    
   ],
 })
 export class PeliculasModule {}

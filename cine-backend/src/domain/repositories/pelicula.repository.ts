@@ -5,5 +5,7 @@ export abstract class PeliculaRepository {
   abstract buscarPorId(id: number): Promise<Pelicula | null>;
   abstract listar(): Promise<Pelicula[]>;
   abstract actualizar(id: number, pelicula: Partial<Pelicula>): Promise<Pelicula>;
-  abstract inhabilitar(id: number): Promise<void>;  
+  abstract inhabilitar(id: number): Promise<void>;
+  abstract listarProximamente(): Promise<Pelicula[]>;
+
 }

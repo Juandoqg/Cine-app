@@ -7,6 +7,9 @@ import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-
 import { GetPeliculaByIdUseCase } from 'src/application/use-cases/peliculas/get-peliculas-by-id.use-case';
 import { UpdatePeliculaUseCase} from 'src/application/use-cases/peliculas/update-pelicula.use-case';
 import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/inhabilitar-pelicula.use-case';
+import { GetPeliculasProximamenteUseCase } from 'src/application/use-cases/peliculas/get-peliculas-proximamente';
+
+
 
 @Controller('peliculas')
 export class PeliculasController {
@@ -14,7 +17,8 @@ export class PeliculasController {
     private readonly getAllPeliculasUseCase: GetAllPeliculasUseCase, 
     private readonly getPeliculaByIdUseCase: GetPeliculaByIdUseCase,
     private readonly updatePeliculaUseCase: UpdatePeliculaUseCase,
-    private readonly inhabilitarPeliculaUseCase: InhabilitarPeliculaUseCase
+    private readonly inhabilitarPeliculaUseCase: InhabilitarPeliculaUseCase,
+    private readonly getPeliculasProximamenteUseCase : GetPeliculasProximamenteUseCase
 ) {}
 
   @Post()
@@ -24,7 +28,13 @@ export class PeliculasController {
   @Get()
   async getAll(): Promise<Pelicula[]> {
   return this.getAllPeliculasUseCase.execute();
-}
+  }
+  
+  @Get('proximamente')
+  async getProximamente(): Promise<Pelicula[]> {
+  return this.getPeliculasProximamenteUseCase.execute();
+  }
+
  @Get(':id')
   async getById(@Param('id') id: number) {
     return await this.getPeliculaByIdUseCase.execute(id);
