@@ -10,6 +10,8 @@ import { PeliculasService } from 'src/application/peliculas/peliculas.service';
 
 import { GetAllPeliculasUseCase } from 'src/application/use-cases/get-all-peliculas.use-case';
 
+import { GetPeliculaByIdUseCase } from 'src/application/use-cases/get-peliculas-by-id';
+
 @Module({
   imports: [TypeOrmModule.forFeature([PeliculaOrmEntity])],
   controllers: [PeliculasController],
@@ -28,6 +30,11 @@ import { GetAllPeliculasUseCase } from 'src/application/use-cases/get-all-pelicu
     {
       provide: GetAllPeliculasUseCase,
       useFactory: (repo) => new GetAllPeliculasUseCase(repo),
+      inject: ['PeliculaRepository'],
+    },
+    {
+      provide: GetPeliculaByIdUseCase,
+      useFactory: (repo) => new GetPeliculaByIdUseCase(repo),
       inject: ['PeliculaRepository'],
     },
   ],
