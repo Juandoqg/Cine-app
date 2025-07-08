@@ -4,6 +4,7 @@ import configuration from './config/configuration';
 import { validationSchema } from './config/validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
+import { PeliculasModule } from './infraestructure/peliculas/peliculas.module';
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ import { typeOrmConfig } from './config/typeorm.config';
       inject: [ConfigService],
       useFactory: typeOrmConfig,
     }),
+
+    PeliculasModule,
 
     // otros módulos...
   ],
