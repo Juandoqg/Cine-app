@@ -15,4 +15,8 @@ export default () => ({
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
+  jwt :{
+    secret: process.env.JWT_SECRET,
+    expires_in: process.env.JWT_EXPIRES_IN
+  }
 });
