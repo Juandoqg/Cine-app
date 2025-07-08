@@ -23,6 +23,12 @@ export class PeliculaOrmEntity {
   @Column({ type: 'date' })
   fechaEstreno: Date;
 
-  @Column({ default: true })
+  @Column({ type: 'int' })
+  duracion: number;
+
+  @Column({ type: 'boolean', default: false })
+  proximamente: boolean;
+
+  @Column({ type: 'boolean', default: true })
   activo: boolean;
 }

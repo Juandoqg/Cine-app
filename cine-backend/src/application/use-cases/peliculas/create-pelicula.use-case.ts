@@ -9,14 +9,16 @@ export class CreatePeliculaUseCase {
 
   async execute(dto: PeliculaModelDto): Promise<Pelicula> {
     const pelicula = new Pelicula(
-      0, // el ID lo genera la DB
+      0, // ID generado por la base de datos
       dto.titulo,
       dto.descripcion,
       dto.categoria,
       dto.trailerUrl,
       dto.imagen,
       new Date(dto.fechaEstreno),
-      true,
+      dto.duracion,
+      dto.proximamente,
+      dto.activo
     );
 
     return this.repo.crear(pelicula);

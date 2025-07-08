@@ -1,4 +1,3 @@
-
 export class Pelicula {
   constructor(
     public readonly id: number,
@@ -8,6 +7,8 @@ export class Pelicula {
     public trailerUrl: string,
     public imagen: string,
     public fechaEstreno: Date,
+    public duracion: number, 
+    public proximamente: boolean = false, 
     public activo: boolean = true, 
   ) {}
 }

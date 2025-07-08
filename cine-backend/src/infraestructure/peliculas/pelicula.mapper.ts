@@ -12,6 +12,8 @@ export class PeliculaMapper {
       orm.trailerUrl,
       orm.imagen,
       orm.fechaEstreno,
+      orm.duracion,
+      orm.proximamente,
       orm.activo,
     );
   }
@@ -25,6 +27,8 @@ export class PeliculaMapper {
     orm.trailerUrl = domain.trailerUrl;
     orm.imagen = domain.imagen;
     orm.fechaEstreno = domain.fechaEstreno;
+    orm.duracion = domain.duracion;
+    orm.proximamente = domain.proximamente;
     orm.activo = domain.activo;
     return orm;
   }
