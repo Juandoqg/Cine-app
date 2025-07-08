@@ -5,7 +5,7 @@ import { validationSchema } from './config/validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { PeliculasModule } from './infraestructure/peliculas/peliculas.module';
-
+import { UsuariosModule } from './infraestructure/usuarios/usuarios.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +20,7 @@ import { PeliculasModule } from './infraestructure/peliculas/peliculas.module';
     }),
 
     PeliculasModule,
+    UsuariosModule
 
     // otros módulos...
   ],

@@ -1,12 +1,12 @@
 import { Controller, Post, Get, Put, Param, Body , Patch } from '@nestjs/common';
 import { ParseIntPipe } from '@nestjs/common';
-import { CreatePeliculaDto } from 'src/application/dto/create-pelicula.dto';
-import { CreatePeliculaUseCase } from 'src/application/use-cases/create-pelicula.use-case';
+import { PeliculaModelDto } from 'src/application/dto/PeliculaModelDto';
+import { CreatePeliculaUseCase } from 'src/application/use-cases/peliculas/create-pelicula.use-case';
 import { Pelicula } from 'src/domain/entities/pelicula.entity';
-import { GetAllPeliculasUseCase } from 'src/application/use-cases/get-all-peliculas.use-case';
-import { GetPeliculaByIdUseCase } from 'src/application/use-cases/get-peliculas-by-id.use-case';
-import { UpdatePeliculaUseCase} from 'src/application/use-cases/update-pelicula.use-case';
-import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/inhabilitar-pelicula.use-case';
+import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-all-peliculas.use-case';
+import { GetPeliculaByIdUseCase } from 'src/application/use-cases/peliculas/get-peliculas-by-id.use-case';
+import { UpdatePeliculaUseCase} from 'src/application/use-cases/peliculas/update-pelicula.use-case';
+import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/inhabilitar-pelicula.use-case';
 
 @Controller('peliculas')
 export class PeliculasController {
@@ -18,7 +18,7 @@ export class PeliculasController {
 ) {}
 
   @Post()
-  async crear(@Body() dto: CreatePeliculaDto): Promise<Pelicula> {
+  async crear(@Body() dto: PeliculaModelDto): Promise<Pelicula> {
     return this.createPeliculaUseCase.execute(dto);
   }
   @Get()

@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsDateString, IsUrl } from 'class-validator';
 
-export class CreatePeliculaDto {
+export class PeliculaModelDto {
   @IsString()
   @IsNotEmpty()
   titulo: string;

@@ -5,15 +5,15 @@ import { PeliculaOrmEntity } from '../databases/typeorm/entities/pelicula.orm-en
 import { PeliculasController } from '../controllers/peliculas.controller';
 import { PeliculaTypeOrmRepository } from '../databases/typeorm/repositories/pelicula.typeorm-repository';
 
-import { CreatePeliculaUseCase } from 'src/application/use-cases/create-pelicula.use-case';
+import { CreatePeliculaUseCase } from 'src/application/use-cases/peliculas/create-pelicula.use-case';
 
-import { GetAllPeliculasUseCase } from 'src/application/use-cases/get-all-peliculas.use-case';
+import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-all-peliculas.use-case';
 
-import { GetPeliculaByIdUseCase } from 'src/application/use-cases/get-peliculas-by-id.use-case';
+import { GetPeliculaByIdUseCase } from 'src/application/use-cases/peliculas/get-peliculas-by-id.use-case';
 
-import { UpdatePeliculaUseCase } from 'src/application/use-cases/update-pelicula.use-case';
+import { UpdatePeliculaUseCase } from 'src/application/use-cases/peliculas/update-pelicula.use-case';
 
-import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/inhabilitar-pelicula.use-case';
+import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/inhabilitar-pelicula.use-case';
 
 
 @Module({
