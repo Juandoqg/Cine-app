@@ -1,6 +1,6 @@
 // infrastructure/peliculas/pelicula.mapper.ts
 import { Pelicula } from 'src/domain/entities/pelicula.entity';
-import { PeliculaOrmEntity } from '../databases/typeorm/pelicula.orm-entity';
+import { PeliculaOrmEntity } from '../databases/typeorm/entities/pelicula.orm-entity';
 
 export class PeliculaMapper {
   static toDomain(orm: PeliculaOrmEntity): Pelicula {

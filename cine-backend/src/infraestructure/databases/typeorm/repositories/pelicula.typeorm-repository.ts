@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { PeliculaOrmEntity } from '../pelicula.orm-entity';
+import { PeliculaOrmEntity } from '../entities/pelicula.orm-entity';
 import { PeliculaMapper } from 'src/infraestructure/peliculas/pelicula.mapper';
 
 import { Pelicula } from 'src/domain/entities/pelicula.entity';
