@@ -13,6 +13,10 @@ import { GetAllPeliculasUseCase } from 'src/application/use-cases/get-all-pelicu
 import { GetPeliculaByIdUseCase } from 'src/application/use-cases/get-peliculas-by-id.use-case';
 
 import { UpdatePeliculaUseCase } from 'src/application/use-cases/update-pelicula.use-case';
+
+import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/inhabilitar-pelicula.use-case';
+
+
 @Module({
   imports: [TypeOrmModule.forFeature([PeliculaOrmEntity])],
   controllers: [PeliculasController],
@@ -41,6 +45,11 @@ import { UpdatePeliculaUseCase } from 'src/application/use-cases/update-pelicula
     {
       provide: UpdatePeliculaUseCase,
       useFactory: (repo) => new UpdatePeliculaUseCase(repo),
+      inject: ['PeliculaRepository'],
+    },
+     {
+      provide: InhabilitarPeliculaUseCase,
+      useFactory: (repo) => new InhabilitarPeliculaUseCase(repo),
       inject: ['PeliculaRepository'],
     },
   ],
