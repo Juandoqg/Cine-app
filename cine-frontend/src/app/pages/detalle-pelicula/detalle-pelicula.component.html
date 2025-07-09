@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="trailer-container">
   <iframe
     width="100%"
@@ -9,14 +10,32 @@
   ></iframe>
 </div>
 
-<div class="detalle-container">
-  <img [src]="pelicula.imagen" alt="Imagen de {{ pelicula.titulo }}" class="imagen-pelicula">
-  <div class="info">
+<div class="main-container">
+  <!-- Imagen -->
+  <div class="imagen-container">
+    <img [src]="pelicula.imagen" alt="Imagen de {{ pelicula.titulo }}" class="imagen-pelicula">
+  </div>
+
+  <!-- Detalle -->
+  <div class="info-container">
     <h2>{{ pelicula.titulo }}</h2>
     <p><strong>Descripción:</strong> {{ pelicula.descripcion }}</p>
     <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
     <p><strong>Categoría:</strong> {{ pelicula.categoria }}</p>
     <p><strong>Estreno:</strong> {{ pelicula.fechaEstreno | date }}</p>
+  </div>
+
+  <!-- Funciones -->
+  <div class="funciones-container">
+    <h3>Funciones disponibles</h3>
+    <div *ngFor="let dia of funcionesPorDia | keyvalue">
+      <h4>{{ dia.key }}</h4>
+      <div class="horas">
+        <button *ngFor="let funcion of dia.value">
+          {{ funcion.fecha | date:'shortTime' }} - ${{ funcion.precio }}
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 

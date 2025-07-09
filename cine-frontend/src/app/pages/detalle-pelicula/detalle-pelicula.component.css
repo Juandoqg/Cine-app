@@ -1,18 +1,63 @@
-.detalle-container {
+/* Espaciado entre trailer y detalle */
+.trailer-container {
+  margin-bottom: 40px; /* Aumenta el espacio */
+}
+
+/* Contenedor general */
+.main-container {
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
+  flex-direction: row;
+  gap: 30px;
+  padding: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Imagen */
+.imagen-container {
+  flex: 1;
+  max-width: 25%;
 }
 
 .imagen-pelicula {
-  width: 300px;
+  width: 100%;
   border-radius: 10px;
 }
 
-.info {
+/* Detalles de la película */
+.info-container {
   flex: 1;
+  max-width: 35%;
 }
 
-.trailer-container {
-  margin: 2rem;
+/* Funciones */
+.funciones-container {
+  flex: 1;
+  max-width: 35%;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #ccc; /* ✅ Borde para resaltar */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones de horas */
+.horas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.horas button {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.horas button:hover {
+  background-color: #ccc;
 }
