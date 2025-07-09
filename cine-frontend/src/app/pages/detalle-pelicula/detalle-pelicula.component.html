@@ -32,7 +32,7 @@
       <h4>{{ dia.key }}</h4>
       <div class="horas">
         <button *ngFor="let funcion of dia.value">
-          {{ funcion.fecha | date:'shortTime' }} - ${{ funcion.precio }}
+          {{ funcion.hora }} - ${{ funcion.precio }}
         </button>
       </div>
     </div>
