@@ -1,0 +1,18 @@
+.detalle-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.imagen-pelicula {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.info {
+  flex: 1;
+}
+
+.trailer-container {
+  margin: 2rem;
+}

@@ -15,6 +15,9 @@ export class PeliculaService {
   }
   getPeliculasProximamente(): Observable<Pelicula[]> {
   return this.http.get<Pelicula[]>(`${this.apiUrl}/proximamente`);
-}
+  }
+  getPeliculaPorId(id: number): Observable<Pelicula> {
+  return this.http.get<Pelicula>(`${this.apiUrl}/${id}`);
+  }
 
 }
