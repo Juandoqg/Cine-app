@@ -11,8 +11,9 @@ export const routes: Routes = [
   { path: 'pelicula/:id', component: DetallePeliculaComponent},
   {
     path: 'admin',
-    component: AdminComponent,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
+    loadChildren: () =>
+      import('./pages/admin/admin.module').then(m => m.AdminModule)
   },
 
 
