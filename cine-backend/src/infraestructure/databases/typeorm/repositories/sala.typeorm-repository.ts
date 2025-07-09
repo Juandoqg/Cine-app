@@ -22,11 +22,6 @@ export class SalaTypeOrmRepository implements SalaRepository {
     return SalaMapper.toDomain(guardada);
   }
 
-  async buscarPorId(id: string): Promise<Sala | null> {
-    const encontrada = await this.salaRepo.findOne({ where: { id: parseInt(id) } });
-    return encontrada ? SalaMapper.toDomain(encontrada) : null;
-  }
-
   async obtenerTodas(): Promise<Sala[]> {
     const todas = await this.salaRepo.find();
     return todas.map(SalaMapper.toDomain);

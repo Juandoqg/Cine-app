@@ -5,18 +5,19 @@ import { SalaOrmEntity } from '../databases/typeorm/entities/sala.orm-entity';
 import { SalaTypeOrmRepository } from '../databases/typeorm/repositories/sala.typeorm-repository';
 import { CrearSalaUseCase } from 'src/application/use-cases/salas/create-sala.use-case';
 import { SalasController } from '../controllers/salas.controller';
+import { GetAllSalasUseCase } from 'src/application/use-cases/salas/get-all-salas.use-cases';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SalaOrmEntity])],
   controllers: [SalasController],
   providers: [
-    // ✅ Registrar el repositorio con un token personalizado
     {
       provide: 'SalaRepository',
       useClass: SalaTypeOrmRepository,
     },
-    // ✅ Inyectar el use case, que depende del token anterior
+   
     CrearSalaUseCase,
+    GetAllSalasUseCase
   ],
 })
 export class SalasModule {}
