@@ -3,12 +3,12 @@ import { ParseIntPipe } from '@nestjs/common';
 import { PeliculaModelDto } from 'src/application/dto/PeliculaModelDto';
 import { CreatePeliculaUseCase } from 'src/application/use-cases/peliculas/create-pelicula.use-case';
 import { Pelicula } from 'src/domain/entities/pelicula.entity';
-import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-all-peliculas.use-case';
+import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-all-activas-peliculas.use-case';
 import { GetPeliculaByIdUseCase } from 'src/application/use-cases/peliculas/get-peliculas-by-id.use-case';
 import { UpdatePeliculaUseCase} from 'src/application/use-cases/peliculas/update-pelicula.use-case';
 import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/inhabilitar-pelicula.use-case';
 import { GetPeliculasProximamenteUseCase } from 'src/application/use-cases/peliculas/get-peliculas-proximamente';
-
+import { GetAllPeliculasAdminUseCase } from 'src/application/use-cases/peliculas/get-all-peliculas.use-case';
 
 
 @Controller('peliculas')
@@ -18,7 +18,8 @@ export class PeliculasController {
     private readonly getPeliculaByIdUseCase: GetPeliculaByIdUseCase,
     private readonly updatePeliculaUseCase: UpdatePeliculaUseCase,
     private readonly inhabilitarPeliculaUseCase: InhabilitarPeliculaUseCase,
-    private readonly getPeliculasProximamenteUseCase : GetPeliculasProximamenteUseCase
+    private readonly getPeliculasProximamenteUseCase : GetPeliculasProximamenteUseCase,
+    private readonly getAllPeliculasAdminUseCase: GetAllPeliculasAdminUseCase 
 ) {}
 
   @Post()
@@ -33,6 +34,11 @@ export class PeliculasController {
   @Get('proximamente')
   async getProximamente(): Promise<Pelicula[]> {
   return this.getPeliculasProximamenteUseCase.execute();
+  }
+
+  @Get('admin')
+  async getAllPeliculasAdmin(): Promise<Pelicula[]> {
+    return this.getAllPeliculasAdminUseCase.execute(); 
   }
 
  @Get(':id')

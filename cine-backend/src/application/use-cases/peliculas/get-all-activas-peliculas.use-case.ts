@@ -2,11 +2,13 @@ import { PeliculaOrmEntity } from 'src/infraestructure/databases/typeorm/entitie
 import { PeliculaRepository } from 'src/domain/repositories/pelicula.repository';
 import { Injectable } from '@nestjs/common';
 
+
+
 @Injectable()
-export class GetAllPeliculasAdminUseCase {
+export class GetAllPeliculasUseCase {
   constructor(private readonly repo: PeliculaRepository) {}
 
   async execute(): Promise<PeliculaOrmEntity[]> {
-    return this.repo.listarTodas();
+    return this.repo.listar();
   }
 }

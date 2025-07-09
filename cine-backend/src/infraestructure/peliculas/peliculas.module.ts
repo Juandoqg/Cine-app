@@ -7,7 +7,7 @@ import { PeliculaTypeOrmRepository } from '../databases/typeorm/repositories/pel
 
 import { CreatePeliculaUseCase } from 'src/application/use-cases/peliculas/create-pelicula.use-case';
 
-import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-all-peliculas.use-case';
+import { GetAllPeliculasUseCase } from 'src/application/use-cases/peliculas/get-all-activas-peliculas.use-case';
 
 import { GetPeliculaByIdUseCase } from 'src/application/use-cases/peliculas/get-peliculas-by-id.use-case';
 
@@ -16,6 +16,7 @@ import { UpdatePeliculaUseCase } from 'src/application/use-cases/peliculas/updat
 import { InhabilitarPeliculaUseCase } from 'src/application/use-cases/peliculas/inhabilitar-pelicula.use-case';
 
 import { GetPeliculasProximamenteUseCase } from 'src/application/use-cases/peliculas/get-peliculas-proximamente';
+import { GetAllPeliculasAdminUseCase } from 'src/application/use-cases/peliculas/get-all-peliculas.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PeliculaOrmEntity])],
@@ -55,6 +56,11 @@ import { GetPeliculasProximamenteUseCase } from 'src/application/use-cases/pelic
     {
       provide: GetPeliculasProximamenteUseCase,
       useFactory: (repo) => new GetPeliculasProximamenteUseCase(repo),
+      inject: ['PeliculaRepository'],
+    },
+    {
+      provide: GetAllPeliculasAdminUseCase,
+      useFactory: (repo) => new GetAllPeliculasAdminUseCase(repo),
       inject: ['PeliculaRepository'],
     },
     

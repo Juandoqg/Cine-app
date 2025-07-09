@@ -7,5 +7,6 @@ export abstract class PeliculaRepository {
   abstract actualizar(id: number, pelicula: Partial<Pelicula>): Promise<Pelicula>;
   abstract inhabilitar(id: number): Promise<void>;
   abstract listarProximamente(): Promise<Pelicula[]>;
+  abstract listarTodas(): Promise<Pelicula[]>;
 
 }

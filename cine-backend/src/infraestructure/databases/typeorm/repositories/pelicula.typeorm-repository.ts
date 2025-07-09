@@ -43,6 +43,10 @@ export class PeliculaTypeOrmRepository implements PeliculaRepository {
     return peliculas.map(PeliculaMapper.toDomain);
   }
 
+  async listarTodas(): Promise<Pelicula[]> {
+      const peliculas = await this.repo.find();
+      return peliculas.map(PeliculaMapper.toDomain);
+    }
  async listarProximamente(): Promise<Pelicula[]> {
   const peliculas = await this.repo.find({
     where: {
