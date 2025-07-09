@@ -1,1 +1,40 @@
-<p>crear-pelicula works!</p>
+<div class="crear-pelicula-wrapper">
+  <form (ngSubmit)="onSubmit()" #peliculaForm="ngForm">
+    <h2>Crear Película 🎬</h2>
+
+    <label>Título</label>
+    <input type="text" name="titulo" [(ngModel)]="pelicula.titulo" required />
+
+    <label>Descripción</label>
+    <textarea name="descripcion" [(ngModel)]="pelicula.descripcion" required></textarea>
+
+    <label>Categoría</label>
+    <input type="text" name="categoria" [(ngModel)]="pelicula.categoria" required />
+
+    <label>Trailer URL</label>
+    <input type="url" name="trailerUrl" [(ngModel)]="pelicula.trailerUrl" required />
+
+    <label>Fecha de Estreno</label>
+    <input type="date" name="fechaEstreno" [(ngModel)]="pelicula.fechaEstreno" required />
+
+    <label>Duración (minutos)</label>
+    <input type="number" name="duracion" [(ngModel)]="pelicula.duracion" required />
+
+    <label>Imagen (archivo)</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" required />
+
+    <div class="checkboxes">
+      <label>
+        <input type="checkbox" [(ngModel)]="pelicula.proximamente" name="proximamente" (change)="onCheckboxChange('proximamente')" />
+        Próximamente
+      </label>
+
+      <label>
+        <input type="checkbox" [(ngModel)]="pelicula.activo" name="activo" (change)="onCheckboxChange('activo')" />
+        Activa
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="!peliculaForm.valid">Guardar Película</button>
+  </form>
+</div>

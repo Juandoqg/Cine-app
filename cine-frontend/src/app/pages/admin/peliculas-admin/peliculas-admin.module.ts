@@ -14,7 +14,7 @@ import { PeliculasAdminRoutingModule } from './peliculas-admin.routing';
   ],
   imports: [
     CommonModule,
-    PeliculasAdminRoutingModule
+    PeliculasAdminRoutingModule,
   ]
 })
 export class PeliculasAdminModule {}
