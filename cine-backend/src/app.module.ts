@@ -8,6 +8,7 @@ import { PeliculasModule } from './infraestructure/peliculas/peliculas.module';
 import { AuthModule } from './infraestructure/auth/auth.module';
 
 import { SalasModule } from './infraestructure/salas/salas.module';
+import { FuncionesModule } from './infraestructure/funciones/funciones.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,7 +24,8 @@ import { SalasModule } from './infraestructure/salas/salas.module';
 
     PeliculasModule,
     AuthModule,
-    SalasModule
+    SalasModule,
+    FuncionesModule
 
     // otros módulos...
   ],
