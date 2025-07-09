@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Pelicula } from '../../../../models/pelicula.model';
+import { UploadService} from '../../../../services/upload.services';
 
 @Component({
   selector: 'app-crear-pelicula',
@@ -24,24 +25,35 @@ export class CrearPeliculaComponent {
     activo: true,
     imagen: '', // solo el nombre del archivo
   };
+  imagenSeleccionada: File | null = null;
 
   constructor(
     private peliculasService: PeliculaService,
+    private uploadService: UploadService,
     private router: Router
   ) {}
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.pelicula.imagen = file.name; // solo guarda el nombre
-    }
+  onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    this.imagenSeleccionada = input.files[0];
   }
+}
+
 
   onCheckboxChange(campo: 'proximamente' | 'activo') {
     this.pelicula[campo] = !this.pelicula[campo];
   }
 
-  onSubmit() {
+  async onSubmit() {
+  try {
+    if (this.imagenSeleccionada) {
+      const response = await this.uploadService
+        .subirImagen(this.imagenSeleccionada)
+        .toPromise();
+      this.pelicula.imagen = response.url;
+    }
+
     this.peliculasService.crearPelicula(this.pelicula).subscribe({
       next: () => {
         alert('Película creada con éxito!');
@@ -52,5 +64,10 @@ export class CrearPeliculaComponent {
         alert('Error al crear la película');
       },
     });
+  } catch (err) {
+    console.error(err);
+    alert('Error al subir la imagen');
   }
+}
+
 }
