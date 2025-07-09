@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { PeliculaService } from '../../services/pelicula.service';
@@ -22,7 +21,7 @@ export class InicioComponent implements OnInit {
   ngOnInit(): void {
     this.peliculaService.getPeliculas().subscribe({
       next: (peliculas) => {
-        this.peliculasActivas = peliculas.filter(p => p.activo && !p.proximamente);
+        this.peliculasActivas = peliculas;
       },
       error: (err) => console.error('Error al obtener películas', err)
     });
