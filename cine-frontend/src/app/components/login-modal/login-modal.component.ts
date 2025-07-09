@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -15,19 +19,60 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.css']
 })
 export class LoginModalComponent {
-  constructor(public dialogRef: MatDialogRef<LoginModalComponent>) {}
-
   email = '';
   password = '';
+  loginError: string | null = null;
+
+  constructor(
+    public dialogRef: MatDialogRef<LoginModalComponent>,
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+
+  ) {}
 
   login() {
-    console.log(this.email, this.password);
-    // Aquí iría la lógica real
-  }
+  this.loginError = null;
+
+  this.authService.login(this.email, this.password).subscribe({
+    next: () => {
+      this.authService.fetchUserInfo().subscribe({
+        next: user => {
+          if (user) {
+            console.log('Usuario autenticado:', user);
+
+            // ✅ Mostrar snackbar
+            this.snackBar.open('Sesión iniciada correctamente ✅', 'Cerrar', {
+              duration: 3000,
+              panelClass: ['snackbar-success'],
+            });
+
+            // ✅ Cerrar modal e indicar éxito
+            this.dialogRef.close(true);
+
+            // ✅ Redirigir por rol
+            if (user.rol === 'admin') {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/']);
+            }
+          }
+        },
+        error: () => {
+          this.loginError = 'No se pudo obtener la información del usuario.';
+        }
+      });
+    },
+    error: () => {
+      this.loginError = 'Credenciales incorrectas.';
+    }
+  });
+}
+
 }

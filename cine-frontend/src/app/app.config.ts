@@ -10,12 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+import { CookieService } from 'ngx-cookie-service'; 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
-
+    CookieService,
     importProvidersFrom(
       BrowserAnimationsModule,
       MatDialogModule,

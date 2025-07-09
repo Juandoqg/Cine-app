@@ -10,6 +10,8 @@
     <mat-label>Contraseña</mat-label>
     <input matInput [(ngModel)]="password" type="password" />
   </mat-form-field>
+  <div *ngIf="loginError" class="login-error">{{ loginError }}</div>
+
 
   <div class="login-modal-actions">
     <button mat-raised-button color="primary" (click)="login()">Ingresar</button>
