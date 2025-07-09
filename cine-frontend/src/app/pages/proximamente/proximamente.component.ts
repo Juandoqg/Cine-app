@@ -4,13 +4,14 @@ import { PeliculaService } from '../../services/pelicula.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-proximamente',
   templateUrl: './proximamente.component.html',
   styleUrls: ['./proximamente.component.css'],
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, NavbarComponent, FooterComponent, RouterModule],
 })
 export class ProximamenteComponent implements OnInit {
   peliculasProximamente: Pelicula[] = [];
@@ -22,5 +23,9 @@ export class ProximamenteComponent implements OnInit {
     this.peliculasProximamente = peliculas;
   });
 }
-
+verTrailer(event: Event, url: string): void {
+  event.preventDefault();
+  event.stopPropagation();
+  window.open(url, '_blank');
+}
 }

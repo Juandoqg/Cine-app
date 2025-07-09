@@ -1,15 +1,26 @@
 <app-navbar></app-navbar>
-<h2>🎞️ Próximamente en cartelera</h2>
+
+<h2 class="titulo-cartelera">🎞️ Cartelera actual</h2>
 
 <div class="peliculas-container">
-  <div *ngFor="let peli of peliculasProximamente" class="pelicula-card">
-    <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
-    <h3>{{ peli.titulo }}</h3>
-    <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
-    <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
-    <p><a [href]="peli.trailerUrl" target="_blank">Ver Trailer 🎥</a></p>
-    <p><strong>Fecha de estreno:</strong> {{ peli.fechaEstreno }}</p>
-
-  </div>
+  <a
+    *ngFor="let peli of peliculasProximamente"
+    [routerLink]="['/pelicula', peli.id]"
+    class="pelicula-card-link"
+  >
+    <div class="pelicula-card">
+      <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
+      <h3>{{ peli.titulo }}</h3>
+      <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
+      <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
+      <button
+        class="trailer-link"
+        (click)="verTrailer($event, peli.trailerUrl)"
+      >
+        Ver Trailer 🎥
+      </button>
+    </div>
+  </a>
 </div>
+
 <app-footer></app-footer>
