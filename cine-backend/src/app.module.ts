@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { PeliculasModule } from './infraestructure/peliculas/peliculas.module';
 import { AuthModule } from './infraestructure/auth/auth.module';
+
+import { SalasModule } from './infraestructure/salas/salas.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,7 +22,8 @@ import { AuthModule } from './infraestructure/auth/auth.module';
     }),
 
     PeliculasModule,
-    AuthModule
+    AuthModule,
+    SalasModule
 
     // otros módulos...
   ],
