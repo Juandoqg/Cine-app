@@ -11,6 +11,7 @@ import { SalasModule } from './infraestructure/salas/salas.module';
 import { FuncionesModule } from './infraestructure/funciones/funciones.module';
 
 import { JwtStrategy } from './infraestructure/strategies/jwt.strategy';
+import { UploadModule } from './infraestructure/uploads/upload.module';
 
 
 @Module({
@@ -29,7 +30,8 @@ import { JwtStrategy } from './infraestructure/strategies/jwt.strategy';
     PeliculasModule,
     AuthModule,
     SalasModule,
-    FuncionesModule
+    FuncionesModule,
+    UploadModule
 
     // otros módulos...
   ],
