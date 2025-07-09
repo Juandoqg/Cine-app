@@ -10,6 +10,7 @@ import { UsuarioTypeOrmRepository } from '../databases/typeorm/repositories/usua
 import { RegisterUsuarioUseCase } from 'src/application/use-cases/usuarios/register-usuario.use-case';
 import { LoginUsuarioUseCase }    from 'src/application/use-cases/usuarios/login-usuarios.use-case';
 import { UsuarioRepository }       from 'src/domain/repositories/usuario.repository';
+import { JwtStrategy } from '../strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UsuarioRepository }       from 'src/domain/repositories/usuario.reposit
   ],
   controllers: [AuthController],
   providers: [
+    JwtStrategy,
     {
       provide: 'UsuarioRepository',
       useClass: UsuarioTypeOrmRepository,

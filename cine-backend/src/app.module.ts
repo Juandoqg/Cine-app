@@ -9,6 +9,10 @@ import { AuthModule } from './infraestructure/auth/auth.module';
 
 import { SalasModule } from './infraestructure/salas/salas.module';
 import { FuncionesModule } from './infraestructure/funciones/funciones.module';
+
+import { JwtStrategy } from './infraestructure/strategies/jwt.strategy';
+
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,5 +33,6 @@ import { FuncionesModule } from './infraestructure/funciones/funciones.module';
 
     // otros módulos...
   ],
+  providers: [JwtStrategy],
 })
 export class AppModule {}
