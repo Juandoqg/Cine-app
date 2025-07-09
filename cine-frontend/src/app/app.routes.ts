@@ -13,12 +13,19 @@ export const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'proximamente', component: ProximamenteComponent },
   { path: 'pelicula/:id', component: DetallePeliculaComponent},
+
+
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
   { path: 'admin/peliculas', component: PeliculasAdminComponent, canActivate: [AdminGuard] },
   { path: 'admin/clientes', component: ClientesAdminComponent, canActivate: [AdminGuard] },
   { path: 'admin/compras', component: ComprasClientesComponent, canActivate: [AdminGuard] },
 
-
+  {
+    path: 'admin/peliculas',
+    loadChildren: () =>
+      import('./pages/admin/peliculas-admin/peliculas-admin.routing')
+        .then(m => m.PeliculasAdminRoutingModule)
+  },
 
   
   { path: '**', redirectTo: '' },
