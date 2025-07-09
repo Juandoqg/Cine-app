@@ -1,0 +1,44 @@
+.peliculas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #f0f2f5; /* mismo fondo que admin */
+  padding: 2rem;
+}
+
+.peliculas-panel {
+  background-color: #ffffff; /* blanco más puro */
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.peliculas-panel h1 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.peliculas-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.peliculas-botones button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.peliculas-botones button:hover {
+  background-color: #0056b3;
+}
