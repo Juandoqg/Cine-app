@@ -30,14 +30,17 @@ export class TypeOrmFuncionRepository implements FuncionRepository {
   } as FuncionOrmEntity);
 }
 
+async buscarPorPelicula(peliculaId: string): Promise<Funcion[]> {
+  const funcionesOrm = await this.repo.find({
+    where: {
+      pelicula: {
+        id: Number(peliculaId),
+      },
+    },
+    relations: ['sala', 'pelicula'],
+  });
 
-  async obtenerTodas(): Promise<Funcion[]> {
-    const funciones = await this.repo.find();
-    return funciones.map(FuncionMapper.toDomain);
-  }
+  return funcionesOrm.map(FuncionMapper.toDomain);
+}
 
-  async buscarPorDia(fecha: Date): Promise<Funcion | null> {
-    const result = await this.repo.findOne({ where: { fecha } });
-    return result ? FuncionMapper.toDomain(result) : null;
-  }
 }

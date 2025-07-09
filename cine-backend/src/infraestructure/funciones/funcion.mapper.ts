@@ -21,4 +21,15 @@ export class FuncionMapper {
       precio: funcion.precio,
     };
   }
+
+ static toResponse(funcion: Funcion): any {
+  return {
+    id: funcion.id,
+    peliculaId: funcion.peliculaId,
+    salaId: funcion.salaId,
+    fecha: funcion.fecha,
+    hora: funcion.hora,
+    precio: funcion.precio,
+  };
+}
 }
