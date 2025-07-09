@@ -1,0 +1,22 @@
+<div class="login-modal-container">
+  <h2 class="login-title">Iniciar sesión</h2>
+
+  <mat-form-field appearance="fill" class="login-form-field">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="email" type="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="login-form-field">
+    <mat-label>Contraseña</mat-label>
+    <input matInput [(ngModel)]="password" type="password" />
+  </mat-form-field>
+
+  <div class="login-modal-actions">
+    <button mat-raised-button color="primary" (click)="login()">Ingresar</button>
+  </div>
+
+  <div class="register-link">
+    <span>¿No tienes una cuenta?</span>
+    <a routerLink="/registrarse">Regístrate</a>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #1f1f1f;
+  color: white;
+  align-items: center;
+}
+
+.left a {
+  margin: 0 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.left .brand {
+  font-weight: bold;
+  margin-right: 2rem;
+}
+
+.right button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
