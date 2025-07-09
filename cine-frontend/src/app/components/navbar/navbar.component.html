@@ -6,8 +6,19 @@
   </div>
 
   <div class="right">
-    <button (click)="abrirLogin()">
+    <!-- Si NO está logueado -->
+    <button *ngIf="!isLoggedIn" (click)="abrirLogin()">
       <span class="material-icons">account_circle</span>
     </button>
+
+    <!-- Si está logueado -->
+    <button *ngIf="isLoggedIn" [matMenuTriggerFor]="menu">
+      <span class="material-icons">account_circle</span>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="irAMisCompras()">Mis compras</button>
+      <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+    </mat-menu>
   </div>
 </nav>
