@@ -15,7 +15,7 @@ import { JwtStrategy } from '../strategies/jwt.strategy';
 @Module({
   imports: [
     ConfigModule, 
-    TypeOrmModule.forFeature([UsuarioOrmEntity]),  // ← aquí
+    TypeOrmModule.forFeature([UsuarioOrmEntity]),  
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
