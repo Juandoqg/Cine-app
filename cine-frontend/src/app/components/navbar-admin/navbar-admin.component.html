@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="left">
+    <span class="brand">🎬 Panel Administrador CineApp</span>
+    <a routerLink="/admin/peliculas" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Peliculas</a>
+    <a routerLink="/admin/clientes" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Clientes</a>
+    <a routerLink="/proximamente" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Compras</a>
+
+  </div>
+
+  <div class="right">
+    <!-- Si NO está logueado -->
+    <button *ngIf="!isLoggedIn" (click)="abrirLogin()">
+      <span class="material-icons">account_circle</span>
+    </button>
+
+    <!-- Si está logueado -->
+    <button *ngIf="isLoggedIn" [matMenuTriggerFor]="menu">
+      <span class="material-icons">account_circle</span>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="irAMisCompras()">Mis compras</button>
+      <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+    </mat-menu>
+  </div>
+</nav>

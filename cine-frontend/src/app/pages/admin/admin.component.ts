@@ -3,10 +3,12 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavbarAdminComponent } from '../../components/navbar-admin/navbar-admin.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 @Component({
   selector: 'app-admin',
   standalone :true,
-  imports: [RouterModule],
+  imports: [RouterModule, NavbarAdminComponent, FooterComponent],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
