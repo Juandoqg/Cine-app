@@ -4,8 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { PeliculaOrmEntity } from '../entities/pelicula.orm-entity';
-import { PeliculaMapper } from 'src/infraestructure/peliculas/pelicula.mapper';
-
+import { PeliculaMapper } from 'src/infraestructure/mappers/pelicula.mapper';
 import { Pelicula } from 'src/domain/entities/pelicula.entity';
 import { PeliculaRepository } from 'src/domain/repositories/pelicula.repository';
 

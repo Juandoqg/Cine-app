@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { FuncionOrmEntity } from '../entities/funcion.orm-entity';
 import { Funcion } from 'src/domain/entities/funcion.entity';
 import { FuncionRepository } from 'src/domain/repositories/funcion.repository';
-import { FuncionMapper } from 'src/infraestructure/funciones/funcion.mapper';
+import { FuncionMapper } from 'src/infraestructure/mappers/funcion.mapper';
 
 @Injectable()
 export class TypeOrmFuncionRepository implements FuncionRepository {

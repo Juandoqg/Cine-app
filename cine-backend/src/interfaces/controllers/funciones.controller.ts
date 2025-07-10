@@ -3,7 +3,7 @@ import { CreateFuncionUseCase } from 'src/application/use-cases/funciones/create
 import { FuncionModelDto } from 'src/application/dto/FuncionModelDto';
 import { Funcion } from 'src/domain/entities/funcion.entity';
 import { GetFuncionesPorPeliculaUseCase } from 'src/application/use-cases/funciones/get-funcion-por-pelicula.use-case';
-import { FuncionMapper } from '../../infraestructure/funciones/funcion.mapper';
+import { FuncionMapper } from '../../infraestructure/mappers/funcion.mapper';
 
 @Controller('funciones')
 export class FuncionesController {

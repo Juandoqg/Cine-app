@@ -3,14 +3,14 @@ import { JwtModule , JwtService} from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AuthController } from '../../interfaces/controllers/auth.controller';
-import { UsuarioOrmEntity } from '../databases/typeorm/entities/usuario.orm-entity';
-import { UsuarioTypeOrmRepository } from '../databases/typeorm/repositories/usuario.typeorm-repository';
+import { AuthController } from '../controllers/auth.controller';
+import { UsuarioOrmEntity } from '../../infraestructure/databases/typeorm/entities/usuario.orm-entity';
+import { UsuarioTypeOrmRepository } from '../../infraestructure/databases/typeorm/repositories/usuario.typeorm-repository';
 
 import { RegisterUsuarioUseCase } from 'src/application/use-cases/usuarios/register-usuario.use-case';
 import { LoginUsuarioUseCase }    from 'src/application/use-cases/usuarios/login-usuarios.use-case';
 import { UsuarioRepository }       from 'src/domain/repositories/usuario.repository';
-import { JwtStrategy } from '../strategies/jwt.strategy';
+import { JwtStrategy } from '../../infraestructure/strategies/jwt.strategy';
 
 @Module({
   imports: [

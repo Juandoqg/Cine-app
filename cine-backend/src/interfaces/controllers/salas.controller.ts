@@ -2,7 +2,7 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { CrearSalaUseCase } from 'src/application/use-cases/salas/create-sala.use-case';
 import { SalaModelDto, SalaResponseDto } from 'src/application/dto/SalaModelDto';
-import { SalaMapper } from '../../infraestructure/salas/sala.mapper';
+import { SalaMapper } from '../../infraestructure/mappers/sala.mapper';
 import { GetAllSalasUseCase } from 'src/application/use-cases/salas/get-all-salas.use-cases';
 
 @Controller('salas')

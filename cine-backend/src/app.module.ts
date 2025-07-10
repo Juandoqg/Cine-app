@@ -4,14 +4,14 @@ import configuration from './config/configuration';
 import { validationSchema } from './config/validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
-import { PeliculasModule } from './infraestructure/peliculas/peliculas.module';
-import { AuthModule } from './infraestructure/auth/auth.module';
+import { PeliculasModule } from './interfaces/modules/peliculas.module';
+import { AuthModule } from './interfaces/modules/auth.module';
 
-import { SalasModule } from './infraestructure/salas/salas.module';
-import { FuncionesModule } from './infraestructure/funciones/funciones.module';
+import { SalasModule } from './interfaces/modules/salas.module';
+import { FuncionesModule } from './interfaces/modules/funciones.module';
 
 import { JwtStrategy } from './infraestructure/strategies/jwt.strategy';
-import { UploadModule } from './infraestructure/uploads/upload.module';
+import { UploadModule } from './interfaces/modules/upload.module';
 
 
 @Module({
