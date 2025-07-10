@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -23,17 +23,34 @@ export class RegisterComponent {
     activo : true
   };
 
-  constructor( private router: Router ,  private authService: AuthService) {}
+  constructor( private router: Router ,  private authService: AuthService,   private snackBar: MatSnackBar
+) {}
 
-  registrarse() {
-    this.authService.registrar(this.usuario).subscribe({
-      next: (res) => {
-        console.log('Registro exitoso', res);
-        this.router.navigate(['/']); // redirige al home u otra ruta
-      },
-      error: (err) => {
-        console.error('Error al registrar:', err);
-      }
-    });
-  }
+registrarse() {
+  this.authService.registrar(this.usuario).subscribe({
+    next: () => {
+      this.snackBar.open('¡Registro exitoso! 🎉', 'Cerrar', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-success']
+      });
+      this.router.navigate(['/']);
+    },
+    error: (err) => {
+      console.error('Error al registrar:', err);
+
+      const mensaje = err?.error?.message || 'Error al registrar. Intenta de nuevo.';
+
+      this.snackBar.open(mensaje, 'Cerrar', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-error']
+      });
+    }
+  });
+}
+
+
 }
