@@ -41,9 +41,15 @@ export class CrearPeliculaComponent {
 }
 
 
-  onCheckboxChange(campo: 'proximamente' | 'activo') {
-    this.pelicula[campo] = !this.pelicula[campo];
+  onCheckboxChange(checkbox: 'proximamente' | 'activo'): void {
+  if (checkbox === 'proximamente') {
+    this.pelicula.proximamente = true;
+    this.pelicula.activo = false;
+  } else if (checkbox === 'activo') {
+    this.pelicula.activo = true;
+    this.pelicula.proximamente = false;
   }
+}
 
   async onSubmit() {
   try {
