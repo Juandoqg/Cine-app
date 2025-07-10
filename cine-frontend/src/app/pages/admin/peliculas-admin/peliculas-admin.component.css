@@ -42,3 +42,12 @@
 .peliculas-botones button:hover {
   background-color: #0056b3;
 }
+.peliculas-botones .volver-btn {
+  background-color: #ff7b00;
+  width: 60%; 
+  margin: 0 auto; 
+}
+
+.peliculas-botones .volver-btn:hover {
+  background-color: #e86d00;
+}
