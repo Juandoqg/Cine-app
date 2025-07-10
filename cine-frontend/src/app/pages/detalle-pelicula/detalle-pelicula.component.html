@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 
+<!-- Trailer -->
 <div class="trailer-container">
   <iframe
     width="100%"
@@ -10,31 +11,55 @@
   ></iframe>
 </div>
 
+<!-- Contenido principal -->
 <div class="main-container">
   <!-- Imagen -->
   <div class="imagen-container">
-    <img [src]="pelicula.imagen" alt="Imagen de {{ pelicula.titulo }}" class="imagen-pelicula">
+    <img 
+      [src]="pelicula.imagen" 
+      alt="Imagen de {{ pelicula.titulo }}" 
+      class="imagen-pelicula">
   </div>
 
-  <!-- Detalle -->
+  <!-- Detalles -->
   <div class="info-container">
     <h2>{{ pelicula.titulo }}</h2>
     <p><strong>Descripción:</strong> {{ pelicula.descripcion }}</p>
     <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
     <p><strong>Categoría:</strong> {{ pelicula.categoria }}</p>
-    <p><strong>Estreno:</strong> {{ pelicula.fechaEstreno | date }}</p>
+    <p><strong>Estreno:</strong> {{ pelicula.fechaEstreno | date:'longDate' }}</p>
   </div>
 
-  <!-- Funciones -->
-  <div class="funciones-container">
-    <h3>Funciones disponibles</h3>
-    <div *ngFor="let dia of funcionesPorDia | keyvalue">
-      <h4>{{ dia.key }}</h4>
-      <div class="horas">
-        <button *ngFor="let funcion of dia.value">
-          {{ funcion.hora }} - ${{ funcion.precio }}
+  <!-- Sección días + funciones -->
+  <div class="dias-funciones-container">
+    <!-- Barra de días -->
+    <div class="dias-wrapper">
+      <button class="flecha">&#8249;</button>
+
+      <div class="dias-lista">
+        <button
+          *ngFor="let dia of diasDisponibles"
+          (click)="diaSeleccionado = dia"
+          [class.dia-activo]="dia.toDateString() === diaSeleccionado.toDateString()"
+        >
+          <div class="nombre-dia">{{ dia | date: 'EEE' | uppercase }}</div>
+          <div class="numero-dia">{{ dia | date: 'dd MMM' }}</div>
         </button>
       </div>
+
+      <button class="flecha">&#8250;</button>
+    </div>
+
+    <!-- Caja de funciones -->
+    <div class="funciones-panel" *ngIf="funcionesDelDiaSeleccionado.length > 0">
+  <div class="cine-nombre">Multicine Buga Plaza</div>
+  <div class="tipo-sala">2D - DOB</div>
+
+  <div class="horarios">
+    <button *ngFor="let funcion of funcionesDelDiaSeleccionado">
+      {{ funcion.hora }}
+    </button>
+     </div>
     </div>
   </div>
 </div>

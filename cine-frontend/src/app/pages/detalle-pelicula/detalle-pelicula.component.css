@@ -29,35 +29,103 @@
   flex: 1;
   max-width: 35%;
 }
-
-/* Funciones */
-.funciones-container {
-  flex: 1;
-  max-width: 35%;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  border: 2px solid #ccc; /* ✅ Borde para resaltar */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.selector-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dias-funciones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Botones de horas */
-.horas {
+.dias-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #e0e7ff;
+  border-radius: 12px;
+  padding: 10px 15px;
+  gap: 15px;
+}
+
+.flecha {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #1e3a8a;
+  cursor: pointer;
+}
+
+.dias-lista {
+  display: flex;
+  gap: 10px;
+}
+
+.dias-lista button {
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  color: #1e3a8a;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dias-lista button.dia-activo {
+  background-color: #1e40af;
+  color: white;
+  font-weight: bold;
+}
+
+.nombre-dia {
+  font-size: 12px;
+}
+
+.numero-dia {
+  font-size: 14px;
+}
+
+.funciones-panel {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.cine-nombre {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.tipo-sala {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.horarios {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 5px;
+  justify-content: flex-start;
 }
 
-.horas button {
-  background-color: #e0e0e0;
-  border: none;
+.horarios button {
+  background-color: #f3f4f6;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   padding: 6px 12px;
-  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
   transition: background-color 0.2s;
 }
 
-.horas button:hover {
-  background-color: #ccc;
+.horarios button:hover {
+  background-color: #e2e8f0;
 }

@@ -11,6 +11,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 import { CookieService } from 'ngx-cookie-service'; 
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeEs);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     CookieService,
+    { provide: LOCALE_ID, useValue: 'es' },  
+
     importProvidersFrom(
       BrowserAnimationsModule,
       MatDialogModule,

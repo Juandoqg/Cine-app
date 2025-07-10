@@ -8,17 +8,19 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { Funcion } from '../../models/funcion.model';
 import { FuncionService } from '../../services/funcion.service';
+
 @Component({
   selector: 'app-detalle-pelicula',
   templateUrl: './detalle-pelicula.component.html',
   styleUrl: './detalle-pelicula.component.css',
   imports: [CommonModule, NavbarComponent, FooterComponent],
-
 })
 export class DetallePeliculaComponent implements OnInit {
   pelicula!: Pelicula;
   trailerSafeUrl!: SafeResourceUrl;
-  funcionesPorDia: { [dia: string]: Funcion[] } = {}; // agrupadas por día
+  diasDisponibles: Date[] = [];
+  diaSeleccionado!: Date;
+  funcionesPorDia: { [dia: string]: Funcion[] } = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +37,6 @@ export class DetallePeliculaComponent implements OnInit {
         this.pelicula = peli;
         this.trailerSafeUrl = this.sanitizarUrl(peli.trailerUrl);
 
-        // Obtener funciones
         this.funcionService.getFuncionesPorPelicula(id.toString()).subscribe({
           next: (funciones) => {
             this.agruparFuncionesPorDia(funciones);
@@ -46,15 +47,30 @@ export class DetallePeliculaComponent implements OnInit {
   }
 
   private agruparFuncionesPorDia(funciones: Funcion[]): void {
-    this.funcionesPorDia = funciones.reduce((acc, funcion) => {
-      const fechaObj = new Date(funcion.fecha);
-      const dia = fechaObj.toLocaleDateString();
+    this.funcionesPorDia = {};
+    this.diasDisponibles = [];
 
-      if (!acc[dia]) acc[dia] = [];
-      acc[dia].push(funcion);
-      return acc;
-    }, {} as { [dia: string]: Funcion[] });
+    funciones.forEach(funcion => {
+      const fecha = new Date(funcion.fecha);
+      const clave = fecha.toDateString();
+
+      if (!this.funcionesPorDia[clave]) {
+        this.funcionesPorDia[clave] = [];
+        this.diasDisponibles.push(fecha);
+      }
+
+      this.funcionesPorDia[clave].push(funcion);
+    });
+
+    this.diaSeleccionado = this.diasDisponibles[0];
   }
+
+  get funcionesDelDiaSeleccionado(): Funcion[] {
+  return this.diaSeleccionado
+    ? this.funcionesPorDia[this.diaSeleccionado.toDateString()] || []
+    : [];
+}
+
 
   sanitizarUrl(url: string): SafeResourceUrl {
     const videoId = this.extraerIdYoutube(url);
