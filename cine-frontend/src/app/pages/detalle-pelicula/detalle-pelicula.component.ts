@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PeliculaService } from '../../services/pelicula.service';
 import { Pelicula } from '../../models/pelicula.model';
@@ -10,6 +10,8 @@ import { Funcion } from '../../models/funcion.model';
 import { FuncionService } from '../../services/funcion.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { LoginModalComponent } from '../../components/login-modal/login-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -25,13 +27,17 @@ export class DetallePeliculaComponent implements OnInit {
   diaSeleccionado!: Date;
   funcionesPorDia: { [dia: string]: Funcion[] } = {};
 
+  private dialog = inject(MatDialog)
+isLoggedIn = false;
+  userRole: string | null = null;
   constructor(
     private route: ActivatedRoute,
     private peliculaService: PeliculaService,
     private funcionService: FuncionService,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+
 
   ) {}
 
@@ -95,7 +101,13 @@ export class DetallePeliculaComponent implements OnInit {
     if (logueado) {
       this.router.navigate(['/comprar', funcionId]);
     } else {
-      this.router.navigate(['/login'], { queryParams: { redirect: `/comprar/${funcionId}` } });
+     this.dialog.open(LoginModalComponent, { width: '400px' }).afterClosed().subscribe(() => {
+           // refrescar estado después de login
+           this.authService.fetchUserInfo().subscribe(user => {
+             this.isLoggedIn = !!user;
+             this.userRole = user?.rol ?? null;
+           });
+         });
     }
   });
 }

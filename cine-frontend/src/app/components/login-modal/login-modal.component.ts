@@ -66,7 +66,6 @@ export class LoginModalComponent {
             if (user.rol === 'admin') {
               this.router.navigate(['/admin']);
             } else {
-              this.router.navigate(['/']);
             }
           }
         },

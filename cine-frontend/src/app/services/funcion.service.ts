@@ -13,4 +13,7 @@ export class FuncionService {
   getFuncionesPorPelicula(peliculaId: string): Observable<Funcion[]> {
     return this.http.get<Funcion[]>(`${this.apiUrl}/pelicula/${peliculaId}`);
   }
+  getFuncionPorId(id: number): Observable<Funcion> {
+    return this.http.get<Funcion>(`${this.apiUrl}/${id}`);
+  }
 }
