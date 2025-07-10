@@ -6,6 +6,7 @@ import { SalaTypeOrmRepository } from '../../infraestructure/databases/typeorm/r
 import { CrearSalaUseCase } from 'src/application/use-cases/salas/create-sala.use-case';
 import { SalasController } from '../controllers/salas.controller';
 import { GetAllSalasUseCase } from 'src/application/use-cases/salas/get-all-salas.use-cases';
+import { ObtenerSalaPorIdUseCase } from 'src/application/use-cases/salas/get-sala-por-id.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SalaOrmEntity])],
@@ -17,7 +18,8 @@ import { GetAllSalasUseCase } from 'src/application/use-cases/salas/get-all-sala
     },
    
     CrearSalaUseCase,
-    GetAllSalasUseCase
+    GetAllSalasUseCase,
+    ObtenerSalaPorIdUseCase,
   ],
 })
 export class SalasModule {}

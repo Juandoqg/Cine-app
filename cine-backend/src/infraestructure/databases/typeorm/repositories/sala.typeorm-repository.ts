@@ -25,4 +25,10 @@ export class SalaTypeOrmRepository implements SalaRepository {
     const todas = await this.salaRepo.find();
     return todas.map(SalaMapper.toDomain);
   }
+
+ async obtenerPorId(id: number): Promise<Sala | null> {
+    const sala = await this.salaRepo.findOne({ where: { id } });
+    return sala ? SalaMapper.toDomain(sala) : null;
+    
+  }
 }
