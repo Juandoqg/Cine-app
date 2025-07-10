@@ -18,12 +18,13 @@ export const routes: Routes = [
 
 
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
-  { path: 'admin/peliculas', component: PeliculasAdminComponent, canActivate: [AdminGuard] },
   { path: 'admin/clientes', component: ClientesAdminComponent, canActivate: [AdminGuard] },
   { path: 'admin/compras', component: ComprasClientesComponent, canActivate: [AdminGuard] },
 
   {
     path: 'admin/peliculas',
+    canActivate: [AdminGuard],
+
     loadChildren: () =>
       import('./pages/admin/peliculas-admin/peliculas-admin.routing')
         .then(m => m.PeliculasAdminRoutingModule)

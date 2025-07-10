@@ -64,7 +64,7 @@ export class AuthService {
 
   isLoggedIn(): Observable<boolean> {
   return this.fetchUserInfo().pipe(
-    map(user => !!user), // ✅ transforma el resultado en boolean
+    map(user => !!user), 
     catchError(() => of(false))
   );
 }
