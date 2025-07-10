@@ -32,7 +32,6 @@ registrarse() {
       this.snackBar.open('¡Registro exitoso! 🎉', 'Cerrar', {
         duration: 3000,
         horizontalPosition: 'center',
-        verticalPosition: 'top',
         panelClass: ['snackbar-success']
       });
       this.router.navigate(['/']);

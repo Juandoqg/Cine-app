@@ -22,7 +22,6 @@ export class AdminComponent {
     this.snackBar.open('Sesión cerrada con éxito', 'Cerrar', {
       duration: 3000,
       horizontalPosition: 'center',
-      verticalPosition: 'top',
       panelClass: ['snackbar-success']
     });
     this.router.navigate(['/']);
