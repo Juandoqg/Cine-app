@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  padding: 20px;
+}
 .titulo-listado {
   text-align: center;
   margin-top: 20px;
