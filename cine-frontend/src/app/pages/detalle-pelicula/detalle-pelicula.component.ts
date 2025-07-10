@@ -8,6 +8,9 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { Funcion } from '../../models/funcion.model';
 import { FuncionService } from '../../services/funcion.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-detalle-pelicula',
@@ -26,7 +29,10 @@ export class DetallePeliculaComponent implements OnInit {
     private route: ActivatedRoute,
     private peliculaService: PeliculaService,
     private funcionService: FuncionService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService,
+    private router: Router
+
   ) {}
 
   ngOnInit(): void {
@@ -82,4 +88,16 @@ export class DetallePeliculaComponent implements OnInit {
     const match = url.match(/(?:\?v=|\/embed\/|\.be\/)([a-zA-Z0-9_-]{11})/);
     return match ? match[1] : '';
   }
+
+
+  irAComprar(funcionId: number): void {
+  this.authService.isLoggedIn().subscribe((logueado) => {
+    if (logueado) {
+      this.router.navigate(['/comprar', funcionId]);
+    } else {
+      this.router.navigate(['/login'], { queryParams: { redirect: `/comprar/${funcionId}` } });
+    }
+  });
+}
+
 }
