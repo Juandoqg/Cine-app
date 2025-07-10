@@ -139,3 +139,24 @@
   flex: 1;
   padding: 20px;
 }
+.sin-funciones-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.sin-funciones-card {
+  border: 1.5px dashed #ccc;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  max-width: 300px; /* más angosto */
+  text-align: center;
+}
+
+.mensaje {
+  font-size: 1rem;
+  color: #444;
+}

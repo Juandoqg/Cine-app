@@ -33,37 +33,54 @@
   </div>
 
   <!-- Sección días + funciones -->
-  <div class="dias-funciones-container">
-    <!-- Barra de días -->
-    <div class="dias-wrapper">
-      <button class="flecha">&#8249;</button>
+ <!-- Sección días + funciones -->
+<div class="dias-funciones-container" *ngIf="diasDisponibles.length > 0; else sinFunciones">
+  <!-- Barra de días -->
+  <div class="dias-wrapper">
+    <button class="flecha">&#8249;</button>
 
-      <div class="dias-lista">
-        <button
-          *ngFor="let dia of diasDisponibles"
-          (click)="diaSeleccionado = dia"
-          [class.dia-activo]="dia.toDateString() === diaSeleccionado.toDateString()"
-        >
-          <div class="nombre-dia">{{ dia | date: 'EEE' | uppercase }}</div>
-          <div class="numero-dia">{{ dia | date: 'dd MMM' }}</div>
-        </button>
-      </div>
-
-      <button class="flecha">&#8250;</button>
+    <div class="dias-lista">
+      <button
+        *ngFor="let dia of diasDisponibles"
+        (click)="diaSeleccionado = dia"
+        [class.dia-activo]="dia.toDateString() === diaSeleccionado.toDateString()"
+      >
+        <div class="nombre-dia">{{ dia | date: 'EEE' | uppercase }}</div>
+        <div class="numero-dia">{{ dia | date: 'dd MMM' }}</div>
+      </button>
     </div>
 
-    <!-- Caja de funciones -->
-  <div class="funciones-panel" *ngIf="funcionesDelDiaSeleccionado.length > 0">
-  <div class="cine-nombre">Multicine cineapp</div>
-  <div class="tipo-sala">2D - DOB</div>
+    <button class="flecha">&#8250;</button>
+  </div>
 
-  <div class="horarios">
-    <button *ngFor="let funcion of funcionesDelDiaSeleccionado" (click)="irAComprar(funcion.id)">
-      {{ funcion.hora }}
-    </button>
-     </div>
+  <!-- Caja de funciones -->
+  <div class="funciones-panel">
+    <div class="cine-nombre">Multicine cineapp</div>
+    <div class="tipo-sala">2D - DOB</div>
+
+    <div class="horarios" *ngIf="funcionesDelDiaSeleccionado.length > 0; else sinFuncionesDelDia">
+      <button *ngFor="let funcion of funcionesDelDiaSeleccionado" (click)="irAComprar(funcion.id)">
+        {{ funcion.hora }}
+      </button>
+    </div>
+
+    <ng-template #sinFuncionesDelDia>
+      <p class="sin-funciones">No hay funciones para este día.</p>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Template para cuando no hay ninguna función -->
+<ng-template #sinFunciones>
+  <div class="sin-funciones-container">
+    <div class="sin-funciones-card">
+      <p class="mensaje">🎬 Lo sentimos, no hay funciones disponibles para esta película.</p>
     </div>
   </div>
+</ng-template>
+
+
+
 </div>
 
  </main>
