@@ -1,0 +1,33 @@
+<div class="inicio-layout">
+  <app-navbar></app-navbar>
+
+  <main class="contenido">
+    <div class="register-wrapper">
+      <form #registerForm="ngForm" class="register-form" (ngSubmit)="registrarse()">
+        <h2>Registrarse 📝</h2>
+
+        <label>Nombre</label>
+        <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required />
+
+        <label>Apellido</label>
+        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" required />
+
+        <label>Email</label>
+        <input type="email" name="email" [(ngModel)]="usuario.email" required />
+
+        <label>Teléfono</label>
+        <input type="text" name="telefono" [(ngModel)]="usuario.telefono" required />
+
+        <label>Contraseña</label>
+        <input type="password" name="password" [(ngModel)]="usuario.password" required />
+
+        <div class="registro-boton-container">
+          <button type="submit" class="registro-boton" [disabled]="!registerForm.valid">Registrarse</button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

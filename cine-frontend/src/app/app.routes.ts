@@ -7,12 +7,14 @@ import { AdminGuard } from './guards/admin.guard';
 import { PeliculasAdminComponent} from './pages/admin/peliculas-admin/peliculas-admin.component';
 import { ClientesAdminComponent } from './pages/admin/clientes-admin/clientes-admin.component';
 import { ComprasClientesComponent } from './pages/admin/compras-clientes/compras-clientes.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 export const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'proximamente', component: ProximamenteComponent },
   { path: 'pelicula/:id', component: DetallePeliculaComponent},
+  { path: 'registrarse', component: RegisterComponent},
 
 
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },

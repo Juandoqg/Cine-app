@@ -25,6 +25,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, { email, password }, { withCredentials: true });
   }
 
+  registrar(usuario: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/register`, usuario); 
+  }
   fetchUserInfo(): Observable<Usuario | null> {
     return this.http.get<Usuario>(`${this.apiUrl}/me`, { withCredentials: true }).pipe(
       tap(user => {

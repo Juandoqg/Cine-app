@@ -5,7 +5,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../services/auth.service';
@@ -20,6 +20,7 @@ import { AuthService } from '../../services/auth.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    RouterModule
   ],
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.css']
@@ -37,6 +38,11 @@ export class LoginModalComponent {
 
   ) {}
 
+  cerrarYRedirigir() {
+  this.dialogRef.close();
+  this.router.navigate(['/registrarse']);
+}
+  
   login() {
   this.loginError = null;
 
