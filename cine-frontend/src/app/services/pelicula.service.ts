@@ -11,6 +11,10 @@ export class PeliculaService {
   constructor(private http: HttpClient) {}
 
   getPeliculas(): Observable<Pelicula[]> {
+  return this.http.get<Pelicula[]>(`${this.apiUrl}/admin`);
+  }
+
+  getPeliculasActivas(): Observable<Pelicula[]> {
     return this.http.get<Pelicula[]>(this.apiUrl);
   }
   getPeliculasProximamente(): Observable<Pelicula[]> {

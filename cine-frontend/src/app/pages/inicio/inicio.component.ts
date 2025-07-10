@@ -20,7 +20,7 @@ export class InicioComponent implements OnInit {
   constructor(private peliculaService: PeliculaService) {}
 
   ngOnInit(): void {
-    this.peliculaService.getPeliculas().subscribe({
+    this.peliculaService.getPeliculasActivas().subscribe({
       next: (peliculas) => {
         this.peliculasActivas = peliculas;
       },

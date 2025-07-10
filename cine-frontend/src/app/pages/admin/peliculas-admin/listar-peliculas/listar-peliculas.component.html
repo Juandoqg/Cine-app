@@ -1,1 +1,24 @@
-<p>listar-peliculas works!</p>
+<h2 class="titulo-listado">🎬 Listado de todas las películas</h2>
+
+<div class="peliculas-grid">
+  <div *ngFor="let peli of peliculas" class="pelicula-card-admin">
+    <div class="imagen-wrapper">
+      <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="admin-img" />
+    </div>
+
+    <div class="pelicula-info">
+      <h3>{{ peli.titulo }}</h3>
+      <p><strong>Descripción:</strong> {{ peli.descripcion }}</p>
+      <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
+      <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
+      <p><strong>Fecha de estreno:</strong> {{ peli.fechaEstreno | date }}</p>
+      <p>
+        <strong>Trailer:</strong>
+        <a [href]="peli.trailerUrl" target="_blank">Ver trailer 🎥</a>
+      </p>
+      <p [ngClass]="peli.activo ? 'activo' : 'inactivo'">
+        Estado: {{ peli.activo ? 'Activa' : 'Inactiva' }}
+      </p>
+    </div>
+  </div>
+</div>
