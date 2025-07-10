@@ -1,5 +1,7 @@
-<app-navbar></app-navbar>
+<div class="inicio-layout">
+  <app-navbar></app-navbar>
 
+  <main class="contenido">
 <!-- Trailer -->
 <div class="trailer-container">
   <iframe
@@ -51,7 +53,7 @@
     </div>
 
     <!-- Caja de funciones -->
-    <div class="funciones-panel" *ngIf="funcionesDelDiaSeleccionado.length > 0">
+  <div class="funciones-panel" *ngIf="funcionesDelDiaSeleccionado.length > 0">
   <div class="cine-nombre">Multicine cineapp</div>
   <div class="tipo-sala">2D - DOB</div>
 
@@ -64,4 +66,7 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+ </main>
+
+  <app-footer></app-footer>
+</div>
