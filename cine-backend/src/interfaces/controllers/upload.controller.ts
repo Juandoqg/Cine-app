@@ -1,7 +1,7 @@
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
-import { UploadService } from '../uploads/upload.service';
+import { UploadService } from '../../infraestructure/uploads/upload.service';
 
 @Controller('upload')
 export class UploadController {

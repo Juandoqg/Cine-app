@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { PeliculaOrmEntity } from '../databases/typeorm/entities/pelicula.orm-entity';
-import { PeliculasController } from '../controllers/peliculas.controller';
+import { PeliculasController } from '../../interfaces/controllers/peliculas.controller';
 import { PeliculaTypeOrmRepository } from '../databases/typeorm/repositories/pelicula.typeorm-repository';
 
 import { CreatePeliculaUseCase } from 'src/application/use-cases/peliculas/create-pelicula.use-case';

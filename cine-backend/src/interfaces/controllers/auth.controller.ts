@@ -4,7 +4,7 @@ import { LoginDto } from 'src/application/dto/LoginDto';
 import { LoginUsuarioUseCase } from 'src/application/use-cases/usuarios/login-usuarios.use-case';
 import { Response } from 'express'; 
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../infraestructure/guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {

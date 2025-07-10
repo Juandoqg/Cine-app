@@ -5,7 +5,7 @@ import { FuncionOrmEntity } from '../databases/typeorm/entities/funcion.orm-enti
 import { TypeOrmFuncionRepository } from '../databases/typeorm/repositories/funcion.typeorm-repository';
 import { CreateFuncionUseCase } from 'src/application/use-cases/funciones/create-funcion.use-case';
 
-import { FuncionesController } from '../controllers/funciones.controller';
+import { FuncionesController } from '../../interfaces/controllers/funciones.controller';
 import { GetFuncionesPorPeliculaUseCase } from 'src/application/use-cases/funciones/get-funcion-por-pelicula.use-case';
 import { SalaOrmEntity } from '../databases/typeorm/entities/sala.orm-entity';
 import { PeliculaOrmEntity} from '../databases/typeorm/entities/pelicula.orm-entity';
