@@ -43,4 +43,15 @@ async buscarPorPelicula(peliculaId: string): Promise<Funcion[]> {
   return funcionesOrm.map(FuncionMapper.toDomain);
 }
 
+async obtenerPorId(id: number): Promise<Funcion | null> {
+  const funcionOrm = await this.repo.findOne({
+    where: { id },
+    relations: ['pelicula', 'sala'],
+  });
+
+  if (!funcionOrm) return null;
+
+  return FuncionMapper.toDomain(funcionOrm);
+}
+
 }

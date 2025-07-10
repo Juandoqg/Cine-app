@@ -1,4 +1,3 @@
-// infrastructure/persistence/sala.typeorm-repository.ts
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
