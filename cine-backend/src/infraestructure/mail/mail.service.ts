@@ -8,7 +8,6 @@ export class MailService {
   async sendPurchaseConfirmation(
     to: string,
     data: {
-      name: string;
       movie: string;
       tickets: number;
       total: number;
