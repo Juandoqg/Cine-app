@@ -1,0 +1,5 @@
+import { Venta } from '../entities/venta.entity';
+
+export abstract class VentaRepository {
+  abstract crearVenta(venta: Omit<Venta, 'id'>): Promise<Venta>;
+}
