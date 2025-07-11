@@ -29,6 +29,8 @@
 .usuarios-header p {
   color: #666;
   margin-bottom: 2rem;
+    font-size: 0.9rem;
+
 }
 
 .usuarios-grid {

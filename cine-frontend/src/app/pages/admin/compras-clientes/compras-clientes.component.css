@@ -34,6 +34,7 @@
 .compras-header p {
   color: #666;
   font-size: 0.9rem;
+
 }
 
 .compras-grid {
@@ -79,17 +80,17 @@
 
 .compra-card .contenido h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .compra-card .contenido p {
   color: #666;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .compra-card button {
-  padding: 0.5rem 1.2rem;
-  background-color: #007bff;
+  padding: 0.4rem 1rem;
+  background: #2563eb;
   color: white;
   border: none;
   border-radius: 8px;
@@ -98,7 +99,7 @@
 }
 
 .compra-card button:hover {
-  background-color: #0056b3;
+  background-color: #1d4ed8;
 }
 
 .compras-stats {
