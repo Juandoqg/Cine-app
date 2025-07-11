@@ -1,25 +1,24 @@
 
-<h2 class="titulo-listado">🎬 Listado de todas las películas</h2>
+    <h2 class="titulo-cartelera">🎞️ Peliculas</h2>
 
-<div class="peliculas-grid">
-  <div *ngFor="let peli of peliculas" class="pelicula-card-admin">
-    <div class="imagen-wrapper">
-      <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="admin-img" />
+    <div class="peliculas-container">
+      <a
+        *ngFor="let peli of peliculas"
+        [routerLink]="['/admin/peliculas/editar', peli.id]"
+        class="pelicula-card-link"
+      >
+        <div class="pelicula-card">
+          <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
+          <h3>{{ peli.titulo }}</h3>
+          <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
+          <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
+          <button
+            class="trailer-link"
+            (click)="verTrailer($event, peli.trailerUrl)"
+          >
+            Ver Trailer 🎥
+          </button>
+        </div>
+      </a>
     </div>
-
-    <div class="pelicula-info">
-      <h3>{{ peli.titulo }}</h3>
-      <p><strong>Descripción:</strong> {{ peli.descripcion }}</p>
-      <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
-      <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
-      <p><strong>Fecha de estreno:</strong> {{ peli.fechaEstreno | date }}</p>
-      <p>
-        <strong>Trailer:</strong>
-        <a [href]="peli.trailerUrl" target="_blank">Ver trailer 🎥</a>
-      </p>
-      <p [ngClass]="peli.activo ? 'activo' : 'inactivo'">
-        Estado: {{ peli.activo ? 'Activa' : 'Inactiva' }}
-      </p>
-    </div>
-  </div>
-</div>
+ 

@@ -26,8 +26,11 @@ export class PeliculaService {
   return this.http.get<Pelicula>(`${this.apiUrl}/${id}`);
   }
 
- crearPelicula(pelicula: Partial<Pelicula>): Observable<Pelicula> {
-  return this.http.post<Pelicula>('http://localhost:3000/peliculas', pelicula);
-}
+  crearPelicula(pelicula: Partial<Pelicula>): Observable<Pelicula> {
+  return this.http.post<Pelicula>(this.apiUrl, pelicula);
+  }
 
+  updatePelicula(id: number, data: any) {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
+  }
 }
