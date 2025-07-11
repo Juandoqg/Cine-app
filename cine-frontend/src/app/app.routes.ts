@@ -30,6 +30,15 @@ export const routes: Routes = [
   },
 
   {
+      path: 'admin/clientes',
+      canActivate: [AdminGuard],
+
+      loadChildren: () =>
+        import('./pages/admin/clientes-admin/clientes-admin.routing')
+          .then(m => m.ClientesAdminRoutingModule)
+    },
+
+  {
     path: 'admin/compras',
     canActivate: [AdminGuard],
     loadChildren: () =>
