@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavbarAdminComponent } from '../../../components/navbar-admin/navbar-admin.component';
-import { FooterComponent } from '../../../components/footer/footer.component';
 
 @Component({
   selector: 'app-peliculas-admin',
-  imports: [RouterModule, NavbarAdminComponent, FooterComponent],
+  imports: [RouterModule],
   templateUrl: './peliculas-admin.component.html',
   styleUrl: './peliculas-admin.component.css'
 })

@@ -7,46 +7,50 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CompraTicketComponent } from './pages/compra-ticket/compra-ticket.component';
 import { ProcesarPagoComponent } from './pages/procesar-pago/procesar-pago.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 export const routes: Routes = [
-  {
-  path: '',
-  component: PublicLayoutComponent,
-  children: [
-    { path: '', component: InicioComponent },
-    { path: 'proximamente', component: ProximamenteComponent },
-    { path: 'pelicula/:id', component: DetallePeliculaComponent },
-    { path: 'registrarse', component: RegisterComponent },
-    { path: 'comprar/:id', component: CompraTicketComponent },
-    { path: 'procesar-pago', component: ProcesarPagoComponent },
-  ]
-}, 
-  {
-    path: 'admin/peliculas',
-    canActivate: [AdminGuard],
 
-    loadChildren: () =>
-      import('./pages/admin/peliculas-admin/peliculas-admin.routing')
-        .then(m => m.PeliculasAdminRoutingModule)
+  // 🟢 Layout Público
+  {
+    path: '',
+    component: PublicLayoutComponent,
+    children: [
+      { path: '', component: InicioComponent },
+      { path: 'proximamente', component: ProximamenteComponent },
+      { path: 'pelicula/:id', component: DetallePeliculaComponent },
+      { path: 'registrarse', component: RegisterComponent },
+      { path: 'comprar/:id', component: CompraTicketComponent },
+      { path: 'procesar-pago', component: ProcesarPagoComponent },
+    ]
+  },
+  // 🟢 Layout para admin
+
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: 'peliculas',
+        loadChildren: () =>
+          import('./pages/admin/peliculas-admin/peliculas-admin.routing')
+            .then(m => m.PeliculasAdminRoutingModule)
+      },
+      {
+        path: 'clientes',
+        loadChildren: () =>
+          import('./pages/admin/clientes-admin/clientes-admin.routing')
+            .then(m => m.ClientesAdminRoutingModule)
+      },
+      {
+        path: 'compras',
+        loadChildren: () =>
+          import('./pages/admin/compras-clientes/compras-clientes.routing')
+            .then(m => m.ComprasAdminRoutingModule)
+      },
+    ]
   },
 
-  {
-      path: 'admin/clientes',
-      canActivate: [AdminGuard],
-
-      loadChildren: () =>
-        import('./pages/admin/clientes-admin/clientes-admin.routing')
-          .then(m => m.ClientesAdminRoutingModule)
-    },
-
-  {
-    path: 'admin/compras',
-    canActivate: [AdminGuard],
-    loadChildren: () =>
-       import('./pages/admin/compras-clientes/compras-clientes.routing')
-          .then(m => m.ComprasAdminRoutingModule)
-  },
-
-  
   { path: '**', redirectTo: '' },
 ];
