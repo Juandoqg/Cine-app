@@ -8,6 +8,7 @@ import { ClientesAdminComponent } from './pages/admin/clientes-admin/clientes-ad
 import { ComprasClientesComponent } from './pages/admin/compras-clientes/compras-clientes.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CompraTicketComponent } from './pages/compra-ticket/compra-ticket.component';
+import { ProcesarPagoComponent } from './pages/procesar-pago/procesar-pago.component';
 
 export const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'pelicula/:id', component: DetallePeliculaComponent},
   { path: 'registrarse', component: RegisterComponent},
   { path: 'comprar/:id', component: CompraTicketComponent },
+  { path: 'procesar-pago', component: ProcesarPagoComponent },
 
 
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },

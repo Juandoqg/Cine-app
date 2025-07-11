@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FuncionService } from '../../services/funcion.service';
 import { PeliculaService } from '../../services/pelicula.service';
 import { Funcion } from '../../models/funcion.model';
@@ -33,7 +33,9 @@ export class CompraTicketComponent implements OnInit {
     private route: ActivatedRoute,
     private funcionService: FuncionService,
     private peliculaService: PeliculaService,
-    private salaService: SalaService
+    private salaService: SalaService,
+    private router: Router
+
   ) {}
 
   ngOnInit(): void {
@@ -62,4 +64,17 @@ export class CompraTicketComponent implements OnInit {
   get total(): number {
     return this.precioPorTicket * this.cantidadTickets;
   }
+
+
+  irAProcesarPago() {
+  this.router.navigate(['/procesar-pago'], {
+    state: {
+      pelicula: this.pelicula,
+      funcion: this.funcion,
+      sala: this.sala,
+      cantidadTickets: this.cantidadTickets,
+      total: this.total
+    }
+  });
+}
 }
