@@ -13,7 +13,7 @@ import { MailService } from '../../services/mail.service';
 @Component({
   selector: 'app-procesar-pago',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './procesar-pago.component.html',
   styleUrl: './procesar-pago.component.css'
 })

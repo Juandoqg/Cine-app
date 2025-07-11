@@ -4,8 +4,6 @@ import { FuncionService } from '../../services/funcion.service';
 import { PeliculaService } from '../../services/pelicula.service';
 import { Funcion } from '../../models/funcion.model';
 import { Pelicula } from '../../models/pelicula.model';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { FooterComponent } from '../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalaService } from '../../services/sala.service';
@@ -14,7 +12,7 @@ import { Sala } from '../../models/sala.model';
 
 @Component({
   selector: 'app-compra-ticket',
-  imports: [NavbarComponent, FooterComponent, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './compra-ticket.component.html',
   styleUrl: './compra-ticket.component.css',
 })

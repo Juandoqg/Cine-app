@@ -4,8 +4,6 @@ import { PeliculaService } from '../../services/pelicula.service';
 import { Pelicula } from '../../models/pelicula.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { FooterComponent } from '../../components/footer/footer.component';
 import { Funcion } from '../../models/funcion.model';
 import { FuncionService } from '../../services/funcion.service';
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-detalle-pelicula',
   templateUrl: './detalle-pelicula.component.html',
   styleUrl: './detalle-pelicula.component.css',
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule],
 })
 export class DetallePeliculaComponent implements OnInit {
   pelicula!: Pelicula;
