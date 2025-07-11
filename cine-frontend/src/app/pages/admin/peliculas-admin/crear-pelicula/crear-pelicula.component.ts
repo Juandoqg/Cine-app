@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Pelicula } from '../../../../models/pelicula.model';
-import { UploadService} from '../../../../services/upload.services';
+import { UploadService} from '../../../../services/upload.service';
 
 @Component({
   selector: 'app-crear-pelicula',

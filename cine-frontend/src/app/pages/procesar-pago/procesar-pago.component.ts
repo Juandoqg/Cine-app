@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../models/usuario.model';
+import { MailService } from '../../services/mail.service';
 
 @Component({
   selector: 'app-procesar-pago',
@@ -32,7 +33,8 @@ export class ProcesarPagoComponent implements OnInit {
     private router: Router,
     private tipoPagoService: TipoPagoService,
     private ventaService: VentaService,
-    private authService: AuthService
+    private authService: AuthService,
+    private mailService: MailService
   ) {}
 
   ngOnInit(): void {
@@ -58,34 +60,52 @@ export class ProcesarPagoComponent implements OnInit {
   }
 
   confirmarPago(): void {
-    if (!this.tipoPagoSeleccionadoId) {
-      alert('Por favor, selecciona un tipo de pago.');
-      return;
-    }
-
-    if (!this.cliente) {
-      alert('Debes iniciar sesión para procesar el pago.');
-      return;
-    }
-
-    const ventaData = {
-      funcionId: this.funcion.id,
-      cantidadTickets: this.cantidadTickets,
-      tipoPagoId: this.tipoPagoSeleccionadoId,
-      total: this.total,
-      clienteId: this.cliente.id
-    };
-
-
-    this.ventaService.crearVenta(ventaData).subscribe({
-      next: () => {
-        alert('¡Venta registrada con éxito!');
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.error('Error al registrar la venta:', err);
-        alert('Ocurrió un error al registrar la venta.');
-      }
-    });
+  if (!this.tipoPagoSeleccionadoId) {
+    alert('Por favor, selecciona un tipo de pago.');
+    return;
   }
+
+  if (!this.cliente) {
+    alert('Debes iniciar sesión para procesar el pago.');
+    return;
+  }
+
+  const ventaData = {
+    funcionId: this.funcion.id,
+    cantidadTickets: this.cantidadTickets,
+    tipoPagoId: this.tipoPagoSeleccionadoId,
+    total: this.total,
+    clienteId: this.cliente.id
+  };
+
+  this.ventaService.crearVenta(ventaData).subscribe({
+    next: () => {
+      // Enviar correo al cliente
+      const emailPayload = {
+        to: this.cliente!.email,
+        name: `${this.cliente?.nombre} ${this.cliente?.apellido}`,
+        movie: this.pelicula?.titulo || 'Película',
+        tickets: this.cantidadTickets,
+        total: this.total,
+        status: 'Pagado'
+      };
+
+      this.mailService.enviarCorreoConfirmacion(emailPayload).subscribe({
+        next: () => {
+          alert('¡Venta registrada y correo enviado con éxito!');
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Error al enviar el correo:', err);
+          alert('Venta registrada, pero ocurrió un error al enviar el correo.');
+          this.router.navigate(['/']);
+        }
+      });
+    },
+    error: (err) => {
+      console.error('Error al registrar la venta:', err);
+      alert('Ocurrió un error al registrar la venta.');
+    }
+  });
+}
 }
