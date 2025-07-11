@@ -9,6 +9,8 @@ export class MailService {
     to: string,
     data: {
       movie: string;
+      fecha : string;
+      hora : string;
       tickets: number;
       total: number;
       status: string;

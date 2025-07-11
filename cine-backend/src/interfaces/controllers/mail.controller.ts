@@ -9,6 +9,8 @@ export class MailController {
   sendPurchase(@Body() body: any) {
     return this.mailService.sendPurchaseConfirmation(body.to, {
       movie: body.movie,
+      fecha : body.fecha,
+      hora : body.hora,
       tickets: body.tickets,
       total: body.total,
       status: body.status,
