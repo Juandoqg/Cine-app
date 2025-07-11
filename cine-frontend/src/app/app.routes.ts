@@ -25,32 +25,37 @@ export const routes: Routes = [
     ]
   },
   // 🟢 Layout para admin
+{
+  path: 'admin',
+  component: AdminLayoutComponent,
+  canActivate: [AdminGuard],
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'peliculas'  
+    },
+    {
+      path: 'peliculas',
+      loadChildren: () =>
+        import('./pages/admin/peliculas-admin/peliculas-admin.routing')
+          .then(m => m.PeliculasAdminRoutingModule)
+    },
+    {
+      path: 'clientes',
+      loadChildren: () =>
+        import('./pages/admin/clientes-admin/clientes-admin.routing')
+          .then(m => m.ClientesAdminRoutingModule)
+    },
+    {
+      path: 'compras',
+      loadChildren: () =>
+        import('./pages/admin/compras-clientes/compras-clientes.routing')
+          .then(m => m.ComprasAdminRoutingModule)
+    },
+  ]
+},
 
-  {
-    path: 'admin',
-    component: AdminLayoutComponent,
-    canActivate: [AdminGuard],
-    children: [
-      {
-        path: 'peliculas',
-        loadChildren: () =>
-          import('./pages/admin/peliculas-admin/peliculas-admin.routing')
-            .then(m => m.PeliculasAdminRoutingModule)
-      },
-      {
-        path: 'clientes',
-        loadChildren: () =>
-          import('./pages/admin/clientes-admin/clientes-admin.routing')
-            .then(m => m.ClientesAdminRoutingModule)
-      },
-      {
-        path: 'compras',
-        loadChildren: () =>
-          import('./pages/admin/compras-clientes/compras-clientes.routing')
-            .then(m => m.ComprasAdminRoutingModule)
-      },
-    ]
-  },
 
   { path: '**', redirectTo: '' },
 ];
