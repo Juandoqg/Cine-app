@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/enviroment';
 
 export interface Sala {
   id: number;
@@ -12,7 +13,7 @@ export interface Sala {
   providedIn: 'root'
 })
 export class SalaService {
-  private apiUrl = 'http://localhost:3000/salas'; // Ajusta si usas otra URL
+  private readonly apiUrl = `${environment.apiUrl}/salas`;
 
   constructor(private http: HttpClient) {}
 

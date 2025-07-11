@@ -6,12 +6,13 @@ import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:3000/auth'; 
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
   private userRole: string | null = null;
   private currentUser: Usuario | null = null;
 
