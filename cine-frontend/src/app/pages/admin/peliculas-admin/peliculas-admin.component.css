@@ -1,53 +1,114 @@
-.peliculas-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
-  background-color: #f0f2f5; /* mismo fondo que admin */
-  padding: 2rem;
+:host {
+  display: block;
+  background-color: #f0f2f5;
 }
 
-.peliculas-panel {
-  background-color: #ffffff; /* blanco más puro */
+.inicio-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.contenido {
+  flex: 1;
+  padding: 20px;
+}
+
+.peliculas-container {
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 500px;
   text-align: center;
 }
 
-.peliculas-panel h1 {
+.peliculas-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.peliculas-header p {
+  color: #666;
   margin-bottom: 2rem;
-  color: #333;
 }
 
-.peliculas-botones {
+.peliculas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ✅ 2 columnas fijas */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.pelicula-card {
   display: flex;
-  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  align-items: center;
   gap: 1rem;
+  text-align: left;
 }
 
-.peliculas-botones button {
-  padding: 1rem;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 10px;
-  background-color: #007bff;
+.icono {
+  font-size: 2rem;
+  color: #2563eb;
+}
+
+.contenido h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.contenido p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.contenido button {
+  background: #2563eb;
   color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: bold;
 }
 
-.peliculas-botones button:hover {
-  background-color: #0056b3;
-}
-.peliculas-botones .volver-btn {
-  background-color: #ff7b00;
-  width: 60%; 
-  margin: 0 auto; 
+.contenido button:hover {
+  background: #1d4ed8;
 }
 
-.peliculas-botones .volver-btn:hover {
-  background-color: #e86d00;
+.volver-section {
+  margin-top: 2rem;
+}
+
+.volver-btn {
+  background: #f97316;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.volver-btn:hover {
+  background: #ea580c;
+}
+
+@media screen and (max-width: 768px) {
+  .peliculas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pelicula-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .icono {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
 }

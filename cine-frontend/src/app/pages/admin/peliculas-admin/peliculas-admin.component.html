@@ -1,15 +1,55 @@
-<app-navbar-admin></app-navbar-admin>
-<div class="peliculas-wrapper">
-  <div class="peliculas-panel">
-    <h1>Gestión de Películas 🎬</h1>
-    <div class="peliculas-botones">
-      <button routerLink="crear">➕ Crear Película</button>
-      <button routerLink="listar">📋 Ver Todas</button>
-      <button routerLink="editar/1">✏️ Actualizar</button>
-      <button routerLink="inhabilitar/1">🚫 Inhabilitar</button>
-      <button routerLink="/admin" class="volver-btn">🔙 Volver al panel</button>
+<div class="inicio-layout">
+  <app-navbar-admin></app-navbar-admin>
 
+  <main class="contenido">
+
+<div class="peliculas-container">
+  <div class="peliculas-header">
+    <h2>Gestión de Películas</h2>
+    <p>Administra tu catálogo de películas de forma fácil y eficiente</p>
+  </div>
+
+  <div class="peliculas-grid">
+    <div class="pelicula-card">
+      <div class="icono">➕</div>
+      <div class="contenido">
+        <h3>Crear Película</h3>
+        <p>Añade una nueva película al catálogo</p>
+        <button routerLink="crear">Crear Nueva</button>
+      </div>
+    </div>
+
+    <div class="pelicula-card">
+      <div class="icono">👁️</div>
+      <div class="contenido">
+        <h3>Ver Todas</h3>
+        <p>Explora todo el catálogo disponible</p>
+        <button routerLink="listar">Ver Catálogo</button>
+      </div>
+    </div>
+
+    <div class="pelicula-card">
+      <div class="icono">✏️</div>
+      <div class="contenido">
+        <h3>Actualizar</h3>
+        <p>Modifica información existente</p>
+        <button routerLink="editar/1">Editar Películas</button>
+      </div>
+    </div>
+
+    <div class="pelicula-card">
+      <div class="icono">🚫</div>
+      <div class="contenido">
+        <h3>Inhabilitar</h3>
+        <p>Desactiva películas del sistema</p>
+        <button routerLink="inhabilitar/1">Gestionar Estado</button>
+      </div>
     </div>
   </div>
+
 </div>
-<app-footer></app-footer>
+
+</main>
+
+  <app-footer></app-footer>
+</div>
