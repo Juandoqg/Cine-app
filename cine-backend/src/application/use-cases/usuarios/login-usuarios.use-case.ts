@@ -1,7 +1,7 @@
 import { UsuarioRepository } from 'src/domain/repositories/usuario.repository';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { Usuario } from 'src/domain/entities/usuario.entity';
+import { UnauthorizedException, NotFoundException } from '@nestjs/common';
 
 export class LoginUsuarioUseCase {
   constructor(
@@ -13,13 +13,17 @@ export class LoginUsuarioUseCase {
     const usuario = await this.repo.buscarPorEmail(email);
 
     if (!usuario) {
-      throw new Error('Usuario no encontrado');
+      throw new NotFoundException('Usuario no encontrado');
+    }
+
+    if (!usuario.activo) {
+      throw new UnauthorizedException('Usuario inactivo. Contacta al administrador.');
     }
 
     const isMatch = await bcrypt.compare(password, usuario.password);
 
     if (!isMatch) {
-      throw new Error('Credenciales inválidas');
+      throw new UnauthorizedException('Credenciales inválidas');
     }
 
     const payload = {
