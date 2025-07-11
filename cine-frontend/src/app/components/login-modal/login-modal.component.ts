@@ -64,7 +64,7 @@ export class LoginModalComponent {
 
             // ✅ Redirigir por rol
             if (user.rol === 'admin') {
-              this.router.navigate(['/admin']);
+              this.router.navigate(['/admin/peliculas']);
             } else {
             }
           }
