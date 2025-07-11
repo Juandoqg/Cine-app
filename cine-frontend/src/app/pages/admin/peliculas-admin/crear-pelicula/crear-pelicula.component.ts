@@ -5,13 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Pelicula } from '../../../../models/pelicula.model';
 import { UploadService} from '../../../../services/upload.service';
-import { NavbarAdminComponent } from '../../../../components/navbar-admin/navbar-admin.component';
-import { FooterComponent } from '../../../../components/footer/footer.component';
 
 @Component({
   selector: 'app-crear-pelicula',
   standalone: true,
-  imports: [FormsModule, CommonModule, NavbarAdminComponent, FooterComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './crear-pelicula.component.html',
   styleUrls: ['./crear-pelicula.component.css'],
 })

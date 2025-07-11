@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PeliculaService } from '../../../../services/pelicula.service';
 import { Pelicula } from '../../../../models/pelicula.model';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../../../../components/footer/footer.component';
-import { NavbarAdminComponent } from '../../../../components/navbar-admin/navbar-admin.component';
 
 @Component({
   selector: 'app-listar-peliculas',
-  imports:[CommonModule, FooterComponent, NavbarAdminComponent],
+  imports:[CommonModule],
   templateUrl: './listar-peliculas.component.html',
   styleUrls: ['./listar-peliculas.component.css']
 })
