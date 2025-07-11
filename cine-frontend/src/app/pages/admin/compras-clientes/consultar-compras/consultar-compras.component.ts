@@ -7,7 +7,7 @@ import { VentaService } from '../../../../services/venta.service';
 
 @Component({
   selector: 'app-consultar-compras',
-  imports: [NavbarAdminComponent, FooterComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './consultar-compras.component.html',
   styleUrl: './consultar-compras.component.css'
 })
