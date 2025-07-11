@@ -16,4 +16,10 @@ export class VentaTypeOrmRepository implements VentaRepository {
     const nuevaVenta = this.ventaRepo.create(venta);
     return await this.ventaRepo.save(nuevaVenta);
   }
+  
+  async obtenerTodas(): Promise<Venta[]> {
+    return await this.ventaRepo.find({
+      order: { fecha: 'DESC' },
+    });
+  }
 }
