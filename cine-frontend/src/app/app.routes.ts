@@ -19,7 +19,6 @@ export const routes: Routes = [
 
 
   { path: 'admin/clientes', component: ClientesAdminComponent, canActivate: [AdminGuard] },
-  { path: 'admin/compras', component: ComprasClientesComponent, canActivate: [AdminGuard] },
 
   {
     path: 'admin/peliculas',
@@ -28,6 +27,14 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/admin/peliculas-admin/peliculas-admin.routing')
         .then(m => m.PeliculasAdminRoutingModule)
+  },
+
+  {
+    path: 'admin/compras',
+    canActivate: [AdminGuard],
+    loadChildren: () =>
+       import('./pages/admin/compras-clientes/compras-clientes.routing')
+          .then(m => m.ComprasAdminRoutingModule)
   },
 
   
