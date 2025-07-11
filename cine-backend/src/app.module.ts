@@ -14,6 +14,7 @@ import { JwtStrategy } from './infraestructure/strategies/jwt.strategy';
 import { UploadModule } from './interfaces/modules/upload.module';
 import { TipoPagoModule } from './interfaces/modules/tipo-pago.module';
 import { VentasModule } from './interfaces/modules/venta.module';
+import { MailModule } from './interfaces/modules/mail.module';
 
 
 @Module({
@@ -34,6 +35,7 @@ import { VentasModule } from './interfaces/modules/venta.module';
     SalasModule,
     FuncionesModule,
     UploadModule,
+    MailModule,
     TipoPagoModule,
     VentasModule
   ],
