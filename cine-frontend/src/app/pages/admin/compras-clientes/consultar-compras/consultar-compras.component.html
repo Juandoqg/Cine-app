@@ -2,9 +2,36 @@
   <app-navbar-admin></app-navbar-admin>
 
   <main class="contenido">
+  <div class="compras-titulo">
+    <h2>Consultar Compras</h2>
+  </div>
 
-<p>consultar compras</p>
+  <div class="tabla-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Función</th>
+          <th>Tickets</th>
+          <th>Total</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venta of ventas">
+          <td>{{ venta.id }}</td>
+          <td>{{ venta.clienteId }}</td>
+          <td>{{ venta.funcionId }}</td>
+          <td>{{ venta.cantidadTickets }}</td>
+          <td>{{ venta.total | currency:'COP' }}</td>
+          <td>{{ venta.fecha | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>
+
 
   <app-footer></app-footer>
 </div>

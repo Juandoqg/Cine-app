@@ -15,5 +15,11 @@ export class VentaService {
         return this.http.post<any>(this.apiUrl, data, {
         withCredentials: true
         });
-        }
+  }
+
+  obtenerVentas(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl, {
+      withCredentials: true
+    });
+  }
 }

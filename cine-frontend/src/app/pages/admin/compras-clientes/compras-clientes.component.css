@@ -27,14 +27,13 @@
 }
 
 .compras-header h2 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
 .compras-header p {
   color: #666;
-  font-size: 1rem;
-  margin: 0;
+  font-size: 0.9rem;
 }
 
 .compras-grid {
