@@ -1,3 +1,8 @@
+<div class="inicio-layout">
+  <app-navbar-admin></app-navbar-admin>
+
+  <main class="contenido">
+
 <div class="crear-pelicula-wrapper">
   <form (ngSubmit)="onSubmit()" #peliculaForm="ngForm">
     <h2>Crear Película 🎬</h2>
@@ -37,4 +42,8 @@
 
     <button type="submit" [disabled]="!peliculaForm.valid">Guardar Película</button>
   </form>
+</div>
+</main>
+
+  <app-footer></app-footer>
 </div>
