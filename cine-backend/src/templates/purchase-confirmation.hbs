@@ -1,11 +1,30 @@
-<h2>¡Gracias por tu compra, {{name}}!</h2>
+<div style="font-family: Arial, sans-serif; color: #333; padding: 20px;">
+  <h2 style="color: #2c3e50;">¡Gracias por tu compra!</h2>
 
-<p>Detalles de tu compra:</p>
-<ul>
-  <li><strong>Película:</strong> {{movie}}</li>
-  <li><strong>Entradas:</strong> {{tickets}}</li>
-  <li><strong>Total pagado:</strong> ${{total}}</li>
-  <li><strong>Estado:</strong> {{status}}</li>
-</ul>
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
+    
+    <!-- Columna izquierda: detalles con borde y padding -->
+    <div style="width: 58%; padding: 20px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 2px 2px 8px rgba(0,0,0,0.05); background-color: #f9f9f9;">
+      <p style="margin-top: 0;">Estos son los detalles de tu compra:</p>
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="margin-bottom: 8px;"><strong>🎬 Película:</strong> {{movie}}</li>
+        <li style="margin-bottom: 8px;"><strong>🎟️ Entradas:</strong> {{tickets}}</li>
+        <li style="margin-bottom: 8px;"><strong>💵 Total pagado:</strong> ${{total}}</li>
+        <li style="margin-bottom: 8px;"><strong>📄 Estado:</strong> {{status}}</li>
+      </ul>
+      <p style="margin-top: 16px;">✅ Esperamos que disfrutes la función.</p>
+    </div>
 
-<p>Esperamos que disfrutes la función.</p>
+    <!-- Columna derecha: QR -->
+    <div style="width: 38%; text-align: center;">
+      <p style="margin-bottom: 10px;">🎫 Muestra este QR al ingresar al cine:</p>
+      <img 
+        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Entrada+Cine+{{movie}}" 
+        alt="Código QR" 
+        style="border: 1px solid #ccc; padding: 5px;"
+      />
+    </div>
+  </div>
+
+  <p style="margin-top: 30px;">Gracias por confiar en nuestro cine. ¡Te esperamos!</p>
+</div>
