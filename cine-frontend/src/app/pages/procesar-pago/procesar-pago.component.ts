@@ -1,14 +1,17 @@
-import { Component  , OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TipoPagoService } from '../../services/tipo-pago.service';
+import { VentaService } from '../../services/venta.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-procesar-pago',
+  standalone: true,
   imports: [NavbarComponent, FooterComponent, CommonModule, FormsModule],
   templateUrl: './procesar-pago.component.html',
   styleUrl: './procesar-pago.component.css'
@@ -23,10 +26,13 @@ export class ProcesarPagoComponent implements OnInit {
 
   tiposPago: any[] = [];
   tipoPagoSeleccionadoId: number | null = null;
+  cliente: Usuario | null = null;
 
   constructor(
     private router: Router,
-    private tipoPagoService: TipoPagoService
+    private tipoPagoService: TipoPagoService,
+    private ventaService: VentaService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -40,21 +46,46 @@ export class ProcesarPagoComponent implements OnInit {
     this.tipoPagoService.obtenerTodos().subscribe((tipos) => {
       this.tiposPago = tipos;
     });
+
+    // Obtener info del usuario autenticado
+    this.authService.fetchUserInfo().subscribe(user => {
+      if (user) {
+        this.cliente = user;
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   confirmarPago(): void {
-    if (this.tipoPagoSeleccionadoId) {
-      // Aquí puedes continuar con lógica de crear la compra y procesar el pago
-      console.log('Pago confirmado con tipo:', this.tipoPagoSeleccionadoId);
-      console.log('Datos de la compra:', {
-        pelicula: this.pelicula,
-        funcion: this.funcion,
-        sala: this.sala,
-        cantidadTickets: this.cantidadTickets,
-        total: this.total
-      });
-      alert('¡Pago realizado con éxito!');
-      this.router.navigate(['/']);
+    if (!this.tipoPagoSeleccionadoId) {
+      alert('Por favor, selecciona un tipo de pago.');
+      return;
     }
+
+    if (!this.cliente) {
+      alert('Debes iniciar sesión para procesar el pago.');
+      return;
+    }
+
+    const ventaData = {
+      funcionId: this.funcion.id,
+      cantidadTickets: this.cantidadTickets,
+      tipoPagoId: this.tipoPagoSeleccionadoId,
+      total: this.total,
+      clienteId: this.cliente.id
+    };
+
+
+    this.ventaService.crearVenta(ventaData).subscribe({
+      next: () => {
+        alert('¡Venta registrada con éxito!');
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Error al registrar la venta:', err);
+        alert('Ocurrió un error al registrar la venta.');
+      }
+    });
   }
 }
