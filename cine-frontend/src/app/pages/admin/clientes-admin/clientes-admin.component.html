@@ -1,1 +1,49 @@
-<p>clientes-admin works!</p>
+<div class="inicio-layout">
+  <app-navbar-admin></app-navbar-admin>
+
+  <main class="contenido">
+    <div class="usuarios-container">
+      <div class="usuarios-header">
+        <h2>Gestión de Usuarios</h2>
+        <p>Administra los usuarios registrados del sistema</p>
+      </div>
+
+      <div class="usuarios-grid">
+        <div class="usuario-card">
+          <div class="icono">🔍</div>
+          <div class="contenido">
+            <h3>Consultar</h3>
+            <p>Revisa información de usuarios registrados</p>
+            <button routerLink="consultar">Ver Usuarios</button>
+          </div>
+        </div>
+
+        <div class="usuario-card">
+          <div class="icono">🚫</div>
+          <div class="contenido">
+            <h3>Inhabilitar</h3>
+            <p>Desactiva usuarios del sistema</p>
+            <button routerLink="inhabilitar">Gestionar Estado</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="usuarios-stats">
+        <div class="stat-box">
+          <h4>342</h4>
+          <span>Usuarios Activos</span>
+        </div>
+        <div class="stat-box">
+          <h4>15</h4>
+          <span>Reportes Recientes</span>
+        </div>
+        <div class="stat-box">
+          <h4>2,840</h4>
+          <span>Total Inicios de Sesión</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

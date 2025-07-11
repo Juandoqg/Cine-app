@@ -1,0 +1,140 @@
+:host {
+  display: block;
+  background-color: #f0f2f5;
+}
+
+.inicio-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.contenido {
+  flex: 1;
+  padding: 20px;
+}
+
+
+.usuarios-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.usuarios-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.usuarios-header p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.usuarios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.usuario-card {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.usuario-card:hover {
+  transform: scale(1.02);
+}
+
+.icono {
+  font-size: 2rem;
+  color: #2563eb;
+}
+
+.contenido h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.contenido p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.contenido button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.contenido button:hover {
+  background: #1d4ed8;
+}
+
+.usuarios-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  flex: 1;
+  min-width: 180px;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stat-box h4 {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+  color: #4f46e5;
+}
+
+.stat-box span {
+  color: #555;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .usuarios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .usuario-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .icono {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .usuarios-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-box {
+    width: 100%;
+  }
+}
