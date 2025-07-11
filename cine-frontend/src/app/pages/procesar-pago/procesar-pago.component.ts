@@ -70,6 +70,14 @@ export class ProcesarPagoComponent implements OnInit {
     return;
   }
 
+  const fechaObj = new Date(this.funcion.fecha);
+  const fecha = fechaObj.toLocaleDateString('es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+
   const ventaData = {
     funcionId: this.funcion.id,
     cantidadTickets: this.cantidadTickets,
@@ -80,14 +88,14 @@ export class ProcesarPagoComponent implements OnInit {
 
   this.ventaService.crearVenta(ventaData).subscribe({
     next: () => {
-      // Enviar correo al cliente
       const emailPayload = {
         to: this.cliente!.email,
-        name: `${this.cliente?.nombre} ${this.cliente?.apellido}`,
         movie: this.pelicula?.titulo || 'Película',
         tickets: this.cantidadTickets,
         total: this.total,
-        status: 'Pagado'
+        status: 'Pagado',
+        fecha: fecha,
+        hora: this.funcion.hora
       };
 
       this.mailService.enviarCorreoConfirmacion(emailPayload).subscribe({

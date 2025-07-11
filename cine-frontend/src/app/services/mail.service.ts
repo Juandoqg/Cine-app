@@ -2,14 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/enviroment';
-
-interface MailData {
-  to: string;
-  movie: string;
-  tickets: number;
-  total: number;
-  status: string;
-}
+import { MailData } from '../models/mail.model';
 
 @Injectable({
   providedIn: 'root'
