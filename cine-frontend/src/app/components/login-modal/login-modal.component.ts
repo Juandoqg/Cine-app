@@ -66,6 +66,7 @@ export class LoginModalComponent {
             if (user.rol === 'admin') {
               this.router.navigate(['/admin/peliculas']);
             } else {
+              // Ruta de clientes si es necesario
             }
           }
         },
@@ -74,10 +75,16 @@ export class LoginModalComponent {
         }
       });
     },
-    error: () => {
-      this.loginError = 'Credenciales incorrectas.';
+    error: (err) => {
+      // Mostrar mensaje real desde el backend si existe
+      if (err.error && err.error.message) {
+        this.loginError = err.error.message;
+      } else {
+        this.loginError = 'Error desconocido al iniciar sesión.';
+      }
     }
   });
 }
+
 
 }
