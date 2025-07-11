@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
 import { FuncionOrmEntity } from '../entities/funcion.orm-entity';
 import { Funcion } from 'src/domain/entities/funcion.entity';
 import { FuncionRepository } from 'src/domain/repositories/funcion.repository';

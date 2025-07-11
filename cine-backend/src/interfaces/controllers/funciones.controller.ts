@@ -13,8 +13,7 @@ export class FuncionesController {
   constructor(
     private readonly crearFuncionUseCase: CreateFuncionUseCase,
     private readonly buscarPorPeliculaUseCase: GetFuncionesPorPeliculaUseCase,
-        private readonly obtenerFuncionPorIdUseCase : ObtenerFuncionPorIdUseCase
-
+    private readonly obtenerFuncionPorIdUseCase : ObtenerFuncionPorIdUseCase
   ) {}
 
   @Post()

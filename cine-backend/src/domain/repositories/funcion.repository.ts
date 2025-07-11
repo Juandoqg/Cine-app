@@ -1,4 +1,3 @@
-
 import { Funcion } from '../entities/funcion.entity';
 
 export abstract class FuncionRepository {
