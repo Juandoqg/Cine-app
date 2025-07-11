@@ -1,1 +1,40 @@
-<p>compras-clientes works!</p>
+<div class="inicio-layout">
+  <app-navbar-admin></app-navbar-admin>
+
+  <main class="contenido">
+    <div class="compras-container">
+      <div class="compras-header">
+        <h2>Gestión de Compras</h2>
+        <p>Consulta y administra las compras realizadas por los clientes</p>
+      </div>
+
+      <div class="compras-grid">
+        <div class="compra-card">
+          <div class="icono">🧾</div>
+          <div class="contenido">
+            <h3>Consultar Compras</h3>
+            <p>Visualiza el historial de compras realizadas</p>
+            <button routerLink="consultar-compras">Ver Compras</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="compras-stats">
+        <div class="stat-box">
+          <h4>512</h4>
+          <span>Compras Realizadas</span>
+        </div>
+        <div class="stat-box">
+          <h4>48</h4>
+          <span>Compras Pendientes</span>
+        </div>
+        <div class="stat-box">
+          <h4>$125,300</h4>
+          <span>Total Recaudado</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>
