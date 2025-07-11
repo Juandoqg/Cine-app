@@ -6,16 +6,21 @@ import { AdminGuard } from './guards/admin.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { CompraTicketComponent } from './pages/compra-ticket/compra-ticket.component';
 import { ProcesarPagoComponent } from './pages/procesar-pago/procesar-pago.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 export const routes: Routes = [
-  { path: '', component: InicioComponent },
-  { path: 'proximamente', component: ProximamenteComponent },
-  { path: 'pelicula/:id', component: DetallePeliculaComponent},
-  { path: 'registrarse', component: RegisterComponent},
-  { path: 'comprar/:id', component: CompraTicketComponent },
-  { path: 'procesar-pago', component: ProcesarPagoComponent },
-
-
+  {
+  path: '',
+  component: PublicLayoutComponent,
+  children: [
+    { path: '', component: InicioComponent },
+    { path: 'proximamente', component: ProximamenteComponent },
+    { path: 'pelicula/:id', component: DetallePeliculaComponent },
+    { path: 'registrarse', component: RegisterComponent },
+    { path: 'comprar/:id', component: CompraTicketComponent },
+    { path: 'procesar-pago', component: ProcesarPagoComponent },
+  ]
+}, 
   {
     path: 'admin/peliculas',
     canActivate: [AdminGuard],

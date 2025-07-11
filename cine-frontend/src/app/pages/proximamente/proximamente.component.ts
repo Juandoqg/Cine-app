@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Pelicula } from '../../models/pelicula.model';
 import { PeliculaService } from '../../services/pelicula.service';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { FooterComponent } from '../../components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -11,7 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './proximamente.component.html',
   styleUrls: ['./proximamente.component.css'],
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, RouterModule],
+  imports: [CommonModule, RouterModule],
 })
 export class ProximamenteComponent implements OnInit {
   peliculasProximamente: Pelicula[] = [];
