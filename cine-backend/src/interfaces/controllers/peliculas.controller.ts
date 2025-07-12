@@ -49,7 +49,7 @@ export class PeliculasController {
   async update(@Param('id') id: number, @Body() body: Partial<Pelicula>) {
     return await this.updatePeliculaUseCase.execute(id, body);
   }
-  @Patch(':id/inhabilitar')
+  @Patch('inhabilitar/:id')
   inhabilitar(@Param('id', ParseIntPipe) id: number) {
   return this.inhabilitarPeliculaUseCase.execute(id);
   }

@@ -12,6 +12,7 @@ export class InhabilitarPeliculaUseCase {
     if (!pelicula) return null;
 
     pelicula.activo = false;
+    pelicula.proximamente =false
 
     return await this.repo.actualizar(id, pelicula);
   }
