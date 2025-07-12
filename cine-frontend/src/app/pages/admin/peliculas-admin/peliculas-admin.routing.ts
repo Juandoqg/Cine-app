@@ -5,7 +5,6 @@ import { PeliculasAdminComponent } from './peliculas-admin.component';
 import { CrearPeliculaComponent } from './crear-pelicula/crear-pelicula.component';
 import { ActualizarPeliculaComponent } from './actualizar-pelicula/actualizar-pelicula.component';
 import { ListarPeliculasComponent } from './listar-peliculas/listar-peliculas.component';
-import { InhabilitarPeliculaComponent } from './inhabilitar-pelicula/inhabilitar-pelicula.component';
 
 const routes: Routes = [
   {
@@ -23,10 +22,6 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component:ActualizarPeliculaComponent
-  },
-  {
-    path: 'inhabilitar/:id',
-    component:InhabilitarPeliculaComponent
   },
 ];
 
