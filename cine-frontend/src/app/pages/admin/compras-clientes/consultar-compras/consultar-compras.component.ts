@@ -1,8 +1,5 @@
 import { Component , OnInit} from '@angular/core';
-import { NavbarAdminComponent } from '../../../../components/navbar-admin/navbar-admin.component';
-import { FooterComponent } from '../../../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { VentaService } from '../../../../services/venta.service';
 
 @Component({

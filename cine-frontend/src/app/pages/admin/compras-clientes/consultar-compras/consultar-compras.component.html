@@ -10,6 +10,7 @@
           <th>ID</th>
           <th>Cliente</th>
           <th>Función</th>
+          <th>Tipo de pago</th>
           <th>Tickets</th>
           <th>Total</th>
           <th>Fecha</th>
@@ -20,6 +21,7 @@
           <td>{{ venta.id }}</td>
           <td>{{ venta.clienteId }}</td>
           <td>{{ venta.funcionId }}</td>
+          <td>{{ venta.tipoPagoId }}</td>
           <td>{{ venta.cantidadTickets }}</td>
           <td>{{ venta.total | currency:'COP' }}</td>
           <td>{{ venta.fecha | date:'short' }}</td>
