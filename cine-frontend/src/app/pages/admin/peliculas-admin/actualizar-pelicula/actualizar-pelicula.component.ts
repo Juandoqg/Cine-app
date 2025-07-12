@@ -74,4 +74,24 @@ export class ActualizarPeliculaComponent implements OnInit {
   }
 }
 
+mostrarModal: boolean = false;
+
+confirmarInhabilitar() {
+  console.log('Inhabilitando película con ID', this.pelicula.id);
+  this.peliculaService.inhabilitarPelicula(this.pelicula.id).subscribe({
+    next: () => {
+      this.pelicula.activo = false;
+      this.pelicula.proximamente = false;
+      this.mostrarModal = false;
+      alert('Película inhabilitada correctamente.');
+      this.router.navigate(['/admin/peliculas/listar']);
+    },
+    error: (err) => {
+      console.error('Error al inhabilitar la película', err);
+    }
+  });
+}
+
+
+
 }

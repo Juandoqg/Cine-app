@@ -33,4 +33,8 @@ export class PeliculaService {
   updatePelicula(id: number, data: any) {
     return this.http.put(`${this.apiUrl}/${id}`, data);
   }
+
+  inhabilitarPelicula(id: number) {
+  return this.http.patch(`${this.apiUrl}/inhabilitar/${id}`, {});
+}
 }

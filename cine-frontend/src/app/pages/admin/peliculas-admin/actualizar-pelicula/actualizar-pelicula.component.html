@@ -36,6 +36,26 @@
       </label>
     </div>
 
-    <button type="submit" [disabled]="!peliculaForm.valid">Guardar Película</button>
+      <button type="submit" [disabled]="!peliculaForm.valid">Guardar Película</button>
+      <button type="button" class="desactivar-btn" (click)="mostrarModal = true">Inhabilitar</button>
+
+    <!-- Modal -->
+
+     <!-- Modal -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>¿Estás seguro que quieres inhabilitar esta película?</h3>
+    <p>Esta acción hará que ya no aparezca en la cartelera.</p>
+
+    <div class="modal-buttons">
+     <button type="button" class ="confirmar" (click)="confirmarInhabilitar()">
+        Sí, Inhabilitar</button>
+      <button class="cancelar" (click)="mostrarModal = false">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+
+  
   </form>
 </div>
