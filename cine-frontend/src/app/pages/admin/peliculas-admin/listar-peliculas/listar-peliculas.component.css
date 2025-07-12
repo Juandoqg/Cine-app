@@ -64,3 +64,17 @@ a.pelicula-card-link:focus {
   outline: none;
   box-shadow: none;
 }
+.peliculas-scroll-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.peliculas-scroll {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 1rem;
+  min-width: max-content; 
+}

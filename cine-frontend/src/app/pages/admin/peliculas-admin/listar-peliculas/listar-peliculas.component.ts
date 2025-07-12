@@ -6,12 +6,15 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-listar-peliculas',
-  imports:[CommonModule, RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './listar-peliculas.component.html',
   styleUrls: ['./listar-peliculas.component.css']
 })
 export class ListarPeliculasComponent implements OnInit {
-  peliculas: Pelicula[] = [];
+  peliculasCartelera: Pelicula[] = [];
+  peliculasProximamente: Pelicula[] = [];
+  peliculasInhabilitadas: Pelicula[] = [];
 
   constructor(private peliculaService: PeliculaService) {}
 
@@ -22,21 +25,19 @@ export class ListarPeliculasComponent implements OnInit {
   cargarPeliculas(): void {
     this.peliculaService.getPeliculas().subscribe({
       next: (data) => {
-        this.peliculas = data;
-        console.log('Películas cargadas (admin):', this.peliculas);
+        this.peliculasCartelera = data.filter(p => p.activo && !p.proximamente);
+        this.peliculasProximamente = data.filter(p => p.proximamente && !p.activo);
+        this.peliculasInhabilitadas = data.filter(p => !p.activo && !p.proximamente);
       },
       error: (err) => {
         console.error('Error al obtener películas:', err);
       }
     });
-  } 
+  }
 
-    verTrailer(event: Event, url: string): void {
-      event.preventDefault();
-      event.stopPropagation();
-      window.open(url, '_blank');
-    }
-
-
-
+  verTrailer(event: Event, url: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(url, '_blank');
+  }
 }
