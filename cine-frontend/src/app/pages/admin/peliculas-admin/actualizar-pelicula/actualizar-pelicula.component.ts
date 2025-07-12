@@ -21,13 +21,13 @@ export class ActualizarPeliculaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private peliculasService: PeliculaService,
+    private peliculaService: PeliculaService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
-    this.peliculasService.getPeliculaPorId(id).subscribe((data) => {
+    this.peliculaService.getPeliculaPorId(id).subscribe((data) => {
       this.pelicula = data;
       this.initForm();
     });
@@ -49,13 +49,19 @@ export class ActualizarPeliculaComponent implements OnInit {
   
   }
 
-  onSubmit(): void {
-    const { proximamente, activo } = this.peliculaForm.getRawValue();
-    this.peliculasService.updatePelicula(this.pelicula.id, { proximamente, activo })
-      .subscribe(() => {
-        alert('Película actualizada correctamente');
-        this.router.navigate(['/admin/peliculas/listar']);
+   onSubmit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.peliculaService.updatePelicula(+id, this.pelicula).subscribe({
+        next: () => {
+          alert('Película actualizada correctamente.');
+          this.router.navigate(['/admin/peliculas/listar']);
+        },
+        error: (error) => {
+          console.error('Error al actualizar:', error);
+        }
       });
+    }
   }
 
  onCheckboxChange(checkbox: 'proximamente' | 'activo'): void {
