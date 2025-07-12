@@ -1,53 +1,53 @@
 <h2 class="titulo-cartelera">🎬 Cartelera</h2>
-<div class="peliculas-scroll-wrapper">
-
-<div class="peliculas-scroll">
-  <ng-container *ngFor="let peli of peliculasCartelera">
-    <a [routerLink]="['/admin/peliculas/editar', peli.id]" class="pelicula-card-link">
-      <div class="pelicula-card">
-        <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
-        <h3>{{ peli.titulo }}</h3>
-        <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
-        <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
-        <button class="trailer-link" (click)="verTrailer($event, peli.trailerUrl)">Ver Trailer 🎥</button>
-      </div>
-    </a>
-  </ng-container>
+<div *ngIf="peliculasCartelera.length > 0; else noCartelera" class="peliculas-scroll-wrapper">
+  <div class="peliculas-scroll">
+    <ng-container *ngFor="let peli of peliculasCartelera">
+      <a [routerLink]="['/admin/peliculas/editar', peli.id]" class="pelicula-card-link">
+        <div class="pelicula-card">
+          <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
+          <h3>{{ peli.titulo }}</h3>
+          <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
+          <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
+          <button class="trailer-link" (click)="verTrailer($event, peli.trailerUrl)">Ver Trailer 🎥</button>
+        </div>
+      </a>
+    </ng-container>
+  </div>
 </div>
-</div>
+<ng-template #noCartelera><p class="mensaje-vacio">No hay películas en cartelera.</p></ng-template>
 
 <h2 class="titulo-cartelera">🎥 Próxima Cartelera</h2>
-<div class="peliculas-scroll-wrapper">
-
-<div class="peliculas-scroll">
-  <ng-container *ngFor="let peli of peliculasProximamente">
-    <a [routerLink]="['/admin/peliculas/editar', peli.id]" class="pelicula-card-link">
-      <div class="pelicula-card">
-        <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
-        <h3>{{ peli.titulo }}</h3>
-        <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
-        <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
-        <button class="trailer-link" (click)="verTrailer($event, peli.trailerUrl)">Ver Trailer 🎥</button>
-      </div>
-    </a>
-  </ng-container>
+<div *ngIf="peliculasProximamente.length > 0; else noProximamente" class="peliculas-scroll-wrapper">
+  <div class="peliculas-scroll">
+    <ng-container *ngFor="let peli of peliculasProximamente">
+      <a [routerLink]="['/admin/peliculas/editar', peli.id]" class="pelicula-card-link">
+        <div class="pelicula-card">
+          <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
+          <h3>{{ peli.titulo }}</h3>
+          <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
+          <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
+          <button class="trailer-link" (click)="verTrailer($event, peli.trailerUrl)">Ver Trailer 🎥</button>
+        </div>
+      </a>
+    </ng-container>
+  </div>
 </div>
-</div>
+<ng-template #noProximamente><p class="mensaje-vacio">No hay próximas películas programadas.</p></ng-template>
 
 <h2 class="titulo-cartelera">🚫 Películas Inhabilitadas</h2>
-<div class="peliculas-scroll-wrapper">
-
-<div class="peliculas-scroll">
-  <ng-container *ngFor="let peli of peliculasInhabilitadas">
-    <a [routerLink]="['/admin/peliculas/editar', peli.id]" class="pelicula-card-link">
-      <div class="pelicula-card">
-        <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
-        <h3>{{ peli.titulo }}</h3>
-        <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
-        <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
-        <button class="trailer-link" (click)="verTrailer($event, peli.trailerUrl)">Ver Trailer 🎥</button>
-      </div>
-    </a>
-  </ng-container>
+<div *ngIf="peliculasInhabilitadas.length > 0; else noInhabilitadas" class="peliculas-scroll-wrapper">
+  <div class="peliculas-scroll">
+    <ng-container *ngFor="let peli of peliculasInhabilitadas">
+      <a [routerLink]="['/admin/peliculas/editar', peli.id]" class="pelicula-card-link">
+        <div class="pelicula-card">
+          <img [src]="peli.imagen" alt="{{ peli.titulo }}" class="pelicula-img" />
+          <h3>{{ peli.titulo }}</h3>
+          <p><strong>Duración:</strong> {{ peli.duracion }} min</p>
+          <p><strong>Categoría:</strong> {{ peli.categoria }}</p>
+          <button class="trailer-link" (click)="verTrailer($event, peli.trailerUrl)">Ver Trailer 🎥</button>
+        </div>
+      </a>
+    </ng-container>
+  </div>
 </div>
-</div>
+<ng-template #noInhabilitadas><p class="mensaje-vacio">No hay películas inhabilitadas.</p></ng-template>

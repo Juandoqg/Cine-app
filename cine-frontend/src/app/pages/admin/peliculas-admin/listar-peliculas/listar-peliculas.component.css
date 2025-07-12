@@ -78,3 +78,10 @@ a.pelicula-card-link:focus {
   scroll-padding: 1rem;
   min-width: max-content; 
 }
+
+.mensaje-vacio {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  margin: 1rem 0 2rem;
+}
