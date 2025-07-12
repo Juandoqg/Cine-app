@@ -18,6 +18,6 @@ export class VentaController {
 
    async obtenerTodas(): Promise<Venta[]> {
     const ventasOrm = await this.obtenerVentas.execute();
-    return ventasOrm
+    return ventasOrm.map(VentaMapper.toDomain);
   }
 }

@@ -21,6 +21,7 @@ export class VentaTypeOrmRepository implements VentaRepository {
 
   async obtenerTodas(): Promise<Venta[]> {
     const ventas = await this.ventaRepo.find({
+      relations: ['tipoPago'], 
       order: { fecha: 'DESC' },
     });
     return ventas.map(VentaMapper.toDomain);
