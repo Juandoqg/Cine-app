@@ -4,6 +4,7 @@ import { Usuario } from 'src/domain/entities/usuario.entity';
 import { UsuarioOrmEntity } from '../entities/usuario.orm-entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UsuarioMapper } from 'src/infraestructure/mappers/usuario.mapper';
 
 @Injectable()
 export class UsuarioTypeOrmRepository implements UsuarioRepository {
@@ -13,12 +14,13 @@ export class UsuarioTypeOrmRepository implements UsuarioRepository {
   ) {}
 
   async crear(usuario: Usuario): Promise<Usuario> {
-    const nuevo = this.repo.create(usuario);
-    const guardado = await this.repo.save(nuevo);
-    return guardado;
+    const ormEntity = UsuarioMapper.toOrmEntity(usuario);
+    const guardado = await this.repo.save(ormEntity);
+    return UsuarioMapper.toDomain(guardado);
   }
 
   async buscarPorEmail(email: string): Promise<Usuario | null> {
-    return await this.repo.findOne({ where: { email } });
+    const encontrado = await this.repo.findOne({ where: { email } });
+    return encontrado ? UsuarioMapper.toDomain(encontrado) : null;
   }
 }
