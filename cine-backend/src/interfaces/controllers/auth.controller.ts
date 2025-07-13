@@ -5,6 +5,9 @@ import { LoginUsuarioUseCase } from 'src/application/use-cases/auth/login-usuari
 import { Response } from 'express'; 
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../infraestructure/guards/jwt-auth.guard';
+import { GoogleAuthGuard } from 'src/infraestructure/guards/google-auth.guard';
+
+
 
 @Controller('auth')
 export class AuthController {
@@ -47,4 +50,45 @@ export class AuthController {
   res.clearCookie('access_token');
   return { message: 'Sesión cerrada correctamente' };
 }
+ 
+
+@Get('google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuth() {
+    // Redirecciona a Google
+  }
+
+  @Get('google/callback')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuthRedirect(@Req() req, @Res({ passthrough: true }) res: Response) {
+    const user = req.user;
+
+    // Aquí puedes buscar si el usuario existe o crearlo
+    const token = await this.loginUseCase.executeGoogle(user.email); // crea esta función o usa una lógica diferente
+
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      maxAge: 1000 * 60 * 60,
+    });
+
+    res.redirect('/'); // o redirige al frontend
+  }
+
+  @Get('google/redirect')
+@UseGuards(GoogleAuthGuard)
+async googleRedirect(@Req() req: Request, @Res() res: Response) {
+  const user = (req as any).user;
+
+  const token = await this.loginUseCase.executeGoogle(user.email);
+    res.cookie('access_token', token, {
+          httpOnly: true,
+          secure: true, 
+          sameSite: 'lax',
+          maxAge: 1000 * 60 * 60 // 1 hora
+        });
+  return res.redirect(`http://localhost:4200/`);
+}
+
 }

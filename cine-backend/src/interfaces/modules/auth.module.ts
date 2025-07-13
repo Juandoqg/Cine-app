@@ -11,6 +11,7 @@ import { RegisterUsuarioUseCase } from 'src/application/use-cases/auth/register-
 import { LoginUsuarioUseCase }    from 'src/application/use-cases/auth/login-usuarios.use-case';
 import { UsuarioRepository }       from 'src/domain/repositories/usuario.repository';
 import { JwtStrategy } from '../../infraestructure/strategies/jwt.strategy';
+import { GoogleStrategy } from 'src/infraestructure/strategies/google.strategy';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { JwtStrategy } from '../../infraestructure/strategies/jwt.strategy';
   controllers: [AuthController],
   providers: [
     JwtStrategy,
+    GoogleStrategy,
     {
       provide: 'UsuarioRepository',
       useClass: UsuarioTypeOrmRepository,
