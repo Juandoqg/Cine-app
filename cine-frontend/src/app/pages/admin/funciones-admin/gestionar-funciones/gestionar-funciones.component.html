@@ -4,7 +4,7 @@
   <div class="filtros">
     <input type="text" placeholder="ID Película..." [(ngModel)]="filtro.peliculaId" (ngModelChange)="aplicarFiltros()">
     <input type="text" placeholder="ID Sala..." [(ngModel)]="filtro.salaId" (ngModelChange)="aplicarFiltros()">
-    <input type="text" placeholder="Fecha..." [(ngModel)]="filtro.fecha" (ngModelChange)="aplicarFiltros()">
+    <input type="text" placeholder="Fecha(YYYY-MM-DD)" [(ngModel)]="filtro.fecha" (ngModelChange)="aplicarFiltros()">
     <select [(ngModel)]="filtro.activo" (ngModelChange)="aplicarFiltros()">
       <option value="">Todos</option>
       <option value="true">Activas</option>
@@ -29,7 +29,7 @@
         <tr *ngFor="let f of funcionesFiltradas">
           <td>{{ f.peliculaId }}</td>
           <td>{{ f.salaId }}</td>
-          <td>{{ f.fecha | date:'yyyy/MM/dd' }}</td>
+          <td>{{ f.fecha | date:'yyyy-MM-dd' }}</td>
           <td>{{ f.hora }}</td>
           <td>{{ f.precio | currency:'USD' }}</td>
           <td [ngClass]="f.activo ? 'activo' : 'inactivo'">
