@@ -55,7 +55,7 @@
     <div class="tipo-sala">2D - DOB</div>
 
     <div class="horarios" *ngIf="funcionesDelDiaSeleccionado.length > 0; else sinFuncionesDelDia">
-      <button *ngFor="let funcion of funcionesDelDiaSeleccionado" (click)="irAComprar(funcion.id)">
+      <button *ngFor="let funcion of funcionesDelDiaSeleccionado" (click)="irAComprar(funcion.id!)">
         {{ funcion.hora }}
       </button>
     </div>

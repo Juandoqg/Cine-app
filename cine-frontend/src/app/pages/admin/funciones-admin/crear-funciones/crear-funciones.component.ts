@@ -38,6 +38,10 @@ export class CrearFuncionesComponent implements OnInit {
   }
 
   onSubmit(): void {
-   
-  }
+  this.funcionService.crearFuncion(this.funcion).subscribe(() => {
+    alert('✅ ¡Función creada exitosamente!');
+    this.router.navigate(['/admin/funciones']);
+  });
+}
+
 }

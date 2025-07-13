@@ -1,5 +1,5 @@
 export interface Funcion {
-  id: number;
+  id?: number;
   fecha: string; 
   hora: string;  
   salaId: string;

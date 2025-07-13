@@ -18,4 +18,10 @@ export class FuncionService {
   getFuncionPorId(id: number): Observable<Funcion> {
     return this.http.get<Funcion>(`${this.apiUrl}/${id}`);
   }
+
+  crearFuncion(funcion: Funcion): Observable<any> {
+    return this.http.post(this.apiUrl, funcion);
+  }
+
+
 }
