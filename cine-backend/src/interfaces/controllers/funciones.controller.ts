@@ -8,6 +8,7 @@ import { NotFoundException } from '@nestjs/common';
 import { ObtenerFuncionPorIdUseCase} from 'src/application/use-cases/funciones/get-funcion-por-id.use-case';
 import { ObtenerFuncionesUseCase } from 'src/application/use-cases/funciones/get-all-funcion.use-case';
 import { InhabilitarFuncionUseCase } from 'src/application/use-cases/funciones/inhabilitar-funcion.use-case';
+import { HabilitarFuncionUseCase } from 'src/application/use-cases/funciones/habilitar-funcion.use-case';
 
 
 @Controller('funciones')
@@ -17,7 +18,8 @@ export class FuncionesController {
     private readonly buscarPorPeliculaUseCase: GetFuncionesPorPeliculaUseCase,
     private readonly obtenerFuncionPorIdUseCase : ObtenerFuncionPorIdUseCase,
     private readonly obtenerFuncionesUseCase : ObtenerFuncionesUseCase,
-    private readonly inhabilitarFuncionUseCase: InhabilitarFuncionUseCase
+    private readonly inhabilitarFuncionUseCase: InhabilitarFuncionUseCase,
+    private readonly habilitarFuncionUseCase : HabilitarFuncionUseCase
   ) {}
 
   @Post()
@@ -49,4 +51,9 @@ async inhabilitarFuncion(@Param('id', ParseIntPipe) id: number) {
   await this.inhabilitarFuncionUseCase.execute(id);
   return { mensaje: 'Función inhabilitada correctamente' };
 }
+@Patch('habilitar/:id')
+async habilitarFuncion(@Param('id') id: number) {
+  return this.habilitarFuncionUseCase.execute(Number(id));
+}
+
 }
