@@ -20,13 +20,12 @@
           {{ usuario.activo ? 'Activo' : 'Inhabilitado' }}
         </td>
         <td>
-          <button 
-            (click)="abrirModal(usuario)" 
-            [disabled]="!usuario.activo"
-            class="inhabilitar-btn"
-          >
-            Inhabilitar
-          </button>
+          <button
+                (click)="abrirModal(usuario)"
+                [ngClass]="usuario.activo ? 'inhabilitar-btn' : 'habilitar-btn'"
+                >
+                {{ usuario.activo ? 'Inhabilitar' : 'Habilitar' }}
+                </button>
         </td>
       </tr>
     </tbody>
@@ -36,16 +35,21 @@
 <!-- Modal -->
 <div class="modal-backdrop" *ngIf="mostrarModal">
   <div class="modal-content">
-    <h3>¿Estás seguro que quieres inhabilitar a {{ usuarioSeleccionado?.nombre }} {{ usuarioSeleccionado?.apellido }}?</h3>
-    <p>Esta acción hará que el cliente ya no esté activo.</p>
+    <h3>
+      ¿Estás seguro que quieres
+      {{ usuarioSeleccionado?.activo ? 'inhabilitar' : 'habilitar' }}
+      a {{ usuarioSeleccionado?.nombre }} {{ usuarioSeleccionado?.apellido }}?
+    </h3>
+    <p>
+      Esta acción hará que el cliente
+      {{ usuarioSeleccionado?.activo ? 'no pueda acceder más' : 'vuelva a estar activo' }}.
+    </p>
 
     <div class="modal-buttons">
-      <button type="button" class="confirmar" (click)="confirmarInhabilitar()">
-        Sí, Inhabilitar
+      <button type="button" class="confirmar" (click)="confirmarCambioEstado()">
+        Sí, {{ usuarioSeleccionado?.activo ? 'Inhabilitar' : 'Habilitar' }}
       </button>
-      <button class="cancelar" (click)="cerrarModal()">
-        Cancelar
-      </button>
+      <button class="cancelar" (click)="cerrarModal()">Cancelar</button>
     </div>
   </div>
 </div>

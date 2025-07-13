@@ -19,4 +19,8 @@ export class UsuarioService {
   inhabilitarUsuario(id: number): Observable<void> {
     return this.http.patch<void>(`${this.apiUrl}/inhabilitar/${id}`, {});
   }
+
+  habilitarUsuario(id: number): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/habilitar/${id}`, {});
+  }
 }

@@ -6,14 +6,14 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-consultar-clientes',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './consultar-clientes.component.html',
-  styleUrls: ['./consultar-clientes.component.css']
+  styleUrls: ['./consultar-clientes.component.css'],
 })
 export class ConsultarClientesComponent implements OnInit {
   usuarios: Usuario[] = [];
-
-  mostrarModal = false;
+  mostrarModal: boolean = false;
   usuarioSeleccionado: Usuario | null = null;
 
   constructor(private usuarioService: UsuarioService) {}
@@ -25,9 +25,9 @@ export class ConsultarClientesComponent implements OnInit {
   cargarUsuarios(): void {
     this.usuarioService.obtenerUsuarios().subscribe({
       next: (data) => {
-        this.usuarios = data.filter(u => u.rol === 'cliente');
+        this.usuarios = data.filter((u) => u.rol === 'cliente');
       },
-      error: (err) => console.error('Error cargando usuarios', err)
+      error: (err) => console.error('Error cargando usuarios', err),
     });
   }
 
@@ -37,22 +37,38 @@ export class ConsultarClientesComponent implements OnInit {
   }
 
   cerrarModal(): void {
-    this.mostrarModal = false;
     this.usuarioSeleccionado = null;
+    this.mostrarModal = false;
   }
 
-  confirmarInhabilitar(): void {
+  confirmarCambioEstado(): void {
     if (!this.usuarioSeleccionado) return;
 
-    this.usuarioService.inhabilitarUsuario(this.usuarioSeleccionado.id).subscribe({
-      next: () => {
-        this.usuarioSeleccionado!.activo = false;
-        this.cerrarModal();
-      },
-      error: (err) => {
-        console.error('Error al inhabilitar', err);
-        this.cerrarModal();
+    const id = this.usuarioSeleccionado.id;
+
+    const callback = (success: boolean) => {
+      if (success) {
+        this.usuarioSeleccionado!.activo = !this.usuarioSeleccionado!.activo;
       }
-    });
+      this.cerrarModal();
+    };
+
+    if (this.usuarioSeleccionado.activo) {
+      this.usuarioService.inhabilitarUsuario(id).subscribe({
+        next: () => callback(true),
+        error: (err) => {
+          console.error('Error al inhabilitar', err);
+          callback(false);
+        },
+      });
+    } else {
+      this.usuarioService.habilitarUsuario(id).subscribe({
+        next: () => callback(true),
+        error: (err) => {
+          console.error('Error al habilitar', err);
+          callback(false);
+        },
+      });
+    }
   }
 }

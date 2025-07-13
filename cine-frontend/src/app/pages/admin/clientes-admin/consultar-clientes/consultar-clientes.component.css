@@ -37,6 +37,20 @@ th {
   cursor: pointer;
 }
 
+.habilitar-btn {
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.habilitar-btn:hover {
+  background-color: #43a047;
+}
+
+
 .inhabilitar-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
