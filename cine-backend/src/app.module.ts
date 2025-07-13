@@ -15,6 +15,8 @@ import { UploadModule } from './interfaces/modules/upload.module';
 import { TipoPagoModule } from './interfaces/modules/tipo-pago.module';
 import { VentasModule } from './interfaces/modules/venta.module';
 import { MailModule } from './interfaces/modules/mail.module';
+import { UsuarioModelDto } from './application/dto/UsuarioModelDto';
+import { UsuariosModule } from './interfaces/modules/usuarios.module';
 
 
 @Module({
@@ -37,7 +39,8 @@ import { MailModule } from './interfaces/modules/mail.module';
     UploadModule,
     MailModule,
     TipoPagoModule,
-    VentasModule
+    VentasModule,
+    UsuariosModule
   ],
   providers: [JwtStrategy],
 })

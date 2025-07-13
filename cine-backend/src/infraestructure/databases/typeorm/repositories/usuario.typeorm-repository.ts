@@ -23,4 +23,9 @@ export class UsuarioTypeOrmRepository implements UsuarioRepository {
     const encontrado = await this.repo.findOne({ where: { email } });
     return encontrado ? UsuarioMapper.toDomain(encontrado) : null;
   }
+  
+    async obtenerTodos(): Promise<Usuario[]> {
+    const usuariosOrm = await this.repo.find();
+    return usuariosOrm.map(UsuarioMapper.toDomain);
+  }
 }

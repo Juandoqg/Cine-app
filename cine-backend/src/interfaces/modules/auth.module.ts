@@ -7,8 +7,8 @@ import { AuthController } from '../controllers/auth.controller';
 import { UsuarioOrmEntity } from '../../infraestructure/databases/typeorm/entities/usuario.orm-entity';
 import { UsuarioTypeOrmRepository } from '../../infraestructure/databases/typeorm/repositories/usuario.typeorm-repository';
 
-import { RegisterUsuarioUseCase } from 'src/application/use-cases/usuarios/register-usuario.use-case';
-import { LoginUsuarioUseCase }    from 'src/application/use-cases/usuarios/login-usuarios.use-case';
+import { RegisterUsuarioUseCase } from 'src/application/use-cases/auth/register-usuario.use-case';
+import { LoginUsuarioUseCase }    from 'src/application/use-cases/auth/login-usuarios.use-case';
 import { UsuarioRepository }       from 'src/domain/repositories/usuario.repository';
 import { JwtStrategy } from '../../infraestructure/strategies/jwt.strategy';
 

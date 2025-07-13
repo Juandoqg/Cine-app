@@ -1,7 +1,7 @@
 import { Controller, Post, Body, HttpCode,Res , Req, Get} from '@nestjs/common';
-import { RegisterUsuarioUseCase } from 'src/application/use-cases/usuarios/register-usuario.use-case';
+import { RegisterUsuarioUseCase } from 'src/application/use-cases/auth/register-usuario.use-case';
 import { LoginDto } from 'src/application/dto/LoginDto';
-import { LoginUsuarioUseCase } from 'src/application/use-cases/usuarios/login-usuarios.use-case';
+import { LoginUsuarioUseCase } from 'src/application/use-cases/auth/login-usuarios.use-case';
 import { Response } from 'express'; 
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../infraestructure/guards/jwt-auth.guard';
