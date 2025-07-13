@@ -18,8 +18,6 @@
   </div>
 </div>
 
-<!-- 🔍 Filtro -->
-<input type="text" [(ngModel)]="filtro" placeholder="Buscar venta..." class="input-filtro" />
 
 <!-- 📊 Tabla de ventas -->
 <div class="tabla-scroll">
@@ -36,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let venta of ventas | filtroVentas:filtro">
+      <tr *ngFor="let venta of ventas">
         <td>{{ venta.id }}</td>
         <td>{{ venta.clienteId }}</td>
         <td>{{ venta.funcionId }}</td>

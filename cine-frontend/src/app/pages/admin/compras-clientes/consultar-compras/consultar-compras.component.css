@@ -75,3 +75,14 @@ tbody tr:last-child td {
 .card.blue { background-color: #3f51b5; }
 .card.green { background-color: #4caf50; }
 .card.yellow { background-color: #ffca28; color: #333; }
+.filtros-container {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.filtros-container select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
