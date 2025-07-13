@@ -53,6 +53,12 @@ export const routes: Routes = [
         import('./pages/admin/compras-clientes/compras-clientes.routing')
           .then(m => m.ComprasAdminRoutingModule)
     },
+    {
+      path: 'funciones',
+      loadChildren: () =>
+        import('./pages/admin/funciones-admin/funciones-admin.routing')
+          .then(m => m.FuncionesAdminRoutingModule)
+    },
   ]
 },
 
