@@ -1,1 +1,61 @@
-<p>gestionar-funciones works!</p>
+<div class="funciones-container">
+  <h2 class="titulo-centrado">Funciones Programadas</h2>
+
+
+  <div class="tabla-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Película</th>
+          <th>Sala</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcion of funciones" (click)="seleccionarFuncion(funcion)">
+          <td>{{ funcion.id }}</td>
+          <td>{{ funcion.peliculaId }}</td>
+          <td>{{ funcion.salaId }}</td>
+          <td>{{ funcion.fecha }}</td>
+          <td>{{ funcion.hora }}</td>
+          <td>{{ funcion.precio | currency:'COP'}}</td>
+          <td [ngClass]="funcion.activo ? 'activo' : 'inactivo'">
+            {{ funcion.activo ? 'Activa' : 'Inactiva' }}
+          </td>
+          <td>
+            <button
+              (click)="abrirModal(funcion); $event.stopPropagation()"
+              [ngClass]="funcion.activo ? 'inhabilitar-btn' : 'habilitar-btn'">
+              {{ funcion.activo ? 'Inhabilitar' : 'Habilitar' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>
+      ¿Estás seguro que quieres
+      {{ funcionSeleccionada?.activo ? 'inhabilitar' : 'habilitar' }}
+      la función {{ funcionSeleccionada?.id }}?
+    </h3>
+    <p>
+      Esto {{ funcionSeleccionada?.activo ? 'ocultará esta función del sistema' : 'volverá a hacerla visible' }}.
+    </p>
+    <div class="modal-buttons">
+      <button class="confirmar" (click)="confirmarCambioEstadoFuncion()">
+        Sí, {{ funcionSeleccionada?.activo ? 'Inhabilitar' : 'Habilitar' }}
+      </button>
+      <button class="cancelar" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>

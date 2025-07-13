@@ -23,5 +23,7 @@ export class FuncionService {
     return this.http.post(this.apiUrl, funcion);
   }
 
-
+  obtenerTodas(): Observable<Funcion[]> {
+      return this.http.get<Funcion[]>(this.apiUrl);
+    }
 }
