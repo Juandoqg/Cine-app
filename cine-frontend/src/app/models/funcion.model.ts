@@ -5,4 +5,5 @@ export interface Funcion {
   salaId: string;
   peliculaId: string;
   precio:number
+  activo : boolean
 }

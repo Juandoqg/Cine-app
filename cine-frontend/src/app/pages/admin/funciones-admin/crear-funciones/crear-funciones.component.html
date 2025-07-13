@@ -1,1 +1,30 @@
-<p>crear-funciones works!</p>
+<div class="crear-pelicula-wrapper">
+  <form (ngSubmit)="onSubmit()" #funcionForm="ngForm">
+    <h2>Crear Función 🎟️</h2>
+
+    <label>Película</label>
+    <select name="peliculaId" [(ngModel)]="funcion.peliculaId" required>
+      <option *ngFor="let peli of peliculas" [value]="peli.id">
+        {{ peli.titulo }}
+      </option>
+    </select>
+
+    <label>Sala</label>
+    <select name="salaId" [(ngModel)]="funcion.salaId" required>
+      <option *ngFor="let sala of salas" [value]="sala.id">
+        {{ sala.nombre }}
+      </option>
+    </select>
+
+    <label>Fecha</label>
+    <input type="date" name="fecha" [(ngModel)]="funcion.fecha" required />
+
+    <label>Hora</label>
+    <input type="time" name="hora" [(ngModel)]="funcion.hora" required />
+
+    <label>Precio por cada ticket</label>
+    <input type="number" name="precio" [(ngModel)]="funcion.precio" required min="0" />
+
+    <button type="submit" [disabled]="!funcionForm.valid">Guardar Función</button>
+  </form>
+</div>
