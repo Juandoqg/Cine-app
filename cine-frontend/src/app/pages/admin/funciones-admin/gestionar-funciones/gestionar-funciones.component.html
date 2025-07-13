@@ -31,7 +31,7 @@
           <td>{{ f.salaId }}</td>
           <td>{{ f.fecha | date:'yyyy-MM-dd' }}</td>
           <td>{{ f.hora }}</td>
-          <td>{{ f.precio | currency:'USD' }}</td>
+          <td>{{ f.precio | currency:'COP' }}</td>
           <td [ngClass]="f.activo ? 'activo' : 'inactivo'">
             {{ f.activo ? 'Activa' : 'Inhabilitada' }}
           </td>
