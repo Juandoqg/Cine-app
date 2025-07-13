@@ -1,4 +1,3 @@
-// src/modules/usuarios/usuarios.module.ts
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -9,7 +8,7 @@ import { UsuarioTypeOrmRepository } from 'src/infraestructure/databases/typeorm/
 import { UsuariosController } from '../controllers/usuarios.controller';
 
 import { ObtenerUsuariosUseCase } from 'src/application/use-cases/usuarios/get-all-usuarios.use-case';
-//import { InhabilitarUsuarioUseCase } from 'src/application/use-cases/usuario/inhabilitar-usuario.use-case';
+import { InhabilitarUsuarioUseCase } from 'src/application/use-cases/usuarios/inhabilitar-usuarios.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsuarioOrmEntity])],
@@ -20,7 +19,7 @@ import { ObtenerUsuariosUseCase } from 'src/application/use-cases/usuarios/get-a
       useClass: UsuarioTypeOrmRepository,
     },
     ObtenerUsuariosUseCase,
-   // InhabilitarUsuarioUseCase,
+    InhabilitarUsuarioUseCase,
   ],
 })
 export class UsuariosModule {}

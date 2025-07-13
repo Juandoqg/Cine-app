@@ -28,4 +28,12 @@ export class UsuarioTypeOrmRepository implements UsuarioRepository {
     const usuariosOrm = await this.repo.find();
     return usuariosOrm.map(UsuarioMapper.toDomain);
   }
+
+     async findById(id: number): Promise<Usuario | null> {
+    return await this.repo.findOne({ where: { id } });
+  }
+
+  async save(usuario: Usuario): Promise<Usuario> {
+    return await this.repo.save(usuario);
+  }
 }
