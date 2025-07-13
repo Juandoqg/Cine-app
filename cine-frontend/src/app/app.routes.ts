@@ -8,7 +8,7 @@ import { CompraTicketComponent } from './pages/compra-ticket/compra-ticket.compo
 import { ProcesarPagoComponent } from './pages/procesar-pago/procesar-pago.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-
+import { MisComprasComponent } from './pages/mis-compras/mis-compras.component';
 export const routes: Routes = [
 
   // 🟢 Layout Público
@@ -17,11 +17,14 @@ export const routes: Routes = [
     component: PublicLayoutComponent,
     children: [
       { path: '', component: InicioComponent },
-      { path: 'proximamente', component: ProximamenteComponent },
-      { path: 'pelicula/:id', component: DetallePeliculaComponent },
       { path: 'registrarse', component: RegisterComponent },
+      { path: 'proximamente', component: ProximamenteComponent },
+      
+      { path: 'pelicula/:id', component: DetallePeliculaComponent },
       { path: 'comprar/:id', component: CompraTicketComponent },
       { path: 'procesar-pago', component: ProcesarPagoComponent },
+      { path: 'mis-compras', component: MisComprasComponent },
+
     ]
   },
   // 🟢 Layout para admin
