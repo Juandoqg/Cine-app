@@ -2,14 +2,14 @@
 <div class="compra-container">
   <h2>Compra de Tickets</h2>
 
-  <div class="pelicula-info">
+  <div class="pelicula-info"  *ngIf="pelicula && funcion && sala">
     <h3>{{ pelicula.titulo }}</h3>
     <p><strong>Función:</strong> {{ funcion.fecha | date }} a las {{ funcion.hora }}</p>
     <p><strong>Sala:</strong> {{ sala.nombre }} (Capacidad: {{ sala.capacidad }})</p>
     <p><strong>Precio por ticket:</strong> ${{ precioPorTicket }}</p>
   </div>
 
-  <div class="cantidad-selector">
+  <div class="cantidad-selector "  *ngIf="sala">
     <label for="cantidad">Cantidad de Tickets:</label>
     <input id="cantidad" type="number" min="1" max = "{{sala.capacidad}}" [(ngModel)]="cantidadTickets" />
   </div>
