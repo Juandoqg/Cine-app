@@ -13,13 +13,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class ConsultarClientesComponent implements OnInit {
   usuarios: Usuario[] = [];
+  usuariosFiltrados: Usuario[] = [];
+
   mostrarModal: boolean = false;
   usuarioSeleccionado: Usuario | null = null;
 
-  usuariosFiltrados: Usuario[] = [];
-
   filtro = {
     nombre: '',
+    apellido: '',
     email: '',
     telefono: '',
     activo: ''
@@ -35,6 +36,7 @@ export class ConsultarClientesComponent implements OnInit {
     this.usuarioService.obtenerUsuarios().subscribe({
       next: (data) => {
         this.usuarios = data.filter((u) => u.rol === 'cliente');
+        this.aplicarFiltros(); // Aplica filtros iniciales (por defecto muestra todos)
       },
       error: (err) => console.error('Error cargando usuarios', err),
     });
@@ -58,6 +60,7 @@ export class ConsultarClientesComponent implements OnInit {
     const callback = (success: boolean) => {
       if (success) {
         this.usuarioSeleccionado!.activo = !this.usuarioSeleccionado!.activo;
+        this.aplicarFiltros(); // Refresca la lista luego de cambiar el estado
       }
       this.cerrarModal();
     };
@@ -81,16 +84,22 @@ export class ConsultarClientesComponent implements OnInit {
     }
   }
 
-
-   aplicarFiltros(): void {
+  aplicarFiltros(): void {
     this.usuariosFiltrados = this.usuarios.filter(usuario => {
-      const coincideNombre = usuario.nombre.toLowerCase().includes(this.filtro.nombre.toLowerCase());
-      const coincideEmail = usuario.email.toLowerCase().includes(this.filtro.email.toLowerCase());
-      const coincideTelefono = usuario.telefono.includes(this.filtro.telefono);
-      const coincideActivo =
-        this.filtro.activo === '' || usuario.activo === (this.filtro.activo === 'true');
+      const nombre = usuario.nombre.toLowerCase();
+      const apellido = usuario.apellido.toLowerCase();
+      const email = usuario.email.toLowerCase();
+      const telefono = usuario.telefono.toLowerCase();
+      const activo = usuario.activo.toString();
 
-      return coincideNombre && coincideEmail && coincideTelefono && coincideActivo;
+      const coincideNombre = nombre.includes(this.filtro.nombre.toLowerCase());
+      const coincideApellido = apellido.includes(this.filtro.apellido.toLowerCase());
+      const coincideEmail = email.includes(this.filtro.email.toLowerCase());
+      const coincideTelefono = telefono.includes(this.filtro.telefono.toLowerCase());
+      const coincideActivo =
+        this.filtro.activo === '' || activo === this.filtro.activo;
+
+      return coincideNombre && coincideApellido && coincideEmail && coincideTelefono && coincideActivo;
     });
   }
 }

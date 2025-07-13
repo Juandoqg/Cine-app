@@ -1,9 +1,10 @@
 <div class="clientes-container">
-  <h2>Clientes Registrados</h2>
+  <h2 class="titulo-centrado">Clientes Registrados</h2>
 
-  <!-- Filtros -->
+  <!-- Filtros centrados -->
   <div class="filtros">
     <input type="text" placeholder="Nombre..." [(ngModel)]="filtro.nombre" (ngModelChange)="aplicarFiltros()" name="nombre">
+    <input type="text" placeholder="Apellido..." [(ngModel)]="filtro.apellido" (ngModelChange)="aplicarFiltros()" name="apellido">
     <input type="text" placeholder="Correo..." [(ngModel)]="filtro.email" (ngModelChange)="aplicarFiltros()" name="email">
     <input type="text" placeholder="Teléfono..." [(ngModel)]="filtro.telefono" (ngModelChange)="aplicarFiltros()" name="telefono">
     <select [(ngModel)]="filtro.activo" (ngModelChange)="aplicarFiltros()" name="estado">
@@ -13,11 +14,12 @@
     </select>
   </div>
 
-  <!-- Tabla -->
-  <table>
+  <!-- Tabla de usuarios -->
+  <table class="tabla-clientes">
     <thead>
       <tr>
         <th>Nombre</th>
+        <th>Apellido</th>
         <th>Email</th>
         <th>Teléfono</th>
         <th>Estado</th>
@@ -26,7 +28,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let usuario of usuariosFiltrados">
-        <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.apellido }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.telefono }}</td>
         <td [ngClass]="usuario.activo ? 'activo' : 'inactivo'">
