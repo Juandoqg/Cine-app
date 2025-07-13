@@ -1,5 +1,5 @@
 
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 import { SalaOrmEntity } from './sala.orm-entity';
 import { PeliculaOrmEntity } from './pelicula.orm-entity';
 
@@ -21,5 +21,6 @@ export class FuncionOrmEntity {
   sala: SalaOrmEntity;
 
   @ManyToOne(() => PeliculaOrmEntity, { eager: true })
+  @JoinColumn({ name: 'peliculaId' })
   pelicula: PeliculaOrmEntity;
 }
