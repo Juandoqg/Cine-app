@@ -21,7 +21,7 @@
           <td>{{ funcion.id }}</td>
           <td>{{ funcion.peliculaId }}</td>
           <td>{{ funcion.salaId }}</td>
-          <td>{{ funcion.fecha }}</td>
+          <td>{{ funcion.fecha | date: 'yyyy-MM-dd' }}</td>
           <td>{{ funcion.hora }}</td>
           <td>{{ funcion.precio | currency:'COP'}}</td>
           <td [ngClass]="funcion.activo ? 'activo' : 'inactivo'">
