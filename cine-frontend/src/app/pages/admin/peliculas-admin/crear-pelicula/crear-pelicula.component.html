@@ -22,7 +22,7 @@
     <input type="number" name="duracion" [(ngModel)]="pelicula.duracion" required />
 
     <label>Imagen (archivo)</label>
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" required />
+    <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg, image/webp" required />
 
     <div class="checkboxes">
       <label>

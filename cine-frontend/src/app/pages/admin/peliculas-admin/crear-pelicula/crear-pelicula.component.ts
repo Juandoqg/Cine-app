@@ -36,7 +36,18 @@ export class CrearPeliculaComponent {
   onFileSelected(event: Event) {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files.length > 0) {
-    this.imagenSeleccionada = input.files[0];
+    const file = input.files[0];
+
+    // Validar tipo de archivo (solo imágenes)
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+    if (!validImageTypes.includes(file.type)) {
+      alert('Por favor selecciona un archivo de imagen válido (jpg, jpeg, png, webp).');
+      this.imagenSeleccionada = null;
+      input.value = '';
+      return;
+    }
+
+    this.imagenSeleccionada = file;
   }
 }
 
