@@ -1,5 +1,5 @@
 
-import { Controller, Get, Patch, Param, ParseIntPipe, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Patch, Param, ParseIntPipe } from '@nestjs/common';
 import { ObtenerUsuariosUseCase } from 'src/application/use-cases/usuarios/get-all-usuarios.use-case';
 import { InhabilitarUsuarioUseCase } from 'src/application/use-cases/usuarios/inhabilitar-usuarios.use-case';
 import { Usuario } from 'src/domain/entities/usuario.entity';

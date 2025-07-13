@@ -11,6 +11,7 @@ import { SalaOrmEntity } from '../../infraestructure/databases/typeorm/entities/
 import { PeliculaOrmEntity} from '../../infraestructure/databases/typeorm/entities/pelicula.orm-entity';
 import { ObtenerFuncionPorIdUseCase } from 'src/application/use-cases/funciones/get-funcion-por-id.use-case';
 import { ObtenerFuncionesUseCase } from 'src/application/use-cases/funciones/get-all-funcion.use-case';
+import { InhabilitarFuncionUseCase } from 'src/application/use-cases/funciones/inhabilitar-funcion.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([FuncionOrmEntity, SalaOrmEntity, PeliculaOrmEntity])],
@@ -23,7 +24,8 @@ import { ObtenerFuncionesUseCase } from 'src/application/use-cases/funciones/get
     CreateFuncionUseCase,
     GetFuncionesPorPeliculaUseCase,
     ObtenerFuncionPorIdUseCase,
-    ObtenerFuncionesUseCase
+    ObtenerFuncionesUseCase,
+    InhabilitarFuncionUseCase
   ],
 })
 export class FuncionesModule {}

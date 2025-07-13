@@ -62,4 +62,17 @@ async obtenerPorId(id: number): Promise<Funcion | null> {
   return funcionesOrm.map(funcionOrm => FuncionMapper.toDomain(funcionOrm));
 }
 
+async findById(id: number): Promise<Funcion | null> {
+  const funcionOrm = await this.repo.findOne({
+    where: { id },
+    relations: ['pelicula', 'sala'], 
+  });
+
+  return funcionOrm ? FuncionMapper.toDomain(funcionOrm) : null;
+}
+
+  async save(funcion: Funcion): Promise<Funcion> {
+    return this.repo.save(funcion);
+  }
+
 }

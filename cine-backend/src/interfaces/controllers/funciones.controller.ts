@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param} from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Patch , ParseIntPipe} from '@nestjs/common';
 import { CreateFuncionUseCase } from 'src/application/use-cases/funciones/create-funcion.use-case';
 import { FuncionModelDto } from 'src/application/dto/FuncionModelDto';
 import { Funcion } from 'src/domain/entities/funcion.entity';
@@ -7,6 +7,7 @@ import { FuncionMapper } from '../../infraestructure/mappers/funcion.mapper';
 import { NotFoundException } from '@nestjs/common';
 import { ObtenerFuncionPorIdUseCase} from 'src/application/use-cases/funciones/get-funcion-por-id.use-case';
 import { ObtenerFuncionesUseCase } from 'src/application/use-cases/funciones/get-all-funcion.use-case';
+import { InhabilitarFuncionUseCase } from 'src/application/use-cases/funciones/inhabilitar-funcion.use-case';
 
 
 @Controller('funciones')
@@ -15,7 +16,8 @@ export class FuncionesController {
     private readonly crearFuncionUseCase: CreateFuncionUseCase,
     private readonly buscarPorPeliculaUseCase: GetFuncionesPorPeliculaUseCase,
     private readonly obtenerFuncionPorIdUseCase : ObtenerFuncionPorIdUseCase,
-    private readonly obtenerFuncionesUseCase : ObtenerFuncionesUseCase
+    private readonly obtenerFuncionesUseCase : ObtenerFuncionesUseCase,
+    private readonly inhabilitarFuncionUseCase: InhabilitarFuncionUseCase
   ) {}
 
   @Post()
@@ -40,5 +42,11 @@ async obtenerPorId(@Param('id') id: string) {
   const funcion = await this.obtenerFuncionPorIdUseCase.execute(Number(id));
   if (!funcion) throw new NotFoundException('Función no encontrada');
   return funcion;
+}
+
+@Patch('/inhabilitar/:id')
+async inhabilitarFuncion(@Param('id', ParseIntPipe) id: number) {
+  await this.inhabilitarFuncionUseCase.execute(id);
+  return { mensaje: 'Función inhabilitada correctamente' };
 }
 }
