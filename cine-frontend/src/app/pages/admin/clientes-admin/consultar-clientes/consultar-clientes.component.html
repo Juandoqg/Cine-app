@@ -1,2 +1,51 @@
+<div class="clientes-container">
+  <h2>Clientes Registrados</h2>
 
-<p>consultar cliente</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.telefono }}</td>
+        <td [ngClass]="usuario.activo ? 'activo' : 'inactivo'">
+          {{ usuario.activo ? 'Activo' : 'Inhabilitado' }}
+        </td>
+        <td>
+          <button 
+            (click)="abrirModal(usuario)" 
+            [disabled]="!usuario.activo"
+            class="inhabilitar-btn"
+          >
+            Inhabilitar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>¿Estás seguro que quieres inhabilitar a {{ usuarioSeleccionado?.nombre }} {{ usuarioSeleccionado?.apellido }}?</h3>
+    <p>Esta acción hará que el cliente ya no esté activo.</p>
+
+    <div class="modal-buttons">
+      <button type="button" class="confirmar" (click)="confirmarInhabilitar()">
+        Sí, Inhabilitar
+      </button>
+      <button class="cancelar" (click)="cerrarModal()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
