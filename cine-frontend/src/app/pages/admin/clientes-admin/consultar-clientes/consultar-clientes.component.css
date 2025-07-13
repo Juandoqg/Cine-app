@@ -1,23 +1,67 @@
 .clientes-container {
-  padding: 1rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
+.clientes-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Filtros centrados */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filtros input,
+.filtros select {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Tabla estilizada */
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 th, td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
+  padding: 1rem;
   text-align: left;
 }
 
 th {
   background-color: #f4f4f4;
+  font-weight: bold;
+  color: #444;
 }
 
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* Estado */
 .activo {
   color: green;
   font-weight: bold;
@@ -28,35 +72,40 @@ th {
   font-weight: bold;
 }
 
+/* Botones */
+.inhabilitar-btn,
+.habilitar-btn {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
 .inhabilitar-btn {
   background-color: #d9534f;
   color: white;
-  border: none;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
-  cursor: pointer;
+}
+
+.inhabilitar-btn:hover {
+  background-color: #c9302c;
 }
 
 .habilitar-btn {
-  background-color: #4CAF50; 
+  background-color: #5cb85c;
   color: white;
-  border: none;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .habilitar-btn:hover {
-  background-color: #43a047;
+  background-color: #4cae4c;
 }
 
-
-.inhabilitar-btn:disabled {
+.inhabilitar-btn:disabled,
+.habilitar-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
-/* Modal Styles que me diste */
 
 .modal-backdrop {
   position: fixed;
@@ -132,3 +181,4 @@ th {
     opacity: 1;
   }
 }
+

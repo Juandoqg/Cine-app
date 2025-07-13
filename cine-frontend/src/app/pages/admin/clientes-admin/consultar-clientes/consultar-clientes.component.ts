@@ -16,6 +16,15 @@ export class ConsultarClientesComponent implements OnInit {
   mostrarModal: boolean = false;
   usuarioSeleccionado: Usuario | null = null;
 
+  usuariosFiltrados: Usuario[] = [];
+
+  filtro = {
+    nombre: '',
+    email: '',
+    telefono: '',
+    activo: ''
+  };
+
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
@@ -70,5 +79,18 @@ export class ConsultarClientesComponent implements OnInit {
         },
       });
     }
+  }
+
+
+   aplicarFiltros(): void {
+    this.usuariosFiltrados = this.usuarios.filter(usuario => {
+      const coincideNombre = usuario.nombre.toLowerCase().includes(this.filtro.nombre.toLowerCase());
+      const coincideEmail = usuario.email.toLowerCase().includes(this.filtro.email.toLowerCase());
+      const coincideTelefono = usuario.telefono.includes(this.filtro.telefono);
+      const coincideActivo =
+        this.filtro.activo === '' || usuario.activo === (this.filtro.activo === 'true');
+
+      return coincideNombre && coincideEmail && coincideTelefono && coincideActivo;
+    });
   }
 }
