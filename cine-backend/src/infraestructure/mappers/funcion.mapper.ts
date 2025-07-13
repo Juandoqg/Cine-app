@@ -31,7 +31,7 @@ export class FuncionMapper {
       fecha: funcion.fecha,
       hora: funcion.hora,
       precio: funcion.precio,
-      activa: funcion.activo
+      activo: funcion.activo
     };
   }
 }
