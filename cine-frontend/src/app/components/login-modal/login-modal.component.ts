@@ -86,5 +86,11 @@ export class LoginModalComponent {
   });
 }
 
+loginWithGoogle() {
+  // Cierra el modal antes de redirigir
+  this.dialogRef.close();
 
+  // Redirige al backend para iniciar el flujo OAuth
+  window.location.href = 'http://localhost:3000/auth/google';
+}
 }
