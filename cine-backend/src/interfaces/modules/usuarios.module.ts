@@ -9,6 +9,7 @@ import { UsuariosController } from '../controllers/usuarios.controller';
 
 import { ObtenerUsuariosUseCase } from 'src/application/use-cases/usuarios/get-all-usuarios.use-case';
 import { InhabilitarUsuarioUseCase } from 'src/application/use-cases/usuarios/inhabilitar-usuarios.use-case';
+import { HabilitarUsuarioUseCase } from 'src/application/use-cases/usuarios/habilitar-usuarios.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsuarioOrmEntity])],
@@ -20,6 +21,7 @@ import { InhabilitarUsuarioUseCase } from 'src/application/use-cases/usuarios/in
     },
     ObtenerUsuariosUseCase,
     InhabilitarUsuarioUseCase,
+    HabilitarUsuarioUseCase
   ],
 })
 export class UsuariosModule {}
