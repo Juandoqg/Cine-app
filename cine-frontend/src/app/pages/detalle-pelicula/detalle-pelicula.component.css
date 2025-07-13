@@ -160,3 +160,8 @@
   font-size: 1rem;
   color: #444;
 }
+.dias-lista {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}

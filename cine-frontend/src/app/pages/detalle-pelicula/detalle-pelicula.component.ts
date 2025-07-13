@@ -1,4 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PeliculaService } from '../../services/pelicula.service';
 import { Pelicula } from '../../models/pelicula.model';
@@ -11,7 +15,6 @@ import { Router } from '@angular/router';
 import { LoginModalComponent } from '../../components/login-modal/login-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 
-
 @Component({
   selector: 'app-detalle-pelicula',
   templateUrl: './detalle-pelicula.component.html',
@@ -21,22 +24,26 @@ import { MatDialog } from '@angular/material/dialog';
 export class DetallePeliculaComponent implements OnInit {
   pelicula!: Pelicula;
   trailerSafeUrl!: SafeResourceUrl;
+
   diasDisponibles: Date[] = [];
+  diasVisibles: Date[] = [];
   diaSeleccionado!: Date;
   funcionesPorDia: { [dia: string]: Funcion[] } = {};
 
-  private dialog = inject(MatDialog)
-isLoggedIn = false;
+  private inicioIndex = 0;
+  private readonly cantidadVisible = 5;
+
+  private dialog = inject(MatDialog);
+  isLoggedIn = false;
   userRole: string | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private peliculaService: PeliculaService,
     private funcionService: FuncionService,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private router: Router,
-
-
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,9 +57,10 @@ isLoggedIn = false;
         this.funcionService.getFuncionesPorPelicula(id.toString()).subscribe({
           next: (funciones) => {
             this.agruparFuncionesPorDia(funciones);
-          }
+            this.actualizarDiasVisibles();
+          },
         });
-      }
+      },
     });
   }
 
@@ -60,7 +68,7 @@ isLoggedIn = false;
     this.funcionesPorDia = {};
     this.diasDisponibles = [];
 
-    funciones.forEach(funcion => {
+    funciones.forEach((funcion) => {
       const fecha = new Date(funcion.fecha);
       const clave = fecha.toDateString();
 
@@ -75,12 +83,32 @@ isLoggedIn = false;
     this.diaSeleccionado = this.diasDisponibles[0];
   }
 
-  get funcionesDelDiaSeleccionado(): Funcion[] {
-  return this.diaSeleccionado
-    ? this.funcionesPorDia[this.diaSeleccionado.toDateString()] || []
-    : [];
-}
+  actualizarDiasVisibles(): void {
+    this.diasVisibles = this.diasDisponibles.slice(
+      this.inicioIndex,
+      this.inicioIndex + this.cantidadVisible
+    );
+  }
 
+  scrollIzquierda(): void {
+    if (this.inicioIndex > 0) {
+      this.inicioIndex--;
+      this.actualizarDiasVisibles();
+    }
+  }
+
+  scrollDerecha(): void {
+    if (this.inicioIndex + this.cantidadVisible < this.diasDisponibles.length) {
+      this.inicioIndex++;
+      this.actualizarDiasVisibles();
+    }
+  }
+
+  get funcionesDelDiaSeleccionado(): Funcion[] {
+    return this.diaSeleccionado
+      ? this.funcionesPorDia[this.diaSeleccionado.toDateString()] || []
+      : [];
+  }
 
   sanitizarUrl(url: string): SafeResourceUrl {
     const videoId = this.extraerIdYoutube(url);
@@ -93,22 +121,21 @@ isLoggedIn = false;
     return match ? match[1] : '';
   }
 
-
   irAComprar(funcionId: number): void {
-  this.authService.isLoggedIn().subscribe((logueado) => {
-    if (logueado) {
-      this.router.navigate(['/comprar', funcionId]);
-    } else {
-     this.dialog.open(LoginModalComponent, { width: '400px' }).afterClosed().subscribe(() => {
-           // refrescar estado después de login
-           this.authService.fetchUserInfo().subscribe(user => {
-             this.isLoggedIn = !!user;
-             this.userRole = user?.rol ?? null;
-           });
-         });
-    }
-  });
-}
-
-
+    this.authService.isLoggedIn().subscribe((logueado) => {
+      if (logueado) {
+        this.router.navigate(['/comprar', funcionId]);
+      } else {
+        this.dialog
+          .open(LoginModalComponent, { width: '400px' })
+          .afterClosed()
+          .subscribe(() => {
+            this.authService.fetchUserInfo().subscribe((user) => {
+              this.isLoggedIn = !!user;
+              this.userRole = user?.rol ?? null;
+            });
+          });
+      }
+    });
+  }
 }
