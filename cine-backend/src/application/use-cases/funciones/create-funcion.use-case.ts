@@ -16,7 +16,8 @@ export class CreateFuncionUseCase {
       dto.salaId,
       dto.fecha,
       dto.hora,
-      dto.precio
+      dto.precio,
+      true
     );
 
     return await this.funcionRepo.crear(funcion);

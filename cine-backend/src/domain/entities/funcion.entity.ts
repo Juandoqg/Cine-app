@@ -7,5 +7,7 @@ export class Funcion {
     public fecha: Date,
     public hora: string,
     public precio: number,
+    public activo: boolean = true, 
+
   ) {}
 }

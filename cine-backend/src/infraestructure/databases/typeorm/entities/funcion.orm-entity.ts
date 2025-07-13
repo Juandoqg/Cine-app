@@ -17,6 +17,10 @@ export class FuncionOrmEntity {
   @Column('decimal', { precision: 8, scale: 2 })
   precio: number;
 
+  @Column({ default: true }) 
+  activo: boolean;
+
+
   @ManyToOne(() => SalaOrmEntity, { eager: true })
   sala: SalaOrmEntity;
 
