@@ -1,58 +1,102 @@
-import { Component } from '@angular/core';
-import { FuncionService } from '../../../../services/funcion.service';
+import { Component, OnInit } from '@angular/core';
 import { Funcion } from '../../../../models/funcion.model';
+import { FuncionService } from '../../../../services/funcion.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-gestionar-funciones',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './gestionar-funciones.component.html',
-  styleUrl: './gestionar-funciones.component.css'
+  styleUrls: ['./gestionar-funciones.component.css']
 })
-export class GestionarFuncionesComponent {
+export class GestionarFuncionesComponent implements OnInit {
   funciones: Funcion[] = [];
+  funcionesFiltradas: Funcion[] = [];
+
+  filtro = {
+    peliculaId: '',
+    salaId: '',
+    fecha: '',
+    activo: ''
+  };
+
+  mostrarModal = false;
+  funcionSeleccionada: Funcion | null = null;
+
   constructor(private funcionService: FuncionService) {}
 
-ngOnInit(): void {
-  this.funcionService.obtenerTodas().subscribe((funciones) => {
-    this.funciones = funciones;
-  });
-}
+  ngOnInit(): void {
+    this.cargarFunciones();
+  }
 
-seleccionarFuncion(funcion: Funcion): void {
-  console.log('Función seleccionada:', funcion);
-  // Lógica para editar o ver detalles
-}
+  cargarFunciones(): void {
+    this.funcionService.obtenerTodas().subscribe({
+      next: (data) => {
+        this.funciones = data;
+        this.aplicarFiltros();
+      },
+      error: (err) => console.error('Error cargando funciones', err)
+    });
+  }
 
-inhabilitarFuncion(id: number): void {
-  console.log('Inhabilitar función con ID:', id);
-  // Lógica para desactivar la función
-}
+  abrirModal(funcion: Funcion): void {
+    this.funcionSeleccionada = funcion;
+    this.mostrarModal = true;
+  }
 
-mostrarModal: boolean = false;
-funcionSeleccionada: any = null;
+  cerrarModal(): void {
+    this.funcionSeleccionada = null;
+    this.mostrarModal = false;
+  }
+confirmarCambioEstado(): void {
+  if (!this.funcionSeleccionada) return;
 
-abrirModal(funcion: any) {
-  this.funcionSeleccionada = funcion;
-  this.mostrarModal = true;
-}
+  const id = this.funcionSeleccionada.id;
 
-cerrarModal() {
-  this.funcionSeleccionada = null;
-  this.mostrarModal = false;
-}
+  const callback = (success: boolean) => {
+    if (success) {
+      this.funcionSeleccionada!.activo = !this.funcionSeleccionada!.activo;
+      this.aplicarFiltros();
+      alert(`Función ${this.funcionSeleccionada!.activo ? 'habilitada' : 'inhabilitada'} con éxito.`);
+    }
+    this.cerrarModal();
+  };
 
-confirmarCambioEstadoFuncion() {
-  if (this.funcionSeleccionada) {
-    const nuevaFuncion = { ...this.funcionSeleccionada };
-    nuevaFuncion.activo = !nuevaFuncion.activo;
-
-    // Aquí llamas al servicio para actualizar en backend...
-   // this.servicio.actualizarFuncion(nuevaFuncion.id, nuevaFuncion).subscribe(() => {
-      //this.funcionSeleccionada.activo = nuevaFuncion.activo;
-     // this.cerrarModal();
-   // });
+  if (this.funcionSeleccionada.activo) {
+    this.funcionService.inhabilitarFuncion(id!).subscribe({
+      next: () => callback(true),
+      error: (err) => {
+        console.error('Error al inhabilitar', err);
+        callback(false);
+      },
+    });
+  } else {
+    this.funcionService.habilitarFuncion(id!).subscribe({
+      next: () => callback(true),
+      error: (err) => {
+        console.error('Error al habilitar', err);
+        callback(false);
+      },
+    });
   }
 }
+
+
+  aplicarFiltros(): void {
+    this.funcionesFiltradas = this.funciones.filter(f => {
+      const peliculaId = f.peliculaId.toLowerCase();
+      const salaId = f.salaId.toLowerCase();
+      const fecha = f.fecha.toLowerCase();
+      const activo = f.activo.toString();
+
+      const coincidePelicula = peliculaId.includes(this.filtro.peliculaId.toLowerCase());
+      const coincideSala = salaId.includes(this.filtro.salaId.toLowerCase());
+      const coincideFecha = fecha.includes(this.filtro.fecha.toLowerCase());
+      const coincideActivo = this.filtro.activo === '' || activo === this.filtro.activo;
+
+      return coincidePelicula && coincideSala && coincideFecha && coincideActivo;
+    });
+  }
 }

@@ -26,4 +26,12 @@ export class FuncionService {
   obtenerTodas(): Observable<Funcion[]> {
       return this.http.get<Funcion[]>(this.apiUrl);
     }
+
+  habilitarFuncion(id: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/habilitar/${id}`, {});
+  }
+  inhabilitarFuncion(id: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/inhabilitar/${id}`, {});
+  }
+
 }
