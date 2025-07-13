@@ -13,9 +13,8 @@
       <option value="false">Inactivos</option>
     </select>
   </div>
-
-  <!-- Tabla de usuarios -->
-  <table class="tabla-clientes">
+<div class="tabla-responsive">
+  <table>
     <thead>
       <tr>
         <th>Nombre</th>
@@ -36,15 +35,15 @@
           {{ usuario.activo ? 'Activo' : 'Inhabilitado' }}
         </td>
         <td>
-          <button
-            (click)="abrirModal(usuario)"
-            [ngClass]="usuario.activo ? 'inhabilitar-btn' : 'habilitar-btn'">
+          <button (click)="abrirModal(usuario)"
+                  [ngClass]="usuario.activo ? 'inhabilitar-btn' : 'habilitar-btn'">
             {{ usuario.activo ? 'Inhabilitar' : 'Habilitar' }}
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
 </div>
 
 <!-- Modal -->

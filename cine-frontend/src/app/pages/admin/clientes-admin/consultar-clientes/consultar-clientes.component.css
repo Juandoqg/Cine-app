@@ -43,9 +43,15 @@ display: flex;
 }
 
 
-/* Tabla estilizada */
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Estilo base de la tabla */
 table {
   width: 100%;
+  min-width: 600px; /* Para evitar que se colapse demasiado en móviles */
   border-collapse: separate;
   border-spacing: 0;
   background-color: #ffffff;
@@ -54,23 +60,39 @@ table {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* Encabezados y celdas */
 th, td {
   padding: 1rem;
   text-align: left;
+  white-space: nowrap;
 }
 
+/* Encabezados */
 th {
   background-color: #f4f4f4;
   font-weight: bold;
   color: #444;
 }
 
+/* Fila par */
 tr:nth-child(even) {
   background-color: #fafafa;
 }
 
+/* Hover */
 tr:hover {
   background-color: #f0f8ff;
+}
+
+/* Media query para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 0.75rem;
+  }
 }
 
 /* Estado */
