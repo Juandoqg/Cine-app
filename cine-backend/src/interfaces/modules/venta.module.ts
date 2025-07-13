@@ -5,6 +5,7 @@ import { VentaTypeOrmRepository } from '../../infraestructure/databases/typeorm/
 import { CrearVentaUseCase } from '../../application/use-cases/ventas/crear-venta.use-case';
 import { VentaController } from '../../interfaces/controllers/venta.controller';
 import { ObtenerVentasUseCase } from 'src/application/use-cases/ventas/get-all-venta.use-case';
+import { GetVentasByClienteIdUseCase } from 'src/application/use-cases/ventas/get-venta-por-cliente-id.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([VentaOrmEntity])],
@@ -15,7 +16,8 @@ import { ObtenerVentasUseCase } from 'src/application/use-cases/ventas/get-all-v
       useClass: VentaTypeOrmRepository,
     },
     CrearVentaUseCase,
-    ObtenerVentasUseCase
+    ObtenerVentasUseCase,
+    GetVentasByClienteIdUseCase
   ],
 })
 export class VentasModule {}
