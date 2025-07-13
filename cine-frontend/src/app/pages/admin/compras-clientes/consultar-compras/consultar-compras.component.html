@@ -1,31 +1,50 @@
+<div class="compras-titulo">
+  <h2>Dashboard de Ventas</h2>
+</div>
 
-  <div class="compras-titulo">
-    <h2>Consultar Compras</h2>
+<!-- 🔷 Cards resumen -->
+<div class="cards-container">
+  <div class="card blue">
+    <h3>Total Vendido</h3>
+    <p>{{ totalVendido | currency:'COP' }}</p>
   </div>
+  <div class="card green">
+    <h3>Pago Preferido</h3>
+    <p>{{ pagoPreferido }}</p>
+  </div>
+  <div class="card yellow">
+    <h3>Tickets Vendidos</h3>
+    <p>{{ ticketsVendidos }}</p>
+  </div>
+</div>
 
-  <div class="tabla-scroll">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Cliente</th>
-          <th>Función</th>
-          <th>Tipo de pago</th>
-          <th>Tickets</th>
-          <th>Total</th>
-          <th>Fecha</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let venta of ventas">
-          <td>{{ venta.id }}</td>
-          <td>{{ venta.clienteId }}</td>
-          <td>{{ venta.funcionId }}</td>
-          <td>{{ venta.tipoPagoId }}</td>
-          <td>{{ venta.cantidadTickets }}</td>
-          <td>{{ venta.total | currency:'COP' }}</td>
-          <td>{{ venta.fecha | date:'short' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<!-- 🔍 Filtro -->
+<input type="text" [(ngModel)]="filtro" placeholder="Buscar venta..." class="input-filtro" />
+
+<!-- 📊 Tabla de ventas -->
+<div class="tabla-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Función</th>
+        <th>Tipo de pago</th>
+        <th>Tickets</th>
+        <th>Total</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas | filtroVentas:filtro">
+        <td>{{ venta.id }}</td>
+        <td>{{ venta.clienteId }}</td>
+        <td>{{ venta.funcionId }}</td>
+        <td>{{ venta.tipoPagoId }}</td>
+        <td>{{ venta.cantidadTickets }}</td>
+        <td>{{ venta.total | currency:'COP' }}</td>
+        <td>{{ venta.fecha | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
