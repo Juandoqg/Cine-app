@@ -53,16 +53,5 @@ export class ConsultarComprasComponent implements OnInit {
     );
   }
 
-  // Para llenar select automáticamente con valores únicos
-  obtenerClientes(): string[] {
-    return [...new Set(this.ventas.map(v => v.clienteId.toString()))];
-  }
 
-  obtenerFunciones(): string[] {
-    return [...new Set(this.ventas.map(v => v.funcionId.toString()))];
-  }
-
-  obtenerTiposPago(): string[] {
-    return [...new Set(this.ventas.map(v => v.tipoPagoId.toString()))];
-  }
 }
