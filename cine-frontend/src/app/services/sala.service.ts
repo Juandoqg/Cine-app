@@ -2,12 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/enviroment';
-
-export interface Sala {
-  id: number;
-  nombre: string;
-  capacidad: number;
-}
+import { Sala } from '../models/sala.model';
 
 @Injectable({
   providedIn: 'root'
