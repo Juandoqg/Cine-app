@@ -10,7 +10,7 @@
 
 
 <!-- Contenido principal -->
-<div class="main-container">
+<div class="main-container" *ngIf="pelicula">
   <!-- Imagen -->
   <div class="imagen-container">
     <img 
@@ -20,7 +20,7 @@
   </div>
 
   <!-- Detalles -->
-  <div class="info-container">
+  <div class="info-container ">
     <h2>{{ pelicula.titulo }}</h2>
     <p><strong>Descripción:</strong> {{ pelicula.descripcion }}</p>
     <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
