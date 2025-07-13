@@ -53,4 +53,13 @@ async obtenerPorId(id: number): Promise<Funcion | null> {
   return FuncionMapper.toDomain(funcionOrm);
 }
 
+ async obtenerTodas(): Promise<Funcion[]> {
+  const funcionesOrm = await this.repo.find({
+    relations: ['pelicula', 'sala'],
+    order: { fecha: 'ASC' }
+  });
+
+  return funcionesOrm.map(funcionOrm => FuncionMapper.toDomain(funcionOrm));
+}
+
 }
