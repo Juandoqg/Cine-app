@@ -1,5 +1,5 @@
 
-<div class="actualizar-pelicula-wrapper">
+<div class="actualizar-pelicula-wrapper"  *ngIf="pelicula">
   <form (ngSubmit)="onSubmit()" #peliculaForm="ngForm">
     <h2>Actualizar Película 🎬</h2>
 
