@@ -5,7 +5,12 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   background-color: #fff;
 }
-
+.compras-titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0,5rem 0;
+}
 
 table {
   width: 100%;

@@ -1,20 +1,21 @@
 <div class="compras-titulo">
-  <h2>Dashboard de Ventas</h2>
+  <h2>Revisa tus compras realizadas</h2>
 </div>
 
 <!-- 🔷 Cards resumen -->
 <div class="cards-container">
-  <div class="card blue">
-    <h3>Total Vendido</h3>
-    <p>{{ totalVendido | currency:'COP' }}</p>
+    <div class="card yellow">
+    <h3>Tickets Vendidos</h3>
+    <p>{{ ticketsVendidos }}</p>
   </div>
+
   <div class="card green">
     <h3>Pago Preferido</h3>
     <p>{{ pagoPreferido }}</p>
   </div>
-  <div class="card yellow">
-    <h3>Tickets Vendidos</h3>
-    <p>{{ ticketsVendidos }}</p>
+   <div class="card red">
+    <h3>Sala Más Frecuente</h3>
+    <p>{{ salaFrecuente }}</p>
   </div>
 </div>
 

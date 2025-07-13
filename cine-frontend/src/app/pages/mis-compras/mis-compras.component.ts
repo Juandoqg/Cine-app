@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VentaService } from '../../services/venta.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-mis-compras',
@@ -10,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MisComprasComponent implements OnInit {
   ventas: any[] = [];
-  totalVendido: number = 0;
+  salaFrecuente: string = ''; 
   ticketsVendidos: number = 0;
   pagoPreferido: string = '';
 
@@ -19,28 +20,46 @@ export class MisComprasComponent implements OnInit {
   funcionSeleccionada: string = '';
   tipoPagoSeleccionado: string = '';
 
-  constructor(private ventaService: VentaService) {}
+  constructor(private ventaService: VentaService, private authService : AuthService) {}
 
   ngOnInit(): void {
-    this.ventaService.obtenerVentas().subscribe({
-      next: (data) => {
-        this.ventas = data;
-        this.calcularResumen();
-      },
-      error: (err) => console.error('Error al obtener ventas', err)
-    });
+    const usuario = this.authService.getCurrentUser();
+
+    if (usuario) {
+      const idCliente = usuario.id;
+
+      this.ventaService.obtenerVentas().subscribe({
+        next: (data) => {
+          this.ventas = data.filter(v => v.clienteId === idCliente);
+          this.calcularResumen();
+        },
+        error: (err) => console.error('Error al obtener ventas', err)
+      });
+    } else {
+      console.warn('No hay usuario autenticado');
+    }
   }
 
   calcularResumen(): void {
-    this.totalVendido = this.ventas.reduce((acc, venta) => acc + venta.total, 0);
     this.ticketsVendidos = this.ventas.reduce((acc, venta) => acc + venta.cantidadTickets, 0);
 
     const conteoPagos: Record<string, number> = {};
+    const conteoSalas: Record<number, number> = {};
+
     for (const venta of this.ventas) {
+      // Contar tipo de pago
       conteoPagos[venta.tipoPagoId] = (conteoPagos[venta.tipoPagoId] || 0) + 1;
+
+      // Contar sala (usa salaId directamente o accede desde funcion.salaId)
+      const salaId = venta.salaId || venta.funcion?.salaId || venta.funcionId; // Ajusta según tu estructura
+      conteoSalas[salaId] = (conteoSalas[salaId] || 0) + 1;
     }
 
-    this.pagoPreferido = Object.entries(conteoPagos).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+    // Determinar el pago preferido
+    this.pagoPreferido = Object.entries(conteoPagos).reduce((a, b) => a[1] > b[1] ? a : b, ['-', 0])[0];
+
+    // Determinar la sala más frecuente
+    this.salaFrecuente = Object.entries(conteoSalas).reduce((a, b) => a[1] > b[1] ? a : b, ['-', 0])[0];
   }
 
   // Método que retorna ventas según filtros aplicados
