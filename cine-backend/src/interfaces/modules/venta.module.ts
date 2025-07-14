@@ -6,6 +6,7 @@ import { CrearVentaUseCase } from '../../application/use-cases/ventas/crear-vent
 import { VentaController } from '../../interfaces/controllers/venta.controller';
 import { ObtenerVentasUseCase } from 'src/application/use-cases/ventas/get-all-venta.use-case';
 import { GetVentasByClienteIdUseCase } from 'src/application/use-cases/ventas/get-venta-por-cliente-id.use-case';
+import { GetVentasPorFuncionUseCase } from 'src/application/use-cases/ventas/get-venta-por-funcion-id.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([VentaOrmEntity])],
@@ -17,7 +18,8 @@ import { GetVentasByClienteIdUseCase } from 'src/application/use-cases/ventas/ge
     },
     CrearVentaUseCase,
     ObtenerVentasUseCase,
-    GetVentasByClienteIdUseCase
+    GetVentasByClienteIdUseCase,
+    GetVentasPorFuncionUseCase
   ],
 })
 export class VentasModule {}

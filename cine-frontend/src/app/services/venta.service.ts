@@ -26,4 +26,8 @@ export class VentaService {
   obtenerVentasPorClienteId(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/cliente/${id}`, { withCredentials: true });
   }
+
+   obtenerVentasPorFuncionId(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/funcion/${id}`, { withCredentials: true });
+  }
 }

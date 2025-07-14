@@ -37,4 +37,12 @@ export class VentaTypeOrmRepository implements VentaRepository {
 
   return ventas.map(VentaMapper.toDomain);
 }
+
+ async getVentasPorFuncion(funcionId: number): Promise<Venta[]> {
+    const ventas = await this.ventaRepo.find({
+      where: { funcion: { id: funcionId } },
+      relations: ['cliente', 'funcion', 'tipoPago'],
+    });
+    return ventas.map(VentaMapper.toDomain);
+  }
 }

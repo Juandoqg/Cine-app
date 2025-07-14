@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get , Param, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Get , Param, UseGuards , ParseIntPipe} from '@nestjs/common';
 import { CrearVentaUseCase } from 'src/application/use-cases/ventas/crear-venta.use-case';
 import { ObtenerVentasUseCase } from 'src/application/use-cases/ventas/get-all-venta.use-case';
 import { GetVentasByClienteIdUseCase } from 'src/application/use-cases/ventas/get-venta-por-cliente-id.use-case';
@@ -8,6 +8,7 @@ import { JwtAuthGuard } from 'src/infraestructure/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/infraestructure/guards/roles.guard';
 import { Roles } from 'src/infraestructure/decorators/roles.decorator';
 import { ApiTags, ApiOperation, ApiResponse, ApiCookieAuth } from '@nestjs/swagger';
+import { GetVentasPorFuncionUseCase } from 'src/application/use-cases/ventas/get-venta-por-funcion-id.use-case';
 
 @ApiTags('Ventas')
 @Controller('ventas')
@@ -15,7 +16,8 @@ export class VentaController {
   constructor(
     private readonly crearVentaUseCase: CrearVentaUseCase,
     private readonly obtenerVentas: ObtenerVentasUseCase,
-    private readonly getVentasByIdUseCase : GetVentasByClienteIdUseCase
+    private readonly getVentasByIdUseCase : GetVentasByClienteIdUseCase,
+    private readonly getVentasPorFuncion: GetVentasPorFuncionUseCase
   ) {}
 
   @Post()
@@ -43,9 +45,20 @@ export class VentaController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('cliente', 'admin') 
   @ApiCookieAuth()
-  @ApiOperation({ summary: 'Obtener ventas por cliente (solo cliente)' })
+  @ApiOperation({ summary: 'Obtener ventas por cliente (cliente, admin)' })
   @ApiResponse({ status: 200, description: 'Ventas del cliente.' })
   async getVentasByCliente(@Param('id') id: string) {
     return this.getVentasByIdUseCase.execute(id);
+  }
+
+
+  @Get('funcion/:funcionId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('cliente', 'admin') 
+  @ApiCookieAuth()
+  @ApiOperation({ summary: 'Obtener ventas por funcion (cliente, admin)' })
+  @ApiResponse({ status: 200, description: 'Ventas del cliente.' })
+  async getByFuncion(@Param('funcionId', ParseIntPipe) funcionId: number) {
+    return this.getVentasPorFuncion.execute(funcionId);
   }
 }
