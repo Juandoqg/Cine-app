@@ -3,6 +3,7 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { ProximamenteComponent } from './pages/proximamente/proximamente.component';
 import { DetallePeliculaComponent} from './pages/detalle-pelicula/detalle-pelicula.component';
 import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { CompraTicketComponent } from './pages/compra-ticket/compra-ticket.component';
 import { ProcesarPagoComponent } from './pages/procesar-pago/procesar-pago.component';
@@ -16,14 +17,15 @@ export const routes: Routes = [
     path: '',
     component: PublicLayoutComponent,
     children: [
+      //puede ver aun si no esta logeado
       { path: '', component: InicioComponent },
       { path: 'registrarse', component: RegisterComponent },
       { path: 'proximamente', component: ProximamenteComponent },
-      
       { path: 'pelicula/:id', component: DetallePeliculaComponent },
-      { path: 'comprar/:id', component: CompraTicketComponent },
-      { path: 'procesar-pago', component: ProcesarPagoComponent },
-      { path: 'mis-compras', component: MisComprasComponent },
+
+      { path: 'comprar/:id', component: CompraTicketComponent, canActivate: [AuthGuard]},
+      { path: 'procesar-pago', component: ProcesarPagoComponent  ,canActivate: [AuthGuard]},
+      { path: 'mis-compras', component: MisComprasComponent, canActivate: [AuthGuard] },
 
     ]
   },
