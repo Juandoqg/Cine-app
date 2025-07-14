@@ -50,8 +50,8 @@ export class MisComprasComponent implements OnInit {
       // Contar tipo de pago
       conteoPagos[venta.tipoPagoId] = (conteoPagos[venta.tipoPagoId] || 0) + 1;
 
-      // Contar sala (usa salaId directamente o accede desde funcion.salaId)
-      const salaId = venta.salaId || venta.funcion?.salaId || venta.funcionId; // Ajusta según tu estructura
+      // Contar sala 
+      const salaId = venta.salaId  
       conteoSalas[salaId] = (conteoSalas[salaId] || 0) + 1;
     }
 

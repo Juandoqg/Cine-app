@@ -65,23 +65,26 @@ export class DetallePeliculaComponent implements OnInit {
   }
 
   private agruparFuncionesPorDia(funciones: Funcion[]): void {
-    this.funcionesPorDia = {};
-    this.diasDisponibles = [];
+  this.funcionesPorDia = {};
+  this.diasDisponibles = [];
 
-    funciones.forEach((funcion) => {
-      const fecha = new Date(funcion.fecha);
-      const clave = fecha.toDateString();
+  funciones.forEach((funcion) => {
+    // ✅ Extraer fecha manualmente para evitar errores de zona horaria
+    const [anio, mes, dia] = funcion.fecha.split('T')[0].split('-').map(Number);
+    const fechaLocal = new Date(anio, mes - 1, dia); // mes va de 0-11
 
-      if (!this.funcionesPorDia[clave]) {
-        this.funcionesPorDia[clave] = [];
-        this.diasDisponibles.push(fecha);
-      }
+    const clave = fechaLocal.toDateString();
 
-      this.funcionesPorDia[clave].push(funcion);
-    });
+    if (!this.funcionesPorDia[clave]) {
+      this.funcionesPorDia[clave] = [];
+      this.diasDisponibles.push(fechaLocal);
+    }
 
-    this.diaSeleccionado = this.diasDisponibles[0];
-  }
+    this.funcionesPorDia[clave].push(funcion);
+  });
+
+  this.diaSeleccionado = this.diasDisponibles[0];
+}
 
   actualizarDiasVisibles(): void {
     this.diasVisibles = this.diasDisponibles.slice(
