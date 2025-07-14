@@ -13,14 +13,14 @@ export class UsuarioService {
   constructor(private http: HttpClient) {}
 
   obtenerUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}`);
+    return this.http.get<Usuario[]>(`${this.apiUrl}`, { withCredentials: true });
   }
 
   inhabilitarUsuario(id: number): Observable<void> {
-    return this.http.patch<void>(`${this.apiUrl}/inhabilitar/${id}`, {});
+    return this.http.patch<void>(`${this.apiUrl}/inhabilitar/${id}`, {}, { withCredentials: true });
   }
 
   habilitarUsuario(id: number): Observable<void> {
-    return this.http.patch<void>(`${this.apiUrl}/habilitar/${id}`, {});
+    return this.http.patch<void>(`${this.apiUrl}/habilitar/${id}`, {}, { withCredentials: true });
   }
 }
