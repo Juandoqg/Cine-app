@@ -36,6 +36,6 @@
       </label>
     </div>
 
-    <button type="submit" [disabled]="!peliculaForm.valid">Guardar Película</button>
+    <button type="submit" [disabled]="!peliculaForm.valid || !imagenSeleccionada">Guardar Película</button>
   </form>
 </div>

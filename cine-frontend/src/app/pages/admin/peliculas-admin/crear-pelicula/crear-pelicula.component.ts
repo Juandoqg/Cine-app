@@ -33,21 +33,25 @@ export class CrearPeliculaComponent {
     private router: Router
   ) {}
 
-  onFileSelected(event: Event) {
+  onFileSelected(event: Event): void {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files.length > 0) {
     const file = input.files[0];
 
-    // Validar tipo de archivo (solo imágenes)
+    // Tipos de imagen válidos
     const validImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+
+    // Validar tipo de archivo
     if (!validImageTypes.includes(file.type)) {
-      alert('Por favor selecciona un archivo de imagen válido (jpg, jpeg, png, webp).');
+      alert('Por favor selecciona una imagen válida (JPG, JPEG, PNG, WEBP).');
       this.imagenSeleccionada = null;
       input.value = '';
       return;
     }
 
     this.imagenSeleccionada = file;
+  } else {
+    this.imagenSeleccionada = null;
   }
 }
 

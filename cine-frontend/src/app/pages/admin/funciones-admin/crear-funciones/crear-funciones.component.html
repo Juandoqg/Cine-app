@@ -23,7 +23,7 @@
     <input type="time" name="hora" [(ngModel)]="funcion.hora" required />
 
     <label>Precio por cada ticket</label>
-    <input type="number" name="precio" [(ngModel)]="funcion.precio" required min="0" />
+    <input type="number" name="precio" [(ngModel)]="funcion.precio" required min="1" />
 
     <button type="submit" [disabled]="!funcionForm.valid">Guardar Función</button>
   </form>
