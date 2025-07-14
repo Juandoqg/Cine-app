@@ -59,7 +59,7 @@ export class AuthController {
       sameSite: 'lax',
     });
 
-    res.end(); // deja que el guard redirija a Google
+    res.end(); 
   }
 @Get('google/callback')
 @UseGuards(GoogleAuthGuard)
@@ -74,7 +74,7 @@ async googleAuthRedirect(@Req() req: ExpressRequest, @Res() res: Response) {
 
   res.cookie('access_token', token, {
     httpOnly: true,
-    secure: false, // en prod ponlo en true si usas HTTPS
+    secure: true,
     sameSite: 'lax',
     maxAge: 1000 * 60 * 60, // 1 hora
   });
@@ -106,7 +106,6 @@ async googleRedirect(
     maxAge: 1000 * 60 * 60,
   });
 
-  // ✅ OBTENER returnUrl directamente desde la query
   const returnUrl = req.query.returnUrl as string || 'http://localhost:4200/';
   const decodedReturnUrl = decodeURIComponent(returnUrl);
   const separator = decodedReturnUrl.includes('?') ? '&' : '?';
