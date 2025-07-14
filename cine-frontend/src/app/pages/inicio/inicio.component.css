@@ -34,14 +34,10 @@
 .pelicula-img {
   width: 100%;
   height: auto;
-  min-height: 350px;
-  max-height: 350px; 
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 10px;
 }
-
-
 .trailer-link {
   background: none;
   border: none;
@@ -64,4 +60,21 @@ a.pelicula-card-link {
 a.pelicula-card-link:focus {
   outline: none;
   box-shadow: none;
+}
+
+
+@media (min-width: 768px) {
+  .pelicula-img {
+    min-height: 350px;
+    max-height: 350px;
+
+  }
+}
+
+/* Altura menor en móviles */
+@media (max-width: 767px) {
+  .pelicula-img {
+    min-height: 200px;
+    max-height: 200px;
+  }
 }
