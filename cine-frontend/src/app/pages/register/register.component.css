@@ -57,3 +57,9 @@
 .registro-boton:hover {
   background-color: #125aa3;
 }
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}

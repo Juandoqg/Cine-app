@@ -1,4 +1,3 @@
-
 <div class="procesar-pago-container">
   <h2>Procesar Pago</h2>
 
@@ -12,22 +11,35 @@
 
   <div class="tipo-pago-selector">
     <label for="tipoPago">Selecciona tipo de pago:</label>
-    <select id="tipoPago" [(ngModel)]="tipoPagoSeleccionadoId">
-      <option *ngFor="let tipo of tiposPago" [value]="tipo.id">{{ tipo.nombre }}</option>
+    <select id="tipoPago" [(ngModel)]="tipoPagoSeleccionadoId" name="tipoPago" required>
+      <option [ngValue]="null">-- Selecciona --</option>
+      <option *ngFor="let tipo of tiposPago" [ngValue]="tipo.id">{{ tipo.nombre }}</option>
     </select>
   </div>
-<div class="campo-formulario">
-  <label for="numeroCuenta">Número de cuenta:</label>
-  <input
-    type="number"
-    id="numeroCuenta"
-    [(ngModel)]="numeroCuenta"
-    placeholder="1234-5678-9012"
-  />
-</div>
-  <button class="boton-pagar" [disabled]="!tipoPagoSeleccionadoId" (click)="confirmarPago()">
+
+  <div class="campo-formulario">
+    <label for="numeroCuenta">Número de cuenta:</label>
+    <input
+      type="number"
+      id="numeroCuenta"
+      name="numeroCuenta"
+      [(ngModel)]="numeroCuenta"
+      required
+      min="100000"
+      #cuentaRef="ngModel"
+      placeholder="Ej: 123456"
+    />
+    <div *ngIf="cuentaRef.invalid && cuentaRef.touched" class="error">
+      <span *ngIf="cuentaRef.errors?.['required']">Este campo es obligatorio.</span>
+      <span *ngIf="cuentaRef.errors?.['min']">Debe tener al menos 6 dígitos.</span>
+    </div>
+  </div>
+
+  <button
+    class="boton-pagar"
+    [disabled]="!tipoPagoSeleccionadoId || cuentaRef.invalid"
+    (click)="confirmarPago()"
+  >
     Pagar
   </button>
 </div>
-
-

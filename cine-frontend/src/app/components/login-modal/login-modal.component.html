@@ -1,31 +1,63 @@
-<div class="login-modal-container">
+<form #loginForm="ngForm" (ngSubmit)="login()" class="login-modal-container">
   <h2 class="login-title">Iniciar sesión</h2>
 
+  <!-- Campo Email -->
   <mat-form-field appearance="fill" class="login-form-field">
     <mat-label>Email</mat-label>
-    <input matInput [(ngModel)]="email" type="email" />
+    <input
+      matInput
+      name="email"
+      [(ngModel)]="email"
+      type="email"
+      required
+      email
+      #emailRef="ngModel"
+    />
+    <mat-error *ngIf="emailRef.invalid && emailRef.touched">
+      <span *ngIf="emailRef.errors?.['required']">Debes ingresar el correo.</span>
+      <span *ngIf="emailRef.errors?.['email']">Formato de correo inválido.</span>
+    </mat-error>
   </mat-form-field>
 
+  <!-- Campo Contraseña -->
   <mat-form-field appearance="fill" class="login-form-field">
     <mat-label>Contraseña</mat-label>
-    <input matInput [(ngModel)]="password" type="password" />
+    <input
+      matInput
+      name="password"
+      [(ngModel)]="password"
+      type="password"
+      required
+      minlength="8"
+      #passwordRef="ngModel"
+    />
+    <mat-error *ngIf="passwordRef.invalid && passwordRef.touched">
+      <span *ngIf="passwordRef.errors?.['required']">Debes ingresar la contraseña.</span>
+      <span *ngIf="passwordRef.errors?.['minlength']">Mínimo 8 caracteres.</span>
+    </mat-error>
   </mat-form-field>
+
+  <!-- Mensaje de error general -->
   <div *ngIf="loginError" class="login-error">{{ loginError }}</div>
 
-
+  <!-- Botón ingresar deshabilitado si el formulario no es válido -->
   <div class="login-modal-actions">
-    <button mat-raised-button color="primary" (click)="login()">Ingresar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+      Ingresar
+    </button>
   </div>
-  
-  <div class="google-login-container">
-  <button mat-raised-button color="accent" (click)="loginWithGoogle()">
-    <img src="assets/logo-google.png" width="20" style="margin-right: 8px;" />
-    Iniciar sesión con Google
-  </button>
-</div>
 
+  <!-- Login con Google -->
+  <div class="google-login-container">
+    <button mat-raised-button color="accent" (click)="loginWithGoogle()">
+      <img src="assets/logo-google.png" width="20" style="margin-right: 8px;" />
+      Iniciar sesión con Google
+    </button>
+  </div>
+
+  <!-- Registro -->
   <div class="register-link">
     <span>¿No tienes una cuenta?</span>
-<a (click)="cerrarYRedirigir()">Regístrate</a>
+    <a (click)="cerrarYRedirigir()">Regístrate</a>
   </div>
-</div>
+</form>

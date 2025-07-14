@@ -46,6 +46,16 @@ export class LoginModalComponent {
   login() {
   this.loginError = null;
 
+   if (!this.email || !this.password) {
+    this.loginError = 'Todos los campos son obligatorios';
+    return;
+  }
+
+  if (this.password.length < 8) {
+    this.loginError = 'La contraseña debe tener al menos 8 caracteres';
+    return;
+  }
+
   this.authService.login(this.email, this.password).subscribe({
     next: () => {
       this.authService.fetchUserInfo().subscribe({

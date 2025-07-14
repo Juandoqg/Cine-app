@@ -1,26 +1,77 @@
+<div class="register-wrapper">
+  <form #registerForm="ngForm" class="register-form" (ngSubmit)="registrarse()">
+    <h2>Registrarse 📝</h2>
 
-    <div class="register-wrapper">
-      <form #registerForm="ngForm" class="register-form" (ngSubmit)="registrarse()">
-        <h2>Registrarse 📝</h2>
+    <!-- Nombre -->
+    <label>Nombre</label>
+    <input
+      type="text"
+      name="nombre"
+      [(ngModel)]="usuario.nombre"
+      required
+      #nombreRef="ngModel"
+    />
+    <div *ngIf="nombreRef.invalid && nombreRef.touched" class="error">El nombre es obligatorio.</div>
 
-        <label>Nombre</label>
-        <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required />
+    <!-- Apellido -->
+    <label>Apellido</label>
+    <input
+      type="text"
+      name="apellido"
+      [(ngModel)]="usuario.apellido"
+      required
+      #apellidoRef="ngModel"
+    />
+    <div *ngIf="apellidoRef.invalid && apellidoRef.touched" class="error">El apellido es obligatorio.</div>
 
-        <label>Apellido</label>
-        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" required />
-
-        <label>Email</label>
-        <input type="email" name="email" [(ngModel)]="usuario.email" required />
-
-        <label>Teléfono</label>
-        <input type="number" name="telefono" [(ngModel)]="usuario.telefono" required />
-
-        <label>Contraseña</label>
-        <input type="password" name="password" [(ngModel)]="usuario.password" required />
-
-        <div class="registro-boton-container">
-          <button type="submit" class="registro-boton" [disabled]="!registerForm.valid">Registrarse</button>
-        </div>
-
-      </form>
+    <!-- Email -->
+    <label>Email</label>
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="usuario.email"
+      required
+      email
+      #emailRef="ngModel"
+    />
+    <div *ngIf="emailRef.invalid && emailRef.touched" class="error">
+      <span *ngIf="emailRef.errors?.['required']">El email es obligatorio.</span>
+      <span *ngIf="emailRef.errors?.['email']">Formato de email inválido.</span>
     </div>
+
+    <!-- Teléfono -->
+    <label>Teléfono</label>
+    <input
+      type="tel"
+      name="telefono"
+      [(ngModel)]="usuario.telefono"
+      required
+      minlength="7"
+      #telefonoRef="ngModel"
+    />
+    <div *ngIf="telefonoRef.invalid && telefonoRef.touched" class="error">
+      <span *ngIf="telefonoRef.errors?.['required']">El teléfono es obligatorio.</span>
+      <span *ngIf="telefonoRef.errors?.['minlength']">Debe tener al menos 7 dígitos.</span>
+    </div>
+
+    <!-- Contraseña -->
+    <label>Contraseña</label>
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="usuario.password"
+      required
+      minlength="8"
+      #passwordRef="ngModel"
+    />
+    <div *ngIf="passwordRef.invalid && passwordRef.touched" class="error">
+      <span *ngIf="passwordRef.errors?.['required']">La contraseña es obligatoria.</span>
+      <span *ngIf="passwordRef.errors?.['minlength']">Mínimo 8 caracteres.</span>
+    </div>
+
+    <!-- Botón deshabilitado si el formulario no es válido -->
+    <div class="registro-boton-container">
+      <button type="submit" class="registro-boton" [disabled]="registerForm.invalid">Registrarse</button>
+    </div>
+  </form>
+</div>

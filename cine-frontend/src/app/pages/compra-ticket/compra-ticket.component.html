@@ -1,23 +1,41 @@
-
 <div class="compra-container">
   <h2>Compra de Tickets</h2>
 
-  <div class="pelicula-info"  *ngIf="pelicula && funcion && sala">
+  <div class="pelicula-info" *ngIf="pelicula && funcion && sala">
     <h3>{{ pelicula.titulo }}</h3>
     <p><strong>Función:</strong> {{ funcion.fecha | date }} a las {{ funcion.hora }}</p>
     <p><strong>Sala:</strong> {{ sala.nombre }} (Capacidad: {{ sala.capacidad }})</p>
     <p><strong>Precio por ticket:</strong> ${{ precioPorTicket }}</p>
   </div>
 
-  <div class="cantidad-selector "  *ngIf="sala">
+  <div class="cantidad-selector" *ngIf="sala">
     <label for="cantidad">Cantidad de Tickets:</label>
-    <input id="cantidad" type="number" min="1" max = "{{sala.capacidad}}" [(ngModel)]="cantidadTickets" />
+    <input
+      id="cantidad"
+      type="number"
+      [(ngModel)]="cantidadTickets"
+      name="cantidadTickets"
+      min="1"
+      [max]="sala.capacidad"
+      required
+      #cantidadRef="ngModel"
+    />
+    <div *ngIf="cantidadRef.invalid && cantidadRef.touched" class="error">
+      <span *ngIf="cantidadRef.errors?.['required']">Debe ingresar una cantidad.</span>
+      <span *ngIf="cantidadRef.errors?.['min']">Debe comprar al menos 1 ticket.</span>
+      <span *ngIf="cantidadRef.errors?.['max']">No puede comprar más de {{ sala.capacidad }} tickets.</span>
+    </div>
   </div>
 
   <div class="total">
     <p><strong>Total a pagar:</strong> ${{ total }}</p>
   </div>
 
-<button class="boton-comprar" (click)="irAProcesarPago()">Comprar</button>
+  <button
+    class="boton-comprar"
+    [disabled]="!cantidadTickets || cantidadTickets < 1 || cantidadTickets > sala.capacidad"
+    (click)="irAProcesarPago()"
+  >
+    Comprar
+  </button>
 </div>
-
