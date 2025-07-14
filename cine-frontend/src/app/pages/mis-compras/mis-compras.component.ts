@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MisComprasComponent implements OnInit {
   ventas: any[] = [];
-  salaFrecuente: string = ''; 
+  mayorCompra: number = 0; 
   ticketsVendidos: number = 0;
   pagoPreferido: string = '';
 
@@ -22,7 +22,7 @@ export class MisComprasComponent implements OnInit {
 
   constructor(private ventaService: VentaService, private authService : AuthService) {}
 
-  ngOnInit(): void {
+     ngOnInit(): void {
     const usuario = this.authService.getCurrentUser();
 
     if (usuario) {
@@ -40,30 +40,28 @@ export class MisComprasComponent implements OnInit {
     }
   }
 
-  calcularResumen(): void {
-    this.ticketsVendidos = this.ventas.reduce((acc, venta) => acc + venta.cantidadTickets, 0);
+    calcularResumen(): void {
+        this.ticketsVendidos = this.ventas.reduce((acc, venta) => acc + venta.cantidadTickets, 0);
 
-    const conteoPagos: Record<string, number> = {};
-    const conteoSalas: Record<number, number> = {};
+        const conteoPagos: Record<string, number> = {};
+        let maxTotal = 0;
 
-    for (const venta of this.ventas) {
-      // Contar tipo de pago
-      conteoPagos[venta.tipoPagoId] = (conteoPagos[venta.tipoPagoId] || 0) + 1;
+        for (const venta of this.ventas) {
+          // Contar tipo de pago
+          conteoPagos[venta.tipoPagoId] = (conteoPagos[venta.tipoPagoId] || 0) + 1;
 
-      // Contar sala 
-      const salaId = venta.salaId  
-      conteoSalas[salaId] = (conteoSalas[salaId] || 0) + 1;
-    }
+          // Verificar si esta venta tiene el total más alto
+          if (venta.total > maxTotal) {
+            maxTotal = venta.total;
+          }
+        }
 
-    // Determinar el pago preferido
-    this.pagoPreferido = Object.entries(conteoPagos).reduce((a, b) => a[1] > b[1] ? a : b, ['-', 0])[0];
+        this.mayorCompra = maxTotal;
+        this.pagoPreferido = Object.entries(conteoPagos).reduce((a, b) => a[1] > b[1] ? a : b, ['-', 0])[0];
+      }
 
-    // Determinar la sala más frecuente
-    this.salaFrecuente = Object.entries(conteoSalas).reduce((a, b) => a[1] > b[1] ? a : b, ['-', 0])[0];
-  }
 
-  // Método que retorna ventas según filtros aplicados
-  ventasFiltradas(): any[] {
+   ventasFiltradas(): any[] {
     return this.ventas.filter(v =>
       (!this.clienteSeleccionado || v.clienteId.toString() === this.clienteSeleccionado) &&
       (!this.funcionSeleccionada || v.funcionId.toString() === this.funcionSeleccionada) &&
