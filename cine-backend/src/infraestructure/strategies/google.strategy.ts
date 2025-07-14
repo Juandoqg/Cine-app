@@ -11,7 +11,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       callbackURL: process.env.GOOGLE_CALLBACK_URL!,
       scope: ['email', 'profile'],
-      passReqToCallback: true,
+      passReqToCallback: true, 
     });
   }
 
@@ -24,11 +24,14 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   ): Promise<any> {
     const { name, emails } = profile;
 
+    const returnUrl = req.query.state as string; 
+
     const user = {
       email: emails[0].value,
       nombre: name?.givenName,
       apellido: name?.familyName,
       proveedor: 'google',
+      returnUrl: returnUrl || null, 
     };
 
     done(null, user);
