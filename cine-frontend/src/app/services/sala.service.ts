@@ -13,10 +13,14 @@ export class SalaService {
   constructor(private http: HttpClient) {}
 
   obtenerPorId(id: number): Observable<Sala> {
-    return this.http.get<Sala>(`${this.apiUrl}/${id}`);
+    return this.http.get<Sala>(`${this.apiUrl}/${id}`, {
+      withCredentials: true
+    });
   }
 
   obtenerTodas(): Observable<Sala[]> {
-    return this.http.get<Sala[]>(this.apiUrl);
+    return this.http.get<Sala[]>(this.apiUrl, {
+      withCredentials: true
+    });
   }
 }
