@@ -37,9 +37,21 @@
 
   <button
     class="boton-pagar"
-    [disabled]="!tipoPagoSeleccionadoId || cuentaRef.invalid"
+    [disabled]="!tipoPagoSeleccionadoId || cuentaRef.invalid || procesandoPago"
     (click)="confirmarPago()"
   >
-    Pagar
+    {{ procesandoPago ? 'Procesando...' : 'Pagar' }}
   </button>
+
+  <!-- Mensaje de estado del pago -->
+  <div *ngIf="estadoPago" class="estado-pago">
+    {{ estadoPago }}
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <p>{{ mensajeModal }}</p>
+    <div class="spinner" *ngIf="procesandoPago"></div>
+  </div>
 </div>

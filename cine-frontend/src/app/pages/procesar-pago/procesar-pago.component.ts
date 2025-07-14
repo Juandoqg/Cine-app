@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TipoPagoService } from '../../services/tipo-pago.service';
 import { VentaService } from '../../services/venta.service';
 import { AuthService } from '../../services/auth.service';
@@ -29,6 +27,10 @@ export class ProcesarPagoComponent implements OnInit {
   tipoPagoSeleccionadoId: number | null = null;
   cliente: Usuario | null = null;
 
+  mostrarModal: boolean = false;
+  mensajeModal: string = '';
+  estadoPago: string = '';
+  procesandoPago: boolean = false;
   constructor(
     private router: Router,
     private tipoPagoService: TipoPagoService,
@@ -59,16 +61,18 @@ export class ProcesarPagoComponent implements OnInit {
     });
   }
 
-  confirmarPago(): void {
-  if (!this.tipoPagoSeleccionadoId) {
-    alert('Por favor, selecciona un tipo de pago.');
+
+
+
+confirmarPago(): void {
+  if (!this.tipoPagoSeleccionadoId || !this.cliente) {
+    alert('Debes seleccionar un tipo de pago e iniciar sesión.');
     return;
   }
 
-  if (!this.cliente) {
-    alert('Debes iniciar sesión para procesar el pago.');
-    return;
-  }
+  this.procesandoPago = true;
+  this.mensajeModal = 'Procesando tu pago...';
+  this.mostrarModal = true;
 
   const fechaObj = new Date(this.funcion.fecha);
   const fecha = fechaObj.toLocaleDateString('es-CO', {
@@ -76,7 +80,6 @@ export class ProcesarPagoComponent implements OnInit {
     month: 'long',
     day: 'numeric',
   });
-
 
   const ventaData = {
     funcionId: this.funcion.id,
@@ -100,20 +103,30 @@ export class ProcesarPagoComponent implements OnInit {
 
       this.mailService.enviarCorreoConfirmacion(emailPayload).subscribe({
         next: () => {
-          alert('¡Venta registrada y correo enviado con éxito!');
-          this.router.navigate(['/']);
+          this.mensajeModal = '¡Pago exitoso! Revisa tu correo.';
+          setTimeout(() => {
+            this.mostrarModal = false;
+            this.router.navigate(['/']);
+          }, 3000);
         },
-        error: (err) => {
-          console.error('Error al enviar el correo:', err);
-          alert('Venta registrada, pero ocurrió un error al enviar el correo.');
-          this.router.navigate(['/']);
+        error: () => {
+          this.mensajeModal = 'Pago exitoso, pero no se pudo enviar el correo.';
+          setTimeout(() => {
+            this.mostrarModal = false;
+            this.router.navigate(['/']);
+          }, 3000);
         }
       });
     },
-    error: (err) => {
-      console.error('Error al registrar la venta:', err);
-      alert('Ocurrió un error al registrar la venta.');
+    error: () => {
+      this.mensajeModal = 'Error al procesar el pago. Intenta nuevamente.';
+      setTimeout(() => {
+        this.mostrarModal = false;
+        this.procesandoPago = false;
+      }, 3000);
     }
   });
 }
+
+
 }
