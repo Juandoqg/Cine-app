@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./cine-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=juan2003
+      - DB_NAME=cine
+    volumes:
+      - ./cine-backend:/app
+      - /app/node_modules
+    command: npm run start:dev
+
+  frontend:
+    build:
+      context: ./cine-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./cine-frontend:/app
+      - /app/node_modules
+    command: npm run start

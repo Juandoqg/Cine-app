@@ -13,5 +13,4 @@ export const typeOrmConfig = async (
   database: configService.get<string>('database.name'),
   entities: [join(__dirname, '..', '**', '*.orm-entity.{ts,js}')],
   synchronize: true, 
-  logging: true,
 });
