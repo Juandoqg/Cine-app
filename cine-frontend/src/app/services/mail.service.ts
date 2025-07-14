@@ -13,6 +13,8 @@ export class MailService {
   constructor(private http: HttpClient) {}
 
   enviarCorreoConfirmacion(data: MailData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/confirm-purchase`, data);
-  }
+  return this.http.post(`${this.apiUrl}/confirm-purchase`, data, {
+    withCredentials: true
+  });
+}
 }
