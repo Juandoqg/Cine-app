@@ -35,6 +35,7 @@ async buscarPorPelicula(peliculaId: string): Promise<Funcion[]> {
       pelicula: {
         id: Number(peliculaId),
       },
+      activo: true,  
     },
     relations: ['sala', 'pelicula'],
   });
