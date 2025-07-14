@@ -61,12 +61,5 @@ export class MisComprasComponent implements OnInit {
       }
 
 
-   ventasFiltradas(): any[] {
-    return this.ventas.filter(v =>
-      (!this.clienteSeleccionado || v.clienteId.toString() === this.clienteSeleccionado) &&
-      (!this.funcionSeleccionada || v.funcionId.toString() === this.funcionSeleccionada) &&
-      (!this.tipoPagoSeleccionado || v.tipoPagoId.toString() === this.tipoPagoSeleccionado)
-    );
-  }
 
 }

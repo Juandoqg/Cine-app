@@ -98,5 +98,17 @@ confirmarCambioEstado(): void {
 
       return coincidePelicula && coincideSala && coincideFecha && coincideActivo;
     });
-  }
+    }
+
+
+
+    ajustarFechaUTC(fecha: string | Date): string {
+          const d = new Date(fecha);
+          d.setMinutes(d.getMinutes() + d.getTimezoneOffset()); 
+        return d.toISOString().split('T')[0]; // yyyy-MM-dd
+        }
+
+
+
+
 }
