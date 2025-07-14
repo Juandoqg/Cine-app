@@ -12,10 +12,10 @@ export class TipoPagoService {
   constructor(private http: HttpClient) {}
 
   obtenerTodos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl, { withCredentials: true });
   }
 
   obtenerPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 }
