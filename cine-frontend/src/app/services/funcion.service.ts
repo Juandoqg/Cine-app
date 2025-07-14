@@ -12,26 +12,40 @@ export class FuncionService {
 
   constructor(private http: HttpClient) {}
 
-  getFuncionesPorPelicula(peliculaId: string): Observable<Funcion[]> {
-    return this.http.get<Funcion[]>(`${this.apiUrl}/pelicula/${peliculaId}`);
+   getFuncionesPorPelicula(peliculaId: string): Observable<Funcion[]> {
+    return this.http.get<Funcion[]>(`${this.apiUrl}/pelicula/${peliculaId}`, {
+      withCredentials: true
+    });
   }
+
   getFuncionPorId(id: number): Observable<Funcion> {
-    return this.http.get<Funcion>(`${this.apiUrl}/${id}`);
+    return this.http.get<Funcion>(`${this.apiUrl}/${id}`, {
+      withCredentials: true
+    });
   }
 
   crearFuncion(funcion: Funcion): Observable<any> {
-    return this.http.post(this.apiUrl, funcion);
+    return this.http.post(this.apiUrl, funcion, {
+      withCredentials: true
+    });
   }
 
   obtenerTodas(): Observable<Funcion[]> {
-      return this.http.get<Funcion[]>(this.apiUrl);
-    }
+    return this.http.get<Funcion[]>(this.apiUrl, {
+      withCredentials: true
+    });
+  }
 
   habilitarFuncion(id: number): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/habilitar/${id}`, {});
+    return this.http.patch(`${this.apiUrl}/habilitar/${id}`, {}, {
+      withCredentials: true
+    });
   }
+
   inhabilitarFuncion(id: number): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/inhabilitar/${id}`, {});
+    return this.http.patch(`${this.apiUrl}/inhabilitar/${id}`, {}, {
+      withCredentials: true
+    });
   }
 
 }
