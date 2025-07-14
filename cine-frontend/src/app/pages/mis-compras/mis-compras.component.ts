@@ -28,7 +28,7 @@ export class MisComprasComponent implements OnInit {
     if (usuario) {
       const idCliente = usuario.id;
 
-      this.ventaService.obtenerVentas().subscribe({
+      this.ventaService.obtenerVentasPorClienteId(idCliente).subscribe({
         next: (data) => {
           this.ventas = data.filter(v => v.clienteId === idCliente);
           this.calcularResumen();

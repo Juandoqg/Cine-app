@@ -20,7 +20,7 @@ export class AuthController {
 
   @Post('register')
   @ApiOperation({ summary: 'Registrar un nuevo usuario' })
-  @ApiBody({ type: Object }) // Puedes reemplazar por un DTO específico
+  @ApiBody({ type: Object }) 
   @ApiResponse({ status: 201, description: 'Usuario registrado exitosamente' })
   async register(@Body() body: any) {
     return this.registerUseCase.execute(body);

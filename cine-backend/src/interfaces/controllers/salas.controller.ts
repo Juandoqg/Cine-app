@@ -7,11 +7,11 @@ import { ObtenerSalaPorIdUseCase } from 'src/application/use-cases/salas/get-sal
 import { RolesGuard } from 'src/infraestructure/guards/roles.guard';
 import { Roles } from 'src/infraestructure/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/infraestructure/guards/jwt-auth.guard';
-import { ApiBearerAuth, ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiCookieAuth } from '@nestjs/swagger';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @ApiTags('Salas')
-@ApiBearerAuth() 
+@ApiCookieAuth()
 @Controller('salas')
 export class SalasController {
   constructor(

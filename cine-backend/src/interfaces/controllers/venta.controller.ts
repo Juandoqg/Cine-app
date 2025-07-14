@@ -30,7 +30,7 @@ export class VentaController {
 
   @Get()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin') // solo admins pueden ver todas las ventas
+  @Roles('admin') 
   @ApiCookieAuth()
   @ApiOperation({ summary: 'Obtener todas las ventas (solo admin)' })
   @ApiResponse({ status: 200, description: 'Lista de todas las ventas.' })
@@ -41,7 +41,7 @@ export class VentaController {
 
   @Get('cliente/:id')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('cliente') // solo clientes pueden ver sus compras
+  @Roles('cliente', 'admin') 
   @ApiCookieAuth()
   @ApiOperation({ summary: 'Obtener ventas por cliente (solo cliente)' })
   @ApiResponse({ status: 200, description: 'Ventas del cliente.' })

@@ -1,6 +1,6 @@
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { MailService } from 'src/infraestructure/mail/mail.service';
-import { ApiTags, ApiOperation, ApiBody, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBody, ApiResponse, ApiBearerAuth, ApiCookieAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/infraestructure/guards/roles.guard';
 import { Roles } from 'src/infraestructure/decorators/roles.decorator';
@@ -13,7 +13,7 @@ export class MailController {
   @Post('confirm-purchase')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles('admin', 'cliente')
-  @ApiBearerAuth()
+  @ApiCookieAuth()
   @ApiOperation({ summary: 'Enviar correo de confirmación de compra' })
   @ApiBody({
     schema: {

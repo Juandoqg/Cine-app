@@ -46,7 +46,7 @@ export class FuncionesController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @ApiCookieAuth()
-  @ApiOperation({ summary: 'Crear una nueva función' })
+  @ApiOperation({ summary: 'Crear una nueva función (solo admin) ' })
   @ApiResponse({ status: 201, description: 'Función creada exitosamente.' })
   async crear(@Body() dto: FuncionModelDto): Promise<Funcion> {
     return await this.crearFuncionUseCase.execute(dto);
@@ -56,7 +56,7 @@ export class FuncionesController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @ApiCookieAuth()
-  @ApiOperation({ summary: 'Obtener todas las funciones' })
+  @ApiOperation({ summary: 'Obtener todas las funciones (solo admin) ' })
   @ApiResponse({ status: 200, description: 'Lista de funciones' })
   async obtenerTodas(): Promise<any[]> {
     const funciones = await this.obtenerFuncionesUseCase.execute();
@@ -88,7 +88,7 @@ export class FuncionesController {
   @Patch('/inhabilitar/:id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  @ApiOperation({ summary: 'Inhabilitar una función' })
+  @ApiOperation({ summary: 'Inhabilitar una función (solo admin)' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Función inhabilitada correctamente' })
   async inhabilitarFuncion(@Param('id', ParseIntPipe) id: number) {
@@ -99,7 +99,7 @@ export class FuncionesController {
   @Patch('habilitar/:id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
-  @ApiOperation({ summary: 'Habilitar una función' })
+  @ApiOperation({ summary: 'Habilitar una función (solo admin)' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'Función habilitada correctamente' })
   async habilitarFuncion(@Param('id') id: number) {

@@ -8,13 +8,13 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import { UploadService } from '../../infraestructure/uploads/upload.service';
-import { ApiBearerAuth, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {  ApiConsumes, ApiCookieAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/infraestructure/guards/roles.guard';
 import { JwtAuthGuard } from 'src/infraestructure/guards/jwt-auth.guard';
 import { Roles } from 'src/infraestructure/decorators/roles.decorator';
 
 @ApiTags('Upload')
-@ApiBearerAuth()
+@ApiCookieAuth()
 @Controller('upload')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class UploadController {

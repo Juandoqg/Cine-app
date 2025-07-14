@@ -6,7 +6,7 @@ import {
   ParseIntPipe,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiCookieAuth } from '@nestjs/swagger';
 
 import { ObtenerUsuariosUseCase } from 'src/application/use-cases/usuarios/get-all-usuarios.use-case';
 import { InhabilitarUsuarioUseCase } from 'src/application/use-cases/usuarios/inhabilitar-usuarios.use-case';
@@ -22,7 +22,7 @@ import { Usuario } from 'src/domain/entities/usuario.entity';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('admin')
 @Controller('usuarios')
-@ApiBearerAuth('access_token') 
+@ApiCookieAuth() 
 export class UsuariosController {
   constructor(
     private readonly obtenerUsuariosUseCase: ObtenerUsuariosUseCase,
